@@ -1,43 +1,50 @@
 import { createContext, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Orbis } from "@orbisclub/orbis-sdk";
+import moment from "moment-timezone";
+import { v4 as uuidv4 } from "uuid";
+
+import CONVERSATION_MESSAGES from "data/conversation";
+import Profile1 from "assets/img/team/profile-picture-1.jpg"
+import Profile2 from "assets/img/team/profile-picture-2.jpg"
+import MESSAGES_DATA from "data/messages";
+
 // import { providers } from "ethers";
 import { Routes } from "routes";
   
 const OrbisContext = createContext(undefined);
 
 const OrbisProvider = ({ children }) => {
-    /**
-     * Initialize the Orbis class object:
-     * You can make this object available on other components by passing it as
-     * a prop or by using a context.
-     */
     let orbis = new Orbis();
     let history = useHistory();
     const [user, setUser] = useState();
-    const [inbox, setInbox] = useState();
+    const [messages, setMessages] = useState(MESSAGES_DATA);
+    const [conversation, setConversation] = useState(CONVERSATION_MESSAGES);
 
     /** Calls the Orbis SDK and handle the results */
-	async function connect() {
+	const connect = async () => {
         let res = await orbis.connect();
-        /** Check if connection is successful or not */
         if(res.status == 200) {
             setUser(res.did);
+            // TODO: add isLoading state variable.
             history.push(Routes.DashboardOverview.path);
         } else {
             console.log("Error connecting to Ceramic: ", res);
             alert("Error connecting to Ceramic.");
         }
-      }
+    };
 
     return (
         <OrbisContext.Provider
             value={{
                 orbis,
+                connect,
                 user,
                 setUser,
-                inbox,
-                connect
+                messages,
+                setMessages,
+                conversation,
+                setConversation
             }}
         >
             {children}
