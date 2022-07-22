@@ -11,7 +11,8 @@ import { useOrbis } from "services/context";
 
 export default () => {
   // const [conversation, setConversation] = useState(CONVERSATION_MESSAGES);
-  const { conversation, setConversation } = useOrbis();
+  const { messageService } = useOrbis();
+  const { conversation, setConversation } = messageService;  
   const [message, setMessage] = useState("");
   const currentDate = moment().format("Do of MMMM, YYYY");
 
