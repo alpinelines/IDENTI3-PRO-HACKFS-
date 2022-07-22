@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SimpleBar from 'simplebar-react';
 import { useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
@@ -8,6 +8,8 @@ import { ArchiveIcon, CalendarIcon, ChartBarIcon, ChartPieIcon, ChevronRightIcon
 import { LogoutIcon } from "@heroicons/react/outline";
 import { Nav, Badge, Image, Button, Dropdown, Navbar, Collapse, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+import MESSAGES_DATA from "data/messages";
 
 import { Routes } from "routes";
 import ReactHero from "assets/img/technologies/react-hero-logo.svg";
@@ -18,12 +20,19 @@ export default (props = {}) => {
   const { pathname } = location;
   const [show, setShow] = useState(false);
   const [collapsedItems, setCollapsedItems] = useState([pathname]);
+  const [numMessages, setNumMessages] = useState(0);
   const contracted = props.contracted ? "contracted" : "";
   const showClass = show ? "show" : "";
 
   const onCollapse = () => setShow(!show);
   const onMouseEnter = () => props.onMouseEnter && props.onMouseEnter();
   const onMouseLeave = () => props.onMouseLeave && props.onMouseLeave();
+
+  const messageReducer = (messages) => messages.reduce((acc, curr) => curr.read === false ? acc += 1 : acc += 0, 0);
+
+  useEffect(() => {
+    setNumMessages(messageReducer(MESSAGES_DATA));
+  }, []);
 
   const onNavItemCollapse = (itemKey) => {
     const isCollapsed = collapsedItems.some(item => item.includes(itemKey));
@@ -143,7 +152,7 @@ export default (props = {}) => {
               </CollapsableNavItem>
 
               <NavItem title="Kanban" icon={ViewGridIcon} link={Routes.Kanban.path} />
-              <NavItem title="Messages" icon={InboxIcon} badgeText="4" badgeBg="danger" link={Routes.Messages.path} />
+              <NavItem title="Messages" icon={InboxIcon} badgeText={numMessages} badgeBg="danger" link={Routes.Messages.path} />
               <NavItem title="Users List" icon={UsersIcon} link={Routes.Users.path} />
               <NavItem title="Transactions" icon={CreditCardIcon} link={Routes.Transactions.path} />
               <NavItem title="Task List" icon={ClipboardListIcon} link={Routes.Tasks.path} />

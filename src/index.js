@@ -17,6 +17,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from "react-router-dom";
 
+// ceramic provider
+// import { Provider } from '@self.id/react'
+
 // core styles
 import "./scss/volt.scss";
 
@@ -30,8 +33,10 @@ import ScrollToTop from "./components/ScrollToTop";
 
 ReactDOM.render(
   <HashRouter>
-    <ScrollToTop />
-    <HomePage />
+    {/* <Provider client={{ ceramic: 'testnet-clay' }}> */}
+      <ScrollToTop />
+      <HomePage />
+    {/* </Provider> */}
   </HashRouter>
   , document.getElementById("root")
 );

@@ -21,6 +21,8 @@ export default (props) => {
   };
 
   const toggleContracted = () => props.toggleContracted && props.toggleContracted();
+  /** The user object returned by the connect function can be stored in state */
+	const [user, setUser] = useState();
 
   const Notification = (props) => {
     const { link, sender, image, time, message, read = false } = props;
