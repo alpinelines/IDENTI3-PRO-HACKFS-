@@ -30,13 +30,14 @@ import "react-datetime/css/react-datetime.css";
 
 import HomePage from "./pages/HomePage";
 import ScrollToTop from "./components/ScrollToTop";
+import { OrbisProvider } from 'services/context';
 
 ReactDOM.render(
   <HashRouter>
-    {/* <Provider client={{ ceramic: 'testnet-clay' }}> */}
-      <ScrollToTop />
-      <HomePage />
-    {/* </Provider> */}
+      <OrbisProvider>
+        <ScrollToTop />
+        <HomePage />
+      </OrbisProvider>
   </HashRouter>
   , document.getElementById("root")
 );

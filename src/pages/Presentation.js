@@ -24,19 +24,11 @@ import pages from "data/pages";
 import features from "data/features";
 import { BootstrapIcon, FileCodeIcon, GithubIcon, JsIcon, ReactIcon } from "components/BrandIcons";
 
-import { Orbis } from "@orbisclub/orbis-sdk";
-
-/**
- * Initialize the Orbis class object:
- * You can make this object available on other components by passing it as
- * a prop or by using a context.
- */
- let orbis = new Orbis();
+import { useOrbis } from 'services/context';
 
 export default () => {
   const currentYear = moment().get("year");
-  const history = useHistory();
-	const [user, setUser] = useState(); // The user object returned by the connect function can be stored in state
+  const { user, connect } = useOrbis();
 
   const PagePreview = (props) => {
     const { name, image, link } = props;
@@ -84,20 +76,6 @@ export default () => {
     );
   };
 
-	/** Calls the Orbis SDK and handle the results */
-	async function connect() {
-    let res = await orbis.connect();
-
-		/** Check if connection is successful or not */
-		if(res.status == 200) {
-			setUser(res.did);
-      history.push(Routes.DashboardOverview.path);
-		} else {
-			console.log("Error connecting to Ceramic: ", res);
-			alert("Error connecting to Ceramic.");
-		}
-	}
-
   return (
     <>
       <Navbar variant="dark" expand="lg" bg="dark" className="navbar-transparent navbar-theme-primary sticky-top">
@@ -134,11 +112,15 @@ export default () => {
               <div className="d-flex justify-content-center mb-5">
                 {user ?
                   <p>Connected with: {user}</p>
-                :
-                  <Button variant="secondary" onClick={() => connect()} className="text-dark me-3">
+                 :
+                  <Button 
+                    variant="secondary" 
+                    onClick={() => connect()} 
+                    className="text-dark me-3"
+                  >
                     Connect <ExternalLinkIcon className="icon icon-xs d-none d-sm-inline ms-1" />
                   </Button>
-                }
+                } 
                 <Button variant="outline-secondary" as={HashLink} to="#pricing" className="d-flex align-items-center">
                   Purchase now
                 </Button>
