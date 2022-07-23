@@ -88,11 +88,7 @@ export default () => {
           <div className="d-flex align-items-center">
             <Navbar.Collapse id="navbar-default-primary">
               <Nav className="navbar-nav-hover align-items-lg-center">
-                <Nav.Link as={HashLink} to="#features">Features</Nav.Link>
-                <Nav.Link as={HashLink} to="#pages">Pages</Nav.Link>
-                <Nav.Link as={HashLink} to="#folder">Folder Structure</Nav.Link>
-                <Nav.Link as={HashLink} to="#getting-started">Getting Started</Nav.Link>
-                <Nav.Link as={HashLink} to="#free-demo" className="d-sm-none d-xl-inline">Free Demo</Nav.Link>
+
               </Nav>
             </Navbar.Collapse>
             <Button as={HashLink} to="#pricing" variant="outline-white" className="ms-3">Pricing plan</Button>
@@ -104,11 +100,11 @@ export default () => {
           <Row>
             <Col xs={12} className="text-center">
               <h1 className="fw-bolder text-secondary">
-                Volt React
-                <span className="d-none d-sm-inline"> Dashboard</span>
-                <span className="pro-badge fw-bolder">PRO</span>
+                IDENTI3
+                {/* <span className="d-none d-sm-inline"></span>
+                <span className="pro-badge fw-bolder"></span> */}
               </h1>
-              <p className="text-muted fw-light mb-5 h5">Premium admin dashboard powered by React.js and Bootstrap 5</p>
+              <p className="text-muted fw-light mb-5 h5">Take Control of your Data</p>
               <div className="d-flex justify-content-center mb-5">
                 {user ?
                   <p>Connected with: {user}</p>
@@ -121,15 +117,16 @@ export default () => {
                     Connect <ExternalLinkIcon className="icon icon-xs d-none d-sm-inline ms-1" />
                   </Button>
                 } 
-                <Button variant="outline-secondary" as={HashLink} to="#pricing" className="d-flex align-items-center">
+                {/* <Button variant="outline-secondary" as={HashLink} to="#pricing" className="d-flex align-items-center">
                   Purchase now
-                </Button>
+                </Button> */}
               </div>
               <div className="text-center mb-6 mb-lg-5">
-                <a href="https://themesberg.com" target="_blank" rel="noopener noreferrer">
+                {/* <a href="https://themesberg.com" target="_blank" rel="noopener noreferrer">
                   <Image src={ThemesbergLogoIcon} height={25} width={25} className="mb-3" alt="Themesberg Logo" />
                   <p className="text-muted font-small m-0">A Themesberg production</p>
-                </a>
+                </a> */}
+                
               </div>
             </Col>
           </Row>
@@ -152,29 +149,29 @@ export default () => {
               <div className="icon-shape bg-white shadow-lg border-light rounded-circle mb-4">
                 <BookOpenIcon className="icon icon-md text-secondary" />
               </div>
-              <h3 className="fw-bolder">20</h3>
-              <p className="text-gray">Example Pages</p>
+              <h3 className="fw-bolder">Data</h3>
+              <p className="text-gray">Own your Data</p>
             </Col>
             <Col xs={6} md={3} className="text-center mb-4">
               <div className="icon-shape bg-white shadow-lg border-light rounded-circle mb-4">
                 <PuzzleIcon className="icon icon-md text-secondary" />
               </div>
-              <h3 className="fw-bolder">200+</h3>
-              <p className="text-gray">React Components</p>
+              <h3 className="fw-bolder">Control</h3>
+              <p className="text-gray">Control who you share data with</p>
             </Col>
             <Col xs={6} md={3} className="text-center">
               <div className="icon-shape bg-white shadow-lg border-light rounded-circle mb-4">
                 <LightBulbIcon className="icon icon-md text-secondary" />
               </div>
-              <h3 className="fw-bolder">Workflow</h3>
-              <p className="text-gray">Sass & react-app</p>
+              <h3 className="fw-bolder">Authentication</h3>
+              <p className="text-gray">No more passwords</p>
             </Col>
             <Col xs={6} md={3} className="text-center">
               <div className="icon-shape bg-white shadow-lg border-light rounded-circle mb-4">
                 <BootstrapIcon size="md" color="secondary" />
               </div>
-              <h3 className="fw-bolder">Bootstrap 5</h3>
-              <p className="text-gray">CSS Framework</p>
+              <h3 className="fw-bolder">Utility</h3>
+              <p className="text-gray">Benefit from your own data</p>
             </Col>
           </Row>
         </Container>
@@ -183,12 +180,12 @@ export default () => {
         <Container>
         <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5}>
-              <h2>Kanban Board</h2>
+              <h2>Data Management</h2>
               <p className="mb-3 lead fw-bold">
-                Interactive drag and drop interface
+                Manage and own your own data
               </p>
               <p className="mb-4">
-                You'll get a fully interactive Drag and Drop Kanban board interface.
+                Import your own data to build your IDENTI3. OAuth allows you to take your data from your favourite applications and websites
               </p>
               <Button as={Link} to={Routes.Kanban.path} className="me-3" variant="secondary" target="_blank">
                 <MapIcon className="icon icon-xs me-2" /> Demo Kanban
@@ -200,9 +197,9 @@ export default () => {
           </Row>
           <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5} className="order-lg-2 mb-5 mb-lg-0">
-              <h2>Powered by React.js</h2>
-              <p className="mb-3 lead fw-bold">The most popular front-end library in the world</p>
-              <p className="mb-4">Volt React Pro is an admin dashboard template that is built using React.js components using react hooks and a data-driven structure that can kick-start your app in no time.</p>
+              <h2>Access Control</h2>
+              <p className="mb-3 lead fw-bold">Easy management of data access and control</p>
+              <p className="mb-4">IDENTI3 uses Lit Protocol to encrypt and control access to your data. Easily Share your data with people and applications you trust</p>
               <Button as={Link} to={Routes.DashboardOverview.path} variant="secondary" target="_blank">
                 Live Demo <ExternalLinkIcon className="icon icon-xs ms-1" />
               </Button>
