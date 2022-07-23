@@ -89,7 +89,7 @@ export default () => {
         <Container className="position-relative justify-content-between px-3">
           <Navbar.Brand as={HashLink} to="#home" className="me-lg-3 d-flex align-items-center">
             <Image src={ReactHero} />
-            <span className="ms-2 brand-text d-none d-md-inline">Volt React Pro</span>
+            <span className="ms-2 brand-text d-none d-md-inline">IDENTI3</span>
           </Navbar.Brand>
 
           <div className="d-flex align-items-center">
@@ -305,7 +305,7 @@ export default () => {
           </Row>
         </Container>
       </section>
-      <section className="section section-sm pt-0" id="pages">
+      {/* <section className="section section-sm pt-0" id="pages">
         <Container>
           <Row className="justify-content-center mb-5 mb-lg-6">
             <Col xs={12} className="text-center">
@@ -321,7 +321,7 @@ export default () => {
             {pages.map(page => <PagePreview key={`page-${page.id}`} {...page} />)}
           </Row>
         </Container>
-      </section>
+      </section> */}
       <section className="section section-lg bg-primary text-white">
         <Container>
           <Row className="justify-content-center mb-5 mb-lg-6">
@@ -420,7 +420,7 @@ export default () => {
           </Row>
         </Container>
       </section>
-      <section className="section section-lg bg-white" id="free-demo">
+      {/* <section className="section section-lg bg-white" id="free-demo">
         <Container>
           <Row>
             <Col xs={12} lg={8}>
@@ -520,8 +520,8 @@ export default () => {
             </Col>
           </Row>
         </Container>
-      </section>
-      <section className="section bg-white">
+      </section> */}
+      {/* <section className="section bg-white">
         <Container id="pricing">
           <Row className="justify-content-center mb-6">
             <Col xs={12} lg={9} className="text-center">
@@ -701,7 +701,7 @@ export default () => {
             </Col>
           </Row>
         </Container>
-      </section>
+      </section> */}
       <section className="section section-lg bg-soft" id="pricing">
         <Container id="faq">
           <Row>
@@ -709,81 +709,68 @@ export default () => {
             <Row className="faq-section">
               <Col lg={6}>
                 <div className="mb-5">
-                  <h4 className="h5">How do I use the license that I got with my purchase?</h4>
-                  <p>You will receive a code in your order receipt. You do not need to insert it anywhere. Please keep it in your records for any future inquiry from us. If you create a client project, you can either keep this code or you can send us an email using our <a href="https://themesberg.com/contact">contact page</a>, and we will transfer the license to your client, provided that they have an account on our website.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">What is the difference between the Freelancer/Company/Enterprise licenses?</h4>
-                  <p>The Freelancer license is aimed at people who work on their own. It grants you the right to use the purchased product only for one project (either yours or for a client).</p>
-                  <p>The Company license is aimed at agencies or larger teams. It grants you the right to create other licensed products base on the template that you purchase from us.</p>
-                  <p>The Enterprise license is aimed at large companies with multiple projects. It grants you the right to create any kind of software, SaaS, digital products and sell them.</p>
-                  <p>All the differences between the types of licenses are <a href="https://themesberg.com/licensing">available here</a>.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
+                 </div>
+                <div className="mb-5">
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">Will I get an update to Bootstrap 5 for the Bootstrap 4 themes?</h4>
-                  <p>Although two of the products (Pixel Pro and Volt Pro) are already available in Bootstrap 5, we will update all of the themes to Bootstrap 5 in the next 6 months for free.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>               
+                 </div>
+                <div className="mb-5">
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">Are the themes available with only classic CSS and without Sass as well?</h4>
-                  <p>Yes, they are. Each theme has a <code className="text-primary">html&amp;css</code> folder which contains the theme with classic HTML, CSS, and Javascript files.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">Do these themes work with Wordpress?</h4>
-                  <p>These products are not Wordpress themes, however, they can be integrated in Wordpress by an experienced web developer.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">Are the images, fonts, and icons free to use?</h4>
-                  <p>The images, fonts, icons and every other creative element for each theme can be freely used in your project under our licensing terms.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">If I purchased a Freelancer/Company License, how can I upgrade to the Company/Enterprise License?</h4>
-                  <p>In case you have already purchased a license, but you want to upgrade, you can just send us a message using the <Card.Link href="https://themesberg.com/contact" target="_blank">contact page</Card.Link> and we will send you a discount code so you will only pay the difference for the upgrade.</p>
-                </div>
-                <div className="mb-5">
-                  <h4 className="h5">What does the Included Documentation feature refer to?</h4>
-                  <p>It means that each theme has a thorough and up to date documentation on how to get started with the product and each components and plugin is properly explained.</p>
-                </div>
-                <div className="mb-5">
-                  <h4 className="h5">What happens after the 6/12/24 months of Free Updates expires? Can I download the new updates after this period?</h4>
-                  <p>At the end of this period, you will need to renew your license (purchase the product again) to get Support.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div>
-                  <h4 className="h5">Can I remove the copyright notice from the files?</h4>
-                  <p>You can remove the copyright notice (if it's a premium item), but then you will need to create a separate <code className="text-primary">.txt</code> file called <code className="text-primary">LICENSE.txt</code>, and copy paste the copyright text in there. This file should be added to the root folder of your project.</p>
+                  <h4 className="h5">Question</h4>
                 </div>
               </Col>
               <Col lg={6}>
                 <div className="mb-5">
-                  <h4 className="h5">What does the full code feature refer to?</h4>
-                  <p>It refers to the fact that you will get all of the Sass, HTML, Javascript, and CSS files of the template.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">What does the Domains number refer to?</h4>
-                  <p>Depending on the license you purchase, you can use our products to either code a website/web application for you, for a client, or for multiple clients, which will be hosted on one or multiple domains:</p>
-                  <p>For example, if you purchased the Freelancer License, you can create only one website (for you or a client). If you want to create multiple websites, you will need a bigger license (like Company or Enterprise). Same, if you have multiple subdomains, like test.yoursite.com (http://test.yoursite.com/) or dev.yoursite.com (http://dev.yoursite.com/), you can use the Freelancer or Startup License.</p>
-                  <p>If you have a complex application like a SaaS and have client1.yoursite.com (http://client1.yoursite.com/) and client2.yoursite.com (http://client2.yoursite.com/) and clientx.yoursite.com, (http://clientx.yoursite.com/) you will need a multi-domain license like Company or Enterprise.</p>
-                  <p>For more information about our licenses, you can <a href="https://themesberg.com/licensing">check it here</a>.</p>
-                </div>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
+                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">What does the Team Size refer to?</h4>
-                  <p>The Team size for each license reflects the number of people who can access the product.</p>
-                  <p>For example, if you buy the Freelancer license, only one person can use the product. If you have a team of 6-10 people, you will need the Company license.</p>
-                  <p>For bigger teams of 5 developers, you will need to purchase an Enterprise License.</p>
-                </div>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
+                  </div>
                 <div className="mb-5">
-                  <h4 className="h5">What does the Tech Support refer to?</h4>
-                  <p>Depending on your license type, you have a fixed period when you can submit any ticket to us regarding product functionalities and bug fixes (learning and tutorials related requests are not included). You will get responses directly from the product's creators in 24 hours (during business days):</p>
-                  <p>If you purchase the Freelancer license, you will receive Support from us for 6 months. If you need 12 months of Support, you will need the Company license.</p>
-                  <p>If you purchase the Enterprise license, you will benefit from 24 months of Support. At the end of this period, you will need to renew your license (purchase the product again) to get Support.</p>
-                </div>
+                  <h4 className="h5">WQuestion</h4>
+                  <p>Answer</p>
+                  </div>
                 <div className="mb-5">
-                  <h4 className="h5">What does the Free Updates refer to?</h4>
-                  <p>Depending on your license type, you have a determined period when you receive product Updates that include bug fixes and new features:</p>
-                  <p>Freelancer: You will receive Free Updates for 6 months. Company: You will receive Free Updates for 12 months. Enterprise: You will benefit from 24 months of Free Updates.</p>
-                </div>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p> </div>
                 <div>
-                  <h4 className="h5">Do you have a question?</h4>
-                  <p className="mb-0">Feel free to send us a message using the <Card.Link href="https://themesberg.com/contact" target="_blank">contact page</Card.Link> and one of our team members will get back to you in the shortest time possible.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
               </Col>
             </Row>
