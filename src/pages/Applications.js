@@ -5,8 +5,8 @@ import withReactContent from 'sweetalert2-react-content';
 import { AdjustmentsIcon, CheckIcon, CogIcon, HomeIcon, PlusIcon, SearchIcon } from "@heroicons/react/solid";
 import { Col, Row, Form, Button, ButtonGroup, Breadcrumb, InputGroup, Dropdown } from 'react-bootstrap';
 
-import { ApplicationsTable } from "components/Tables";
-import USERS_DATA from "data/applications";
+// import { ApplicationsTable } from "components/Tables";
+import USERS_DATA from "data/users";
 import { Routes } from "routes";
 
 const SwalWithBootstrapButtons = withReactContent(Swal.mixin({
@@ -161,13 +161,13 @@ export default () => {
         </Row>
       </div>
 
-      <ApplicationsTable
+      {/* <ApplicationsTable
         applications={applications.filter(u => u.show)}
         allSelected={allSelected}
         selectApplication={selectApplication}
         deleteApplications={deleteApplications}
         selectAllApplications={selectAllApplications}
-      />
+      /> */}
     </>
   );
 };

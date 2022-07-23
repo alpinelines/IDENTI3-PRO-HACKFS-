@@ -7,6 +7,15 @@ import { Link, useHistory } from 'react-router-dom';
 import { Routes } from "routes";
 import { pageVisits, pageTraffic, pageRanking } from "data/tables";
 import commands from "data/commands";
+import data from "data/test";
+import CeramicLogo from "assets/img/ceramic_Logo.png"
+import { render } from 'react-dom';
+import { AgGridReact } from 'ag-grid-react'; // the AG Grid React Component
+
+import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
+import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
+
+
 
 const capitalizeFirstLetter = (string) => (
   string[0].toUpperCase() + string.slice(1)
@@ -541,165 +550,206 @@ export const CommandsTable = () => {
 
 
 
-export const ApplicationsTable = (props) => {
-  const { applications = [], allSelected } = props;
-  const [bulkOption, setBulkOption] = useState(0);
-  const disabledBulkMenu = applications.filter(u => u.isSelected).length === 0;
 
-  const selectApplication = (id) => {
-    props.selectApplication && props.selectApplication(id);
-  };
+ 
 
-  const selectAllApplications = () => {
-    props.selectAllApplications && props.selectAllApplications();
-  };
+// export const ApplicationsGrid = (props) => {
+//   const {applications = [], allSelected} = props;
+//   const [error, setError] = useState(null);
+//   const [loaded, setLoaded] = useState(false);
 
-  const bulkActionChange = (e) => {
-    const newOption = e.target.value;
-    setBulkOption(newOption);
-  }
+//   const selectApplication = (id) => {
+//         props.selectApplication && props.selectApplication(id);
+//       };
 
-  const applyBulkAction = () => {
-    if (bulkOption === "delete_applicationr") deleteApplications();
-  }
+//       const data = Object.values(applications);
 
-  const deleteApplications = (ids) => {
-    props.deleteApplications && props.deleteApplications(ids)
-  }
+//       if (error) {
+//         return <>{error.message}</>;
+//       } else if (!loaded) {
+//         return <>loading...</>;
+//       } else {
+//         return (
+//           <div className="wrapper">
+//             <ul className="card-grid">
+//               {data.map((applications) => (
+//                 <li key={applications.alpha3Code}>
+//                   <article className="card">
+//                     <div className="card-image">
+//                       <img src={CeramicLogo} alt={applications.name} />
+//                     </div>
+//                     <div className="card-content"/>
+//                       <h2 className="card-name">{applications.name}</h2>
+//                       // other card content
+//                   </article>
+//                 </li>
+//               ))}
+//             </ul>
+//           </div>
+//         );
+//       }
+// }
 
-  const TableRow = (props) => {
-    const { id, verified, status, image, name, email, dateCreated, isSelected } = props;
-    const VerifiedIcon = verified ? CheckCircleIcon : InformationCircleIcon;
-    const statusVariant = status === "active" ? "success"
-      : status === "inactive" ? "warning"
-        : status === "pending" ? "purple"
-          : status === "suspended" ? "danger" : "primary";
 
-    return (
-      <tr className="border-bottom">
-        <td>
-          <FormCheck type="checkbox" className="dashboard-check">
-            <FormCheck.Input id={`application-${id}`} checked={isSelected} onChange={() => selectApplication(id)} />
-            <FormCheck.Label htmlFor={`application-${id}`} />
-          </FormCheck>
-        </td>
-        <td>
-          <Card.Link className="d-flex align-items-center">
-            {image
-              ? (
-                <Image
-                  src={image}
-                  className="avatar rounded-circle me-3"
-                />
-              ) : (
-                <div className="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-secondary me-3">
-                  <span>{getFirstLetterOfEachWord(name)}</span>
-                </div>
-              )}
-            <div className="d-block">
-              <span className="fw-bold">{name}</span>
-              <div className="small text-gray">{email}</div>
-            </div>
-          </Card.Link>
-        </td>
-        <td><span className="fw-normal">{dateCreated}</span></td>
-        <td>
-          <span className="fw-normal d-flex align-items-center">
-            <VerifiedIcon className={`icon icon-xxs text-${statusVariant} me-1`} />
-            Email
-          </span>
-        </td>
-        <td>
-          <span className={`fw-normal text-${statusVariant}`}>
-            {capitalizeFirstLetter(status)}
-          </span>
-        </td>
-        <td>
-          <Dropdown as={ButtonGroup}>
-            <Dropdown.Toggle as={Button} split variant="link" className="text-dark m-0 p-0">
-              <DotsHorizontalIcon className="icon icon-xs" />
-            </Dropdown.Toggle>
-            <Dropdown.Menu className="dashboard-dropdown dropdown-menu-start mt-2 py-1">
-              <Dropdown.Item className="d-flex align-items-center">
-                <ShieldExclamationIcon className="dropdown-icon text-gray-400 me-2" />
-                Reset Pass
-              </Dropdown.Item>
-              <Dropdown.Item className="d-flex align-items-center">
-                <EyeIcon className="dropdown-icon text-gray-400 me-2" />
-                View Details
-              </Dropdown.Item>
-              <Dropdown.Item className="d-flex align-items-center">
-                <applicationRemoveIcon className="dropdown-icon text-danger me-2" />
-                Suspend
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+// export const ApplicationsTable = (props) => {
+//   const { applications = [], allSelected } = props;
+//   const [bulkOption, setBulkOption] = useState(0);
+//   const disabledBulkMenu = applications.filter(u => u.isSelected).length === 0;
 
-          <OverlayTrigger placement="top" overlay={<Tooltip className="m-0">Delete</Tooltip>}>
-            <Card.Link className="ms-2" onClick={() => deleteApplications([id])}>
-              <XCircleIcon className="icon icon-xs text-danger" />
-            </Card.Link>
-          </OverlayTrigger>
-        </td>
-      </tr>
-    );
-  };
+//   const selectApplication = (id) => {
+//     props.selectApplication && props.selectApplication(id);
+//   };
 
-  return (
-    <Card border="0" className="table-wrapper table-responsive shadow">
-      <Card.Body>
-        <div className="d-flex mb-3">
-          <Form.Select className="fmxw-200" disabled={disabledBulkMenu} value={bulkOption} onChange={bulkActionChange}>
-            <option value="bulk_action">Bulk Action</option>
-            <option value="send_email">Send Email</option>
-            <option value="change_group">Change Group</option>
-            <option value="delete_application">Delete Application</option>
-          </Form.Select>
-          <Button variant="secondary" size="sm" className="ms-3" disabled={disabledBulkMenu} onClick={applyBulkAction}>
-            Apply
-          </Button>
-        </div>
-        <Table hover className="application-table align-items-center">
-          <thead>
-            <tr>
-              <th className="border-bottom">
-                <FormCheck type="checkbox" className="dashboard-check">
-                  <FormCheck.Input id="applicationCheckAll" checked={allSelected} onChange={selectAllApplications} />
-                  <FormCheck.Label htmlFor="applicationCheckAll" />
-                </FormCheck>
-              </th>
-              <th className="border-bottom">Name</th>
-              <th className="border-bottom">Date Created</th>
-              <th className="border-bottom">Verified</th>
-              <th className="border-bottom">Status</th>
-              <th className="border-bottom">Action</th>
-            </tr>
-          </thead>
-          <tbody className="border-0">
-            {applications.map(u => <TableRow key={`application-${u.id}`} {...u} />)}
-          </tbody>
-        </Table>
-        <Card.Footer className="px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-          <Nav>
-            <Pagination className="mb-0">
-              <Pagination.Prev>
-                Previous
-              </Pagination.Prev>
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>
-                Next
-              </Pagination.Next>
-            </Pagination>
-          </Nav>
-          <small className="fw-normal small mt-4 mt-lg-0">
-            Showing <b>{applications.length}</b> out of <b>25</b> entries
-          </small>
-        </Card.Footer>
-      </Card.Body>
-    </Card>
-  );
-};
+//   const selectAllApplications = () => {
+//     props.selectAllApplications && props.selectAllApplications();
+//   };
+
+//   const bulkActionChange = (e) => {
+//     const newOption = e.target.value;
+//     setBulkOption(newOption);
+//   }
+
+//   const applyBulkAction = () => {
+//     if (bulkOption === "delete_applicationr") deleteApplications();
+//   }
+
+//   const deleteApplications = (ids) => {
+//     props.deleteApplications && props.deleteApplications(ids)
+//   }
+
+//   const TableRow = (props) => {
+//     const { id, verified, status, image, name, email, dateCreated, isSelected } = props;
+//     const VerifiedIcon = verified ? CheckCircleIcon : InformationCircleIcon;
+//     const statusVariant = status === "active" ? "success"
+//       : status === "inactive" ? "warning"
+//         : status === "pending" ? "purple"
+//           : status === "suspended" ? "danger" : "primary";
+
+//     return (
+//       <tr className="border-bottom">
+//         <td>
+//           <FormCheck type="checkbox" className="dashboard-check">
+//             <FormCheck.Input id={`application-${id}`} checked={isSelected} onChange={() => selectApplication(id)} />
+//             <FormCheck.Label htmlFor={`application-${id}`} />
+//           </FormCheck>
+//         </td>
+//         <td>
+//           <Card.Link className="d-flex align-items-center">
+//             {image
+//               ? (
+//                 <Image
+//                   src={image}
+//                   className="avatar rounded-circle me-3"
+//                 />
+//               ) : (
+//                 <div className="avatar d-flex align-items-center justify-content-center fw-bold rounded bg-secondary me-3">
+//                   <span>{getFirstLetterOfEachWord(name)}</span>
+//                 </div>
+//               )}
+//             <div className="d-block">
+//               <span className="fw-bold">{name}</span>
+//               <div className="small text-gray">{email}</div>
+//             </div>
+//           </Card.Link>
+//         </td>
+//         <td><span className="fw-normal">{dateCreated}</span></td>
+//         <td>
+//           <span className="fw-normal d-flex align-items-center">
+//             <VerifiedIcon className={`icon icon-xxs text-${statusVariant} me-1`} />
+//             Email
+//           </span>
+//         </td>
+//         <td>
+//           <span className={`fw-normal text-${statusVariant}`}>
+//             {capitalizeFirstLetter(status)}
+//           </span>
+//         </td>
+//         <td>
+//           <Dropdown as={ButtonGroup}>
+//             <Dropdown.Toggle as={Button} split variant="link" className="text-dark m-0 p-0">
+//               <DotsHorizontalIcon className="icon icon-xs" />
+//             </Dropdown.Toggle>
+//             <Dropdown.Menu className="dashboard-dropdown dropdown-menu-start mt-2 py-1">
+//               <Dropdown.Item className="d-flex align-items-center">
+//                 <ShieldExclamationIcon className="dropdown-icon text-gray-400 me-2" />
+//                 Reset Pass
+//               </Dropdown.Item>
+//               <Dropdown.Item className="d-flex align-items-center">
+//                 <EyeIcon className="dropdown-icon text-gray-400 me-2" />
+//                 View Details
+//               </Dropdown.Item>
+//               <Dropdown.Item className="d-flex align-items-center">
+//                 <applicationRemoveIcon className="dropdown-icon text-danger me-2" />
+//                 Suspend
+//               </Dropdown.Item>
+//             </Dropdown.Menu>
+//           </Dropdown>
+
+//           <OverlayTrigger placement="top" overlay={<Tooltip className="m-0">Delete</Tooltip>}>
+//             <Card.Link className="ms-2" onClick={() => deleteApplications([id])}>
+//               <XCircleIcon className="icon icon-xs text-danger" />
+//             </Card.Link>
+//           </OverlayTrigger>
+//         </td>
+//       </tr>
+//     );
+//   };
+
+//   return (
+//     <Card border="0" className="table-wrapper table-responsive shadow">
+//       <Card.Body>
+//         <div className="d-flex mb-3">
+//           <Form.Select className="fmxw-200" disabled={disabledBulkMenu} value={bulkOption} onChange={bulkActionChange}>
+//             <option value="bulk_action">Bulk Action</option>
+//             <option value="send_email">Send Email</option>
+//             <option value="change_group">Change Group</option>
+//             <option value="delete_application">Delete Application</option>
+//           </Form.Select>
+//           <Button variant="secondary" size="sm" className="ms-3" disabled={disabledBulkMenu} onClick={applyBulkAction}>
+//             Apply
+//           </Button>
+//         </div>
+//         <Table hover className="application-table align-items-center">
+//           <thead>
+//             <tr>
+//               <th className="border-bottom">
+//                 <FormCheck type="checkbox" className="dashboard-check">
+//                   <FormCheck.Input id="applicationCheckAll" checked={allSelected} onChange={selectAllApplications} />
+//                   <FormCheck.Label htmlFor="applicationCheckAll" />
+//                 </FormCheck>
+//               </th>
+//               <th className="border-bottom">Name</th>
+//               <th className="border-bottom">Date Created</th>
+//               <th className="border-bottom">Verified</th>
+//               <th className="border-bottom">Status</th>
+//               <th className="border-bottom">Action</th>
+//             </tr>
+//           </thead>
+//           <tbody className="border-0">
+//             {applications.map(u => <TableRow key={`application-${u.id}`} {...u} />)}
+//           </tbody>
+//         </Table>
+//         <Card.Footer className="px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+//           <Nav>
+//             <Pagination className="mb-0">
+//               <Pagination.Prev>
+//                 Previous
+//               </Pagination.Prev>
+//               <Pagination.Item active>1</Pagination.Item>
+//               <Pagination.Item>2</Pagination.Item>
+//               <Pagination.Item>3</Pagination.Item>
+//               <Pagination.Item>4</Pagination.Item>
+//               <Pagination.Item>5</Pagination.Item>
+//               <Pagination.Next>
+//                 Next
+//               </Pagination.Next>
+//             </Pagination>
+//           </Nav>
+//           <small className="fw-normal small mt-4 mt-lg-0">
+//             Showing <b>{applications.length}</b> out of <b>25</b> entries
+//           </small>
+//         </Card.Footer>
+//       </Card.Body>
+//     </Card>
+//   );
+// };

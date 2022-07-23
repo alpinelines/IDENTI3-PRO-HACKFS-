@@ -30,6 +30,7 @@ import Lock from "pages/examples/Lock";
 import Widgets from "pages/examples/Widgets";
 import NotFoundPage from "pages/examples/NotFound";
 import ServerError from "pages/examples/ServerError";
+import Applications from "pages/Applications";
 
 // documentation pages
 import DocsOverview from "pages/documentation/DocsOverview";
@@ -162,6 +163,7 @@ export default () => (
     <RouteWithSidebar exact path={Routes.Pricing.path} component={Pricing} />
     <RouteWithSidebar exact path={Routes.Billing.path} component={Billing} />
     <RouteWithSidebar exact path={Routes.Invoice.path} component={Invoice} />
+    <RouteWithSidebar exact path={Routes.Applications.path} component={Applications} />
 
     {/* components */}
     <RouteWithSidebar exact path={Routes.Accordions.path} component={Accordion} />
