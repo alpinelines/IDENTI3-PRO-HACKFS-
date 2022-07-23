@@ -7,13 +7,9 @@ import { Link, useHistory } from 'react-router-dom';
 import { Routes } from "routes";
 import { pageVisits, pageTraffic, pageRanking } from "data/tables";
 import commands from "data/commands";
-import data from "data/test";
-import CeramicLogo from "assets/img/ceramic_Logo.png"
-import { render } from 'react-dom';
-import { AgGridReact } from 'ag-grid-react'; // the AG Grid React Component
 
-import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
-import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
+
+
 
 
 
