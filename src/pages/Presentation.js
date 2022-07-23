@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import moment from "moment-timezone";
 import { Col, Row, Card, Image, Button, Container, ListGroup, Tooltip, OverlayTrigger, Form, Navbar, Nav } from 'react-bootstrap';
 import { BookOpenIcon, CheckCircleIcon, CodeIcon, ExternalLinkIcon, FolderIcon, InformationCircleIcon, LightBulbIcon, MapIcon, PuzzleIcon, ScaleIcon, ShoppingCartIcon, XCircleIcon } from "@heroicons/react/solid";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import Code from "components/CodeEditor";
 import GitHubButton from 'react-github-btn';
@@ -19,14 +19,23 @@ import ReactMockupImg from "assets/img/react-mockup.png";
 import BS5IllustrationsImg from "assets/img/illustrations/bs5-illustrations.svg";
 import BS5Logo from "assets/img/technologies/bootstrap-5-logo.svg";
 import ReactLogo from "assets/img/technologies/react-logo.svg";
+import LitLogo from "assets/img/Lit_Logo.webp";
+import CeramicLogo from "assets/img/ceramic_Logo.png";
+import AuthenticationImg from "assets/img/AuthenticationIMG1.png"
+import UtilityImg from "assets/img/UtilityIMG.png";
+import AccessControlImg from "assets/img/AccessControlIMG.png";
+
+
 
 import pages from "data/pages";
 import features from "data/features";
 import { BootstrapIcon, FileCodeIcon, GithubIcon, JsIcon, ReactIcon } from "components/BrandIcons";
 
+import { useOrbis } from 'services/context';
 
 export default () => {
   const currentYear = moment().get("year");
+  const { user, connect } = useOrbis();
 
   const PagePreview = (props) => {
     const { name, image, link } = props;
@@ -80,20 +89,23 @@ export default () => {
         <Container className="position-relative justify-content-between px-3">
           <Navbar.Brand as={HashLink} to="#home" className="me-lg-3 d-flex align-items-center">
             <Image src={ReactHero} />
-            <span className="ms-2 brand-text d-none d-md-inline">Volt React Pro</span>
+            <span className="ms-2 brand-text d-none d-md-inline">IDENTI3</span>
           </Navbar.Brand>
 
           <div className="d-flex align-items-center">
             <Navbar.Collapse id="navbar-default-primary">
               <Nav className="navbar-nav-hover align-items-lg-center">
-                <Nav.Link as={HashLink} to="#features">Features</Nav.Link>
-                <Nav.Link as={HashLink} to="#pages">Pages</Nav.Link>
-                <Nav.Link as={HashLink} to="#folder">Folder Structure</Nav.Link>
-                <Nav.Link as={HashLink} to="#getting-started">Getting Started</Nav.Link>
-                <Nav.Link as={HashLink} to="#free-demo" className="d-sm-none d-xl-inline">Free Demo</Nav.Link>
+
               </Nav>
             </Navbar.Collapse>
-            <Button as={HashLink} to="#pricing" variant="outline-white" className="ms-3">Pricing plan</Button>
+
+            <Button 
+              className="ms-3"
+              variant="outline-white"
+              onClick={() => connect()} 
+            >
+              Open IDENTI3</Button>
+
           </div>
         </Container>
       </Navbar>
@@ -102,24 +114,34 @@ export default () => {
           <Row>
             <Col xs={12} className="text-center">
               <h1 className="fw-bolder text-secondary">
-                Volt React
-                <span className="d-none d-sm-inline"> Dashboard</span>
-                <span className="pro-badge fw-bolder">PRO</span>
+                IDENTI3
+                {/* <span className="d-none d-sm-inline"></span>
+                <span className="pro-badge fw-bolder"></span> */}
               </h1>
-              <p className="text-muted fw-light mb-5 h5">Premium admin dashboard powered by React.js and Bootstrap 5</p>
+              <p className="text-muted fw-light mb-5 h5">Take Control of your Data</p>
               <div className="d-flex justify-content-center mb-5">
-                <Button variant="secondary" as={Link} to={Routes.DashboardOverview.path} className="text-dark me-3">
-                  Explore dashboard <ExternalLinkIcon className="icon icon-xs d-none d-sm-inline ms-1" />
-                </Button>
-                <Button variant="outline-secondary" as={HashLink} to="#pricing" className="d-flex align-items-center">
+                {user ?
+                  <p>Connected with: {user}</p>
+                 :
+                  <Button 
+                    className="text-dark me-3"
+                    variant="secondary" 
+                    onClick={() => connect()} 
+                    
+                  >
+                    Open IDENTI3 <ExternalLinkIcon className="icon icon-xs d-none d-sm-inline ms-1" />
+                  </Button>
+                } 
+                {/* <Button variant="outline-secondary" as={HashLink} to="#pricing" className="d-flex align-items-center">
                   Purchase now
-                </Button>
+                </Button> */}
               </div>
               <div className="text-center mb-6 mb-lg-5">
-                <a href="https://themesberg.com" target="_blank" rel="noopener noreferrer">
+                {/* <a href="https://themesberg.com" target="_blank" rel="noopener noreferrer">
                   <Image src={ThemesbergLogoIcon} height={25} width={25} className="mb-3" alt="Themesberg Logo" />
                   <p className="text-muted font-small m-0">A Themesberg production</p>
-                </a>
+                </a> */}
+                
               </div>
             </Col>
           </Row>
@@ -142,29 +164,29 @@ export default () => {
               <div className="icon-shape bg-white shadow-lg border-light rounded-circle mb-4">
                 <BookOpenIcon className="icon icon-md text-secondary" />
               </div>
-              <h3 className="fw-bolder">20</h3>
-              <p className="text-gray">Example Pages</p>
+              <h3 className="fw-bolder">Ownership</h3>
+              <p className="text-gray">Own your Data</p>
             </Col>
             <Col xs={6} md={3} className="text-center mb-4">
               <div className="icon-shape bg-white shadow-lg border-light rounded-circle mb-4">
                 <PuzzleIcon className="icon icon-md text-secondary" />
               </div>
-              <h3 className="fw-bolder">200+</h3>
-              <p className="text-gray">React Components</p>
+              <h3 className="fw-bolder">Control</h3>
+              <p className="text-gray">Control who you share data with</p>
             </Col>
             <Col xs={6} md={3} className="text-center">
               <div className="icon-shape bg-white shadow-lg border-light rounded-circle mb-4">
                 <LightBulbIcon className="icon icon-md text-secondary" />
               </div>
-              <h3 className="fw-bolder">Workflow</h3>
-              <p className="text-gray">Sass & react-app</p>
+              <h3 className="fw-bolder">Authentication</h3>
+              <p className="text-gray">No more passwords</p>
             </Col>
             <Col xs={6} md={3} className="text-center">
               <div className="icon-shape bg-white shadow-lg border-light rounded-circle mb-4">
                 <BootstrapIcon size="md" color="secondary" />
               </div>
-              <h3 className="fw-bolder">Bootstrap 5</h3>
-              <p className="text-gray">CSS Framework</p>
+              <h3 className="fw-bolder">Utility</h3>
+              <p className="text-gray">Benefit from your own data</p>
             </Col>
           </Row>
         </Container>
@@ -173,12 +195,12 @@ export default () => {
         <Container>
         <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5}>
-              <h2>Kanban Board</h2>
+              <h2>Data Management</h2>
               <p className="mb-3 lead fw-bold">
-                Interactive drag and drop interface
+                Manage and own your own data
               </p>
               <p className="mb-4">
-                You'll get a fully interactive Drag and Drop Kanban board interface.
+                Import your own data to build your IDENTI3. OAuth allows you to take your data from your favourite applications and websites
               </p>
               <Button as={Link} to={Routes.Kanban.path} className="me-3" variant="secondary" target="_blank">
                 <MapIcon className="icon icon-xs me-2" /> Demo Kanban
@@ -190,9 +212,9 @@ export default () => {
           </Row>
           <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5} className="order-lg-2 mb-5 mb-lg-0">
-              <h2>Powered by React.js</h2>
-              <p className="mb-3 lead fw-bold">The most popular front-end library in the world</p>
-              <p className="mb-4">Volt React Pro is an admin dashboard template that is built using React.js components using react hooks and a data-driven structure that can kick-start your app in no time.</p>
+              <h2>Access Control</h2>
+              <p className="mb-3 lead fw-bold">Easy management of data access and control</p>
+              <p className="mb-4">IDENTI3 uses Lit Protocol to encrypt and control access to your data. Easily Share your data with people and applications you trust</p>
               <Button as={Link} to={Routes.DashboardOverview.path} variant="secondary" target="_blank">
                 Live Demo <ExternalLinkIcon className="icon icon-xs ms-1" />
               </Button>
@@ -201,21 +223,22 @@ export default () => {
               </Button>
             </Col>
             <Col lg={6} className="order-lg-1">
-              <Image src={ReactMockupImg} alt="Calendar Preview" />
+              <Image src={AccessControlImg} alt="Calendar Preview" />
             </Col>
           </Row>
           <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5}>
-              <h2>React.js Components</h2>
-              <p className="mb-3 lead fw-bold">200+ premium UI elements based on Bootstrap 5</p>
-              <p className="mb-4">We've built over 200 React.js powered components to be used throughout your application saving you time kickstarting your project.</p>
-              <p className="mb-4">Check out the components and use our live React.js component editor to try the code.</p>
+              <h2>Authentication</h2>
+              <p className="mb-3 lead fw-bold">No more passwords with IDENTI3</p>
+              <p className="mb-4">IDENTI3 uses the latest FIDO standards to allow users to say goodbye to passwords </p>
+              <p className="mb-4">Sign-on to your favourite websites and applications using your wallet</p>
               <Button as={Link} to={Routes.Forms.path} variant="secondary" className="mb-5 mb-lg-0" target="_blank">
                 <ReactIcon color="primary" size="xxs" className="me-1" /> Components examples
               </Button>
             </Col>
-            <Col lg={6} className="rounded shadow pt-3">
-              <Code scope={{ Form, Button }} code={`<Form>
+            <Col lg={6} className="order-lg-1">
+            <Image src={AuthenticationImg} alt="MapBox Leaflet.js Custom Integration Mockup" />
+              {/* <Code scope={{ Form, Button }} code={`<Form>
   <Form.Group id="frameworks" className="mb-3">
     <Form.Label>Example select</Form.Label>
     <Form.Select>
@@ -226,14 +249,15 @@ export default () => {
     </Form.Select>
   </Form.Group>
   <Button variant="primary" className="m-1">Primary</Button>
-</Form>`} language="jsx" />
+</Form>`} language="jsx" /> */}
             </Col>
           </Row>
           <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5} className="order-lg-2 mb-5 mb-lg-0">
-              <h2>Mapbox</h2>
-              <p className="mb-3 lead fw-bold">Markers and cards integration with Leaflet.js</p>
-              <p className="mb-4">You can use this map to add markers with custom cards and show them on a map using our custom MapBox integration with Leaflet.js</p>
+              <h2>Utility</h2>
+              <p className="mb-3 lead fw-bold">Put your data to use</p>
+              <p className="mb-4">IDENTI3 allows users to benefit from the collection of their own data. </p>
+              <p className="mb-5">Use your data to provide useful insights on your identity</p>
               <Button as={Link} to={Routes.Map.path} className="me-3" variant="secondary" target="_blank">
                 <MapIcon className="icon icon-xs me-2" /> Demo Map
               </Button>
@@ -242,17 +266,17 @@ export default () => {
               </Button>
             </Col>
             <Col lg={6} className="order-lg-1">
-              <Image src={MapboxImg} alt="MapBox Leaflet.js Custom Integration Mockup" />
+              <Image src={UtilityImg} alt="MapBox Leaflet.js Custom Integration Mockup" />
             </Col>
           </Row>
           <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5}>
-              <h2>Calendar</h2>
+              <h2>Storage</h2>
               <p className="mb-3 lead fw-bold">
-                Advanced FullCalendar.js integration
+                IDENTI3 uses Ceramic Network and DIDs to create your Self-Soveirgn IDENTI3.
               </p>
               <p className="mb-4">
-                We created a fully editable calendar where you can add, edit and delete events for your admin dashboard.
+                Using Ceramic's permissionless data streaming network, users can store, edti and update content on IPFS & Filecoin. 
               </p>
               <Button as={Link} to={Routes.Calendar.path} className="me-3" variant="secondary" target="_blank">
                 <MapIcon className="icon icon-xs me-2" /> Demo Calendar
@@ -262,12 +286,12 @@ export default () => {
               </Button>
             </Col>
             <Col lg={6}>
-              <Image src={CalendarImg} alt="Calendar Preview" />
+              <Image src={CeramicLogo} alt="Calendar Preview" />
             </Col>
           </Row>
           <Row className="justify-content-between align-items-center">
             <Col lg={5} className="order-lg-2 mb-5 mb-lg-0">
-              <h2>Bootstrap 5</h2>
+              <h2>Encryption</h2>
               <p className="mb-3 lead fw-bold">
                 Latest version of Bootstrap 5
               </p>
@@ -276,12 +300,12 @@ export default () => {
               </p>
             </Col>
             <Col lg={6} className="col-lg-6 order-lg-1">
-              <Image src={BS5IllustrationsImg} alt="Front pages overview" />
+              <Image src={LitLogo} alt="Front pages overview" />
             </Col>
           </Row>
         </Container>
       </section>
-      <section className="section section-sm pt-0" id="pages">
+      {/* <section className="section section-sm pt-0" id="pages">
         <Container>
           <Row className="justify-content-center mb-5 mb-lg-6">
             <Col xs={12} className="text-center">
@@ -297,7 +321,7 @@ export default () => {
             {pages.map(page => <PagePreview key={`page-${page.id}`} {...page} />)}
           </Row>
         </Container>
-      </section>
+      </section> */}
       <section className="section section-lg bg-primary text-white">
         <Container>
           <Row className="justify-content-center mb-5 mb-lg-6">
@@ -396,7 +420,7 @@ export default () => {
           </Row>
         </Container>
       </section>
-      <section className="section section-lg bg-white" id="free-demo">
+      {/* <section className="section section-lg bg-white" id="free-demo">
         <Container>
           <Row>
             <Col xs={12} lg={8}>
@@ -496,8 +520,8 @@ export default () => {
             </Col>
           </Row>
         </Container>
-      </section>
-      <section className="section bg-white">
+      </section> */}
+      {/* <section className="section bg-white">
         <Container id="pricing">
           <Row className="justify-content-center mb-6">
             <Col xs={12} lg={9} className="text-center">
@@ -677,7 +701,7 @@ export default () => {
             </Col>
           </Row>
         </Container>
-      </section>
+      </section> */}
       <section className="section section-lg bg-soft" id="pricing">
         <Container id="faq">
           <Row>
@@ -685,81 +709,68 @@ export default () => {
             <Row className="faq-section">
               <Col lg={6}>
                 <div className="mb-5">
-                  <h4 className="h5">How do I use the license that I got with my purchase?</h4>
-                  <p>You will receive a code in your order receipt. You do not need to insert it anywhere. Please keep it in your records for any future inquiry from us. If you create a client project, you can either keep this code or you can send us an email using our <a href="https://themesberg.com/contact">contact page</a>, and we will transfer the license to your client, provided that they have an account on our website.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">What is the difference between the Freelancer/Company/Enterprise licenses?</h4>
-                  <p>The Freelancer license is aimed at people who work on their own. It grants you the right to use the purchased product only for one project (either yours or for a client).</p>
-                  <p>The Company license is aimed at agencies or larger teams. It grants you the right to create other licensed products base on the template that you purchase from us.</p>
-                  <p>The Enterprise license is aimed at large companies with multiple projects. It grants you the right to create any kind of software, SaaS, digital products and sell them.</p>
-                  <p>All the differences between the types of licenses are <a href="https://themesberg.com/licensing">available here</a>.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
+                 </div>
+                <div className="mb-5">
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">Will I get an update to Bootstrap 5 for the Bootstrap 4 themes?</h4>
-                  <p>Although two of the products (Pixel Pro and Volt Pro) are already available in Bootstrap 5, we will update all of the themes to Bootstrap 5 in the next 6 months for free.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>               
+                 </div>
+                <div className="mb-5">
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">Are the themes available with only classic CSS and without Sass as well?</h4>
-                  <p>Yes, they are. Each theme has a <code className="text-primary">html&amp;css</code> folder which contains the theme with classic HTML, CSS, and Javascript files.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">Do these themes work with Wordpress?</h4>
-                  <p>These products are not Wordpress themes, however, they can be integrated in Wordpress by an experienced web developer.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">Are the images, fonts, and icons free to use?</h4>
-                  <p>The images, fonts, icons and every other creative element for each theme can be freely used in your project under our licensing terms.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">If I purchased a Freelancer/Company License, how can I upgrade to the Company/Enterprise License?</h4>
-                  <p>In case you have already purchased a license, but you want to upgrade, you can just send us a message using the <Card.Link href="https://themesberg.com/contact" target="_blank">contact page</Card.Link> and we will send you a discount code so you will only pay the difference for the upgrade.</p>
-                </div>
-                <div className="mb-5">
-                  <h4 className="h5">What does the Included Documentation feature refer to?</h4>
-                  <p>It means that each theme has a thorough and up to date documentation on how to get started with the product and each components and plugin is properly explained.</p>
-                </div>
-                <div className="mb-5">
-                  <h4 className="h5">What happens after the 6/12/24 months of Free Updates expires? Can I download the new updates after this period?</h4>
-                  <p>At the end of this period, you will need to renew your license (purchase the product again) to get Support.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div>
-                  <h4 className="h5">Can I remove the copyright notice from the files?</h4>
-                  <p>You can remove the copyright notice (if it's a premium item), but then you will need to create a separate <code className="text-primary">.txt</code> file called <code className="text-primary">LICENSE.txt</code>, and copy paste the copyright text in there. This file should be added to the root folder of your project.</p>
+                  <h4 className="h5">Question</h4>
                 </div>
               </Col>
               <Col lg={6}>
                 <div className="mb-5">
-                  <h4 className="h5">What does the full code feature refer to?</h4>
-                  <p>It refers to the fact that you will get all of the Sass, HTML, Javascript, and CSS files of the template.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">What does the Domains number refer to?</h4>
-                  <p>Depending on the license you purchase, you can use our products to either code a website/web application for you, for a client, or for multiple clients, which will be hosted on one or multiple domains:</p>
-                  <p>For example, if you purchased the Freelancer License, you can create only one website (for you or a client). If you want to create multiple websites, you will need a bigger license (like Company or Enterprise). Same, if you have multiple subdomains, like test.yoursite.com (http://test.yoursite.com/) or dev.yoursite.com (http://dev.yoursite.com/), you can use the Freelancer or Startup License.</p>
-                  <p>If you have a complex application like a SaaS and have client1.yoursite.com (http://client1.yoursite.com/) and client2.yoursite.com (http://client2.yoursite.com/) and clientx.yoursite.com, (http://clientx.yoursite.com/) you will need a multi-domain license like Company or Enterprise.</p>
-                  <p>For more information about our licenses, you can <a href="https://themesberg.com/licensing">check it here</a>.</p>
-                </div>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
+                 </div>
                 <div className="mb-5">
-                  <h4 className="h5">What does the Team Size refer to?</h4>
-                  <p>The Team size for each license reflects the number of people who can access the product.</p>
-                  <p>For example, if you buy the Freelancer license, only one person can use the product. If you have a team of 6-10 people, you will need the Company license.</p>
-                  <p>For bigger teams of 5 developers, you will need to purchase an Enterprise License.</p>
-                </div>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
+                  </div>
                 <div className="mb-5">
-                  <h4 className="h5">What does the Tech Support refer to?</h4>
-                  <p>Depending on your license type, you have a fixed period when you can submit any ticket to us regarding product functionalities and bug fixes (learning and tutorials related requests are not included). You will get responses directly from the product's creators in 24 hours (during business days):</p>
-                  <p>If you purchase the Freelancer license, you will receive Support from us for 6 months. If you need 12 months of Support, you will need the Company license.</p>
-                  <p>If you purchase the Enterprise license, you will benefit from 24 months of Support. At the end of this period, you will need to renew your license (purchase the product again) to get Support.</p>
-                </div>
+                  <h4 className="h5">WQuestion</h4>
+                  <p>Answer</p>
+                  </div>
                 <div className="mb-5">
-                  <h4 className="h5">What does the Free Updates refer to?</h4>
-                  <p>Depending on your license type, you have a determined period when you receive product Updates that include bug fixes and new features:</p>
-                  <p>Freelancer: You will receive Free Updates for 6 months. Company: You will receive Free Updates for 12 months. Enterprise: You will benefit from 24 months of Free Updates.</p>
-                </div>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p> </div>
                 <div>
-                  <h4 className="h5">Do you have a question?</h4>
-                  <p className="mb-0">Feel free to send us a message using the <Card.Link href="https://themesberg.com/contact" target="_blank">contact page</Card.Link> and one of our team members will get back to you in the shortest time possible.</p>
+                  <h4 className="h5">Question</h4>
+                  <p>Answer</p>
                 </div>
               </Col>
             </Row>

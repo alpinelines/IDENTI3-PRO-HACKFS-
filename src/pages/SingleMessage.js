@@ -4,11 +4,15 @@ import { DeviceMobileIcon, InboxInIcon, PaperClipIcon, ReplyIcon } from "@heroic
 import { Col, Row, Card, Form, Image, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import CONVERSATION_MESSAGES, { createMessage } from "data/conversation";
+import { createMessage } from "data/conversation";
+
 import { Routes } from "routes";
+import { useOrbis } from "services/context";
 
 export default () => {
-  const [conversation, setConversation] = useState(CONVERSATION_MESSAGES);
+  // const [conversation, setConversation] = useState(CONVERSATION_MESSAGES);
+  const { messageService } = useOrbis();
+  const { conversation, setConversation } = messageService;  
   const [message, setMessage] = useState("");
   const currentDate = moment().format("Do of MMMM, YYYY");
 

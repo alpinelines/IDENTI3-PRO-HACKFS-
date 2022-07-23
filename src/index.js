@@ -17,6 +17,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from "react-router-dom";
 
+// ceramic provider
+// import { Provider } from '@self.id/react'
+
 // core styles
 import "./scss/volt.scss";
 
@@ -27,11 +30,14 @@ import "react-datetime/css/react-datetime.css";
 
 import HomePage from "./pages/HomePage";
 import ScrollToTop from "./components/ScrollToTop";
+import { OrbisProvider } from 'services/context';
 
 ReactDOM.render(
   <HashRouter>
-    <ScrollToTop />
-    <HomePage />
+      <OrbisProvider>
+        <ScrollToTop />
+        <HomePage />
+      </OrbisProvider>
   </HashRouter>
   , document.getElementById("root")
 );

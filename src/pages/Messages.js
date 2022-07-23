@@ -8,7 +8,8 @@ import { Col, Row, Button, Dropdown, ButtonGroup, OverlayTrigger, Tooltip } from
 
 import { MessageCardWidget } from "components/Widgets";
 import { Routes } from "routes";
-import MESSAGES_DATA from "data/messages";
+import { useOrbis } from "services/context";
+// import MESSAGES_DATA from "data/messages";
 
 const ArchiveIconHtml = ReactDOMServer.renderToString(
   <ArchiveIcon className="h-50 w-auto" />
@@ -23,8 +24,10 @@ const SwalWithBootstrapButtons = withReactContent(Swal.mixin({
 }));
 
 export default () => {
-  const [messages, setMessages] = useState(MESSAGES_DATA);
+  const { messageService } = useOrbis();
+  const { messages, setMessages } = messageService;
   const selectedMessageIds = messages.filter(m => m.isSelected).map(m => m.id);
+  
   const disableMenu = selectedMessageIds.length === 0;
 
   const selectMessage = (id) => {
