@@ -127,7 +127,7 @@ export default () => {
                     className="text-dark me-3"
                     variant="secondary" 
                     onClick={() => connect()} 
-
+                    
                   >
                     Open IDENTI3 <ExternalLinkIcon className="icon icon-xs d-none d-sm-inline ms-1" />
                   </Button>
@@ -164,7 +164,7 @@ export default () => {
               <div className="icon-shape bg-white shadow-lg border-light rounded-circle mb-4">
                 <BookOpenIcon className="icon icon-md text-secondary" />
               </div>
-              <h3 className="fw-bolder">Data</h3>
+              <h3 className="fw-bolder">Ownership</h3>
               <p className="text-gray">Own your Data</p>
             </Col>
             <Col xs={6} md={3} className="text-center mb-4">
