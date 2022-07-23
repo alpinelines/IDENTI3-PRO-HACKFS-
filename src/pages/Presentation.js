@@ -19,6 +19,13 @@ import ReactMockupImg from "assets/img/react-mockup.png";
 import BS5IllustrationsImg from "assets/img/illustrations/bs5-illustrations.svg";
 import BS5Logo from "assets/img/technologies/bootstrap-5-logo.svg";
 import ReactLogo from "assets/img/technologies/react-logo.svg";
+import LitLogo from "assets/img/Lit_Logo.webp";
+import CeramicLogo from "assets/img/ceramic_Logo.png";
+import AuthenticationImg from "assets/img/AuthenticationIMG1.png"
+import UtilityImg from "assets/img/UtilityIMG.png";
+import AccessControlImg from "assets/img/AccessControlIMG.png";
+
+
 
 import pages from "data/pages";
 import features from "data/features";
@@ -91,7 +98,14 @@ export default () => {
 
               </Nav>
             </Navbar.Collapse>
-            <Button as={HashLink} to="#pricing" variant="outline-white" className="ms-3">Pricing plan</Button>
+
+            <Button 
+              className="ms-3"
+              variant="outline-white"
+              onClick={() => connect()} 
+            >
+              Open IDENTI3</Button>
+
           </div>
         </Container>
       </Navbar>
@@ -110,11 +124,12 @@ export default () => {
                   <p>Connected with: {user}</p>
                  :
                   <Button 
+                    className="text-dark me-3"
                     variant="secondary" 
                     onClick={() => connect()} 
-                    className="text-dark me-3"
+
                   >
-                    Connect <ExternalLinkIcon className="icon icon-xs d-none d-sm-inline ms-1" />
+                    Open IDENTI3 <ExternalLinkIcon className="icon icon-xs d-none d-sm-inline ms-1" />
                   </Button>
                 } 
                 {/* <Button variant="outline-secondary" as={HashLink} to="#pricing" className="d-flex align-items-center">
@@ -208,21 +223,22 @@ export default () => {
               </Button>
             </Col>
             <Col lg={6} className="order-lg-1">
-              <Image src={ReactMockupImg} alt="Calendar Preview" />
+              <Image src={AccessControlImg} alt="Calendar Preview" />
             </Col>
           </Row>
           <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5}>
-              <h2>React.js Components</h2>
-              <p className="mb-3 lead fw-bold">200+ premium UI elements based on Bootstrap 5</p>
-              <p className="mb-4">We've built over 200 React.js powered components to be used throughout your application saving you time kickstarting your project.</p>
-              <p className="mb-4">Check out the components and use our live React.js component editor to try the code.</p>
+              <h2>Authentication</h2>
+              <p className="mb-3 lead fw-bold">No more passwords with IDENTI3</p>
+              <p className="mb-4">IDENTI3 uses the latest FIDO standards to allow users to say goodbye to passwords </p>
+              <p className="mb-4">Sign-on to your favourite websites and applications using your wallet</p>
               <Button as={Link} to={Routes.Forms.path} variant="secondary" className="mb-5 mb-lg-0" target="_blank">
                 <ReactIcon color="primary" size="xxs" className="me-1" /> Components examples
               </Button>
             </Col>
-            <Col lg={6} className="rounded shadow pt-3">
-              <Code scope={{ Form, Button }} code={`<Form>
+            <Col lg={6} className="order-lg-1">
+            <Image src={AuthenticationImg} alt="MapBox Leaflet.js Custom Integration Mockup" />
+              {/* <Code scope={{ Form, Button }} code={`<Form>
   <Form.Group id="frameworks" className="mb-3">
     <Form.Label>Example select</Form.Label>
     <Form.Select>
@@ -233,14 +249,15 @@ export default () => {
     </Form.Select>
   </Form.Group>
   <Button variant="primary" className="m-1">Primary</Button>
-</Form>`} language="jsx" />
+</Form>`} language="jsx" /> */}
             </Col>
           </Row>
           <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5} className="order-lg-2 mb-5 mb-lg-0">
-              <h2>Mapbox</h2>
-              <p className="mb-3 lead fw-bold">Markers and cards integration with Leaflet.js</p>
-              <p className="mb-4">You can use this map to add markers with custom cards and show them on a map using our custom MapBox integration with Leaflet.js</p>
+              <h2>Utility</h2>
+              <p className="mb-3 lead fw-bold">Put your data to use</p>
+              <p className="mb-4">IDENTI3 allows users to benefit from the collection of their own data. </p>
+              <p className="mb-5">Use your data to provide useful insights on your identity</p>
               <Button as={Link} to={Routes.Map.path} className="me-3" variant="secondary" target="_blank">
                 <MapIcon className="icon icon-xs me-2" /> Demo Map
               </Button>
@@ -249,17 +266,17 @@ export default () => {
               </Button>
             </Col>
             <Col lg={6} className="order-lg-1">
-              <Image src={MapboxImg} alt="MapBox Leaflet.js Custom Integration Mockup" />
+              <Image src={UtilityImg} alt="MapBox Leaflet.js Custom Integration Mockup" />
             </Col>
           </Row>
           <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5}>
-              <h2>Calendar</h2>
+              <h2>Storage</h2>
               <p className="mb-3 lead fw-bold">
-                Advanced FullCalendar.js integration
+                IDENTI3 uses Ceramic Network and DIDs to create your Self-Soveirgn IDENTI3.
               </p>
               <p className="mb-4">
-                We created a fully editable calendar where you can add, edit and delete events for your admin dashboard.
+                Using Ceramic's permissionless data streaming network, users can store, edti and update content on IPFS & Filecoin. 
               </p>
               <Button as={Link} to={Routes.Calendar.path} className="me-3" variant="secondary" target="_blank">
                 <MapIcon className="icon icon-xs me-2" /> Demo Calendar
@@ -269,12 +286,12 @@ export default () => {
               </Button>
             </Col>
             <Col lg={6}>
-              <Image src={CalendarImg} alt="Calendar Preview" />
+              <Image src={CeramicLogo} alt="Calendar Preview" />
             </Col>
           </Row>
           <Row className="justify-content-between align-items-center">
             <Col lg={5} className="order-lg-2 mb-5 mb-lg-0">
-              <h2>Bootstrap 5</h2>
+              <h2>Encryption</h2>
               <p className="mb-3 lead fw-bold">
                 Latest version of Bootstrap 5
               </p>
@@ -283,7 +300,7 @@ export default () => {
               </p>
             </Col>
             <Col lg={6} className="col-lg-6 order-lg-1">
-              <Image src={BS5IllustrationsImg} alt="Front pages overview" />
+              <Image src={LitLogo} alt="Front pages overview" />
             </Col>
           </Row>
         </Container>
