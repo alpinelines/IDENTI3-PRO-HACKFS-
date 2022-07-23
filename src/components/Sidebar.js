@@ -160,6 +160,7 @@ export default (props = {}) => {
               <NavItem title="Calendar" icon={CalendarIcon} link={Routes.Calendar.path} />
               <NavItem title="Map" icon={LocationMarkerIcon} link={Routes.Map.path} />
               <NavItem title="Widgets" icon={TemplateIcon} link={Routes.Widgets.path} />
+              <NavItem title="Applications"icon={TemplateIcon}link ={Routes.Applications.path}/>
 
               <CollapsableNavItem eventKey="tables/" title="Tables" icon={TableIcon}>
                 <NavItem title="DataTables" link={Routes.Datatables.path} />
@@ -178,7 +179,6 @@ export default (props = {}) => {
                 <NavItem title="404 Not Found" link={Routes.NotFound.path} />
                 <NavItem title="500 Server Error" link={Routes.ServerError.path} />
               </CollapsableNavItem>
-
               <Dropdown.Divider className="my-3 border-indigo" />
 
               <CollapsableNavItem eventKey="documentation/" title="Getting Started" icon={InformationCircleIcon}>

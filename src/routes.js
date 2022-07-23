@@ -16,6 +16,7 @@ export const Routes = {
     Calendar: { path: "/calendar" },
     Map: { path: "/map" },
     Datatables: { path: "/tables/datatables" },
+    Applications: {path: "/applications1"},
     BootstrapTables: { path: "/tables/bootstrap-tables" },
     Pricing: { path: "/examples/pricing" },
     Billing: { path: "/examples/billing" },
