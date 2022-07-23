@@ -1,10 +1,6 @@
 
 # IDENTI3-PRO-HACKFS-
 
-Check out the official product page for [Volt Pro React Dashboard on Themesberg](https://themesberg.com/product/dashboard/volt-pro-react).
-
-[![Volt Pro React Dashboard](https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-pro-react-dashboard/thumbnail.png)](https://themesberg.com/product/dashboard/volt-pro-react)
-
 ## Getting started
 
 Make sure you Node v14 LTS installed and then run the following commands:
