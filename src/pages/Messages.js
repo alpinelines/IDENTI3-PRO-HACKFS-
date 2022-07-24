@@ -24,10 +24,9 @@ const SwalWithBootstrapButtons = withReactContent(Swal.mixin({
 }));
 
 export default () => {
-  const { messageService } = useOrbis();
-  const { messages, setMessages } = messageService;
+  const { messageService: { messages, setMessages } } = useOrbis();
   const selectedMessageIds = messages.filter(m => m.isSelected).map(m => m.id);
-  
+
   const disableMenu = selectedMessageIds.length === 0;
 
   const selectMessage = (id) => {

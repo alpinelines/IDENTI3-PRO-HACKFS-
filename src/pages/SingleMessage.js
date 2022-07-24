@@ -10,9 +10,7 @@ import { Routes } from "routes";
 import { useOrbis } from "services/context";
 
 export default () => {
-  // const [conversation, setConversation] = useState(CONVERSATION_MESSAGES);
-  const { messageService } = useOrbis();
-  const { conversation, setConversation } = messageService;  
+  const { messageService: { conversation, setConversation } } = useOrbis();
   const [message, setMessage] = useState("");
   const currentDate = moment().format("Do of MMMM, YYYY");
 
