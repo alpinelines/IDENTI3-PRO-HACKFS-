@@ -33,6 +33,7 @@ const OrbisProvider = ({ children }) => {
 	const connect = async () => {
         let res = await orbis.connect();
         if(res.status == 200) {
+            console.log({res})
             setUser(res.details.did);
             // TODO: add isLoading state variable.
             history.push(Routes.DashboardOverview.path);
@@ -48,6 +49,9 @@ const OrbisProvider = ({ children }) => {
         conversation,
         setConversation,
         messages,
+        getUser: async () => {
+            return await orbis.isConnected();
+        },
         /** We are calling the Orbis SDK to share a new post from this user */
         createConversation: async (recipients) => {
             setLoading(true);

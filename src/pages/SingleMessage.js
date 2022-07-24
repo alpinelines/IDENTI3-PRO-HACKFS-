@@ -15,7 +15,7 @@ export default () => {
   const { 
     messageService: { 
       orbis,
-      user,
+      getUser,
       conversation,
       setConversation,
       createConversation,
@@ -25,11 +25,17 @@ export default () => {
       send
     } 
   } = useOrbis();
+  const [user, setUser] = useState("");
   const [message, setMessage] = useState("");
   const currentDate = moment().format("Do of MMMM, YYYY");
 
   useEffect(() => {
     loadMessages();
+    const handleGetUser = async () => {
+      const res = await getUser();
+      setUser(res);
+    }
+    handleGetUser();
   }, []);
 
   const sendMessage = async (e) => {
@@ -49,9 +55,10 @@ export default () => {
     const [body, setBody] = useState("");
     
     useEffect(() => {
-      const decrypt = async (content) => {
-        let res = await orbis.decryptMessage(content);
-        setBody(res.result);
+      const decrypt = async () => {
+        let res = await decryptMessage(content)
+        console.log({ creator, user })
+        setBody(res);
       }; 
       decrypt();
     }, [content]);
@@ -84,6 +91,7 @@ export default () => {
     useEffect(() => {
       const decrypt = async () => {
         let res = await decryptMessage(content)
+        console.log({ creator, user })
         setBody(res);
       }; 
       decrypt();
@@ -170,7 +178,7 @@ export default () => {
         <Col xs={12}>
           {conversation !== undefined ? 
             messages.map(c => {
-              return c.creator === user
+              return c.creator === user.did
               ? <MyMessage key={`my-message-${c.id}`} {...c} />
               : <Message key={`message-${c.id}`} {...c} />
             }) :
