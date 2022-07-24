@@ -1,13 +1,85 @@
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
-import { ArchiveIcon, CalendarIcon, CameraIcon, CheckIcon, ClipboardCheckIcon, ClockIcon, EyeIcon, PaperClipIcon, PlusIcon, SelectorIcon, ShareIcon, TagIcon, UserGroupIcon } from "@heroicons/react/solid";
-import { Col, Row, Form, Modal, Button, InputGroup, Image, Badge, FloatingLabel } from 'react-bootstrap';
+import { ArrowNarrowDownIcon, ArrowNarrowUpIcon } from "@heroicons/react/solid";
+import {
+  ArchiveIcon,
+  CalendarIcon,
+  CameraIcon,
+  CheckIcon,
+  ClipboardCheckIcon,
+  ClockIcon,
+  EyeIcon,
+  PaperClipIcon,
+  PlusIcon,
+  SelectorIcon,
+  ShareIcon,
+  TagIcon,
+  UserGroupIcon,
+} from "@heroicons/react/solid";
+import {
+  Col,
+  Row,
+  Form,
+  Modal,
+  Button,
+  InputGroup,
+  Image,
+  Badge,
+  FloatingLabel,
+  Table,
+} from "react-bootstrap";
+
+import { Routes } from "routes";
+
+
+import { v4 as uuidv4 } from "uuid";
+
+import { usePizzly } from "services/contextPizzly";
 
 import KanbanAvatar from "components/KanbanAvatar";
 import { Members as BoardMembers, Labels as BoardLabels } from "data/kanban";
 
+import { PageTrafficTable } from "components/Tables";
+import { useHistory } from "react-router-dom";
+
+const pageVisits = [
+  {
+    id: uuidv4(),
+    views: 4.525,
+    returnValue: 255,
+    bounceRate: 42.55,
+    pageName: "/user/@me",
+  },
+  {
+    id: uuidv4(),
+    views: 2.987,
+    returnValue: 139,
+    bounceRate: -43.52,
+    pageName: "/user/group",
+  },
+  {
+    id: uuidv4(),
+    views: 2.844,
+    returnValue: 124,
+    bounceRate: -32.35,
+    pageName: "/channel/id",
+  },
+  {
+    id: uuidv4(),
+    views: 1.22,
+    returnValue: 55,
+    bounceRate: 15.78,
+    pageName: "/guild/everyone",
+  },
+  {
+    id: uuidv4(),
+    views: 505,
+    returnValue: 3,
+    bounceRate: -75.12,
+    pageName: "/user/id",
+  },
+];
 
 export const EventModal = (props) => {
   const [title, setTitle] = useState(props.title);
@@ -15,15 +87,21 @@ export const EventModal = (props) => {
   const [end, setEnd] = useState(props.end);
 
   const { show = false, edit = false, id } = props;
-  const startDate = start ? moment(start).format("YYYY-MM-DD") : moment().format("YYYY-MM-DD");
-  const endDate = end ? moment(end).format("YYYY-MM-DD") : moment(start).format("YYYY-MM-DD");
+  const startDate = start
+    ? moment(start).format("YYYY-MM-DD")
+    : moment().format("YYYY-MM-DD");
+  const endDate = end
+    ? moment(end).format("YYYY-MM-DD")
+    : moment(start).format("YYYY-MM-DD");
 
   const onTitleChange = (e) => setTitle(e.target.value);
 
   const onConfirm = () => {
     const sameDay = startDate === endDate;
-    const finalStart = sameDay ? moment(startDate).toDate() : moment(startDate).startOf('day').toDate();
-    const finalEnd = sameDay ? null : moment(endDate).endOf('day').toDate();
+    const finalStart = sameDay
+      ? moment(startDate).toDate()
+      : moment(startDate).startOf("day").toDate();
+    const finalEnd = sameDay ? null : moment(endDate).endOf("day").toDate();
     const payload = { id, title, sameDay, start: finalStart, end: finalEnd };
 
     if (edit) {
@@ -31,7 +109,7 @@ export const EventModal = (props) => {
     }
 
     return props.onAdd && props.onAdd(payload);
-  }
+  };
   const onDelete = () => edit && props.onDelete && props.onDelete(id);
   const onHide = () => props.onHide && props.onHide();
 
@@ -46,7 +124,8 @@ export const EventModal = (props) => {
               autoFocus
               type="text"
               value={title}
-              onChange={onTitleChange} />
+              onChange={onTitleChange}
+            />
           </Form.Group>
           <Row>
             <Col xs={12} lg={6}>
@@ -66,9 +145,11 @@ export const EventModal = (props) => {
                         placeholder="YYYY-MM-DD"
                         value={startDate}
                         onFocus={openCalendar}
-                        onChange={() => { }} />
+                        onChange={() => {}}
+                      />
                     </InputGroup>
-                  )} />
+                  )}
+                />
               </Form.Group>
             </Col>
             <Col xs={12} lg={6}>
@@ -77,7 +158,7 @@ export const EventModal = (props) => {
                 <Datetime
                   timeFormat={false}
                   onChange={setEnd}
-                  isValidDate={currDate => currDate.isSameOrAfter(start)}
+                  isValidDate={(currDate) => currDate.isSameOrAfter(start)}
                   initialViewDate={end || start}
                   renderInput={(props, openCalendar) => (
                     <InputGroup>
@@ -90,9 +171,11 @@ export const EventModal = (props) => {
                         placeholder="YYYY-MM-DD"
                         value={endDate}
                         onFocus={openCalendar}
-                        onChange={() => { }} />
+                        onChange={() => {}}
+                      />
                     </InputGroup>
-                  )} />
+                  )}
+                />
               </Form.Group>
             </Col>
           </Row>
@@ -169,7 +252,11 @@ export const KanbanCreateModal = (props) => {
           <Button variant="outline-gray-500" onClick={onHide}>
             Close
           </Button>
-          <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
+          <Button
+            variant="secondary"
+            className="d-inline-flex align-items-center"
+            onClick={onSubmit}
+          >
             <PlusIcon className="icon icon-xs me-2" />
             Add {type}
           </Button>
@@ -197,9 +284,7 @@ export const KanbanCopyModal = (props) => {
     <Modal as={Modal.Dialog} centered show={show} onHide={onHide}>
       <Form className="modal-content p-3">
         <Modal.Header className="pb-0 border-0">
-          <Modal.Title className="fw-normal">
-            Copy {type}
-          </Modal.Title>
+          <Modal.Title className="fw-normal">Copy {type}</Modal.Title>
           <Button variant="close" onClick={onHide} />
         </Modal.Header>
         <Modal.Body className="pb-0">
@@ -208,17 +293,17 @@ export const KanbanCopyModal = (props) => {
               autoFocus
               type="text"
               value={title}
-              onChange={e => setTitle(e.target.value)}
-              onFocus={e => e.target.select()}
+              onChange={(e) => setTitle(e.target.value)}
+              onFocus={(e) => e.target.select()}
             />
           </Form.Group>
           {type === "card" && (
             <FloatingLabel id="list" label="Copy to list.." className="mb-3">
               <Form.Select
                 value={listId}
-                onChange={e => setListId(e.target.value)}
+                onChange={(e) => setListId(e.target.value)}
               >
-                {lists.map(l => (
+                {lists.map((l) => (
                   <option value={l.id} key={`copy-card-option-${l.id}`}>
                     {l.title}
                   </option>
@@ -228,7 +313,11 @@ export const KanbanCopyModal = (props) => {
           )}
         </Modal.Body>
         <Modal.Footer className="justify-content-start border-0 pt-0">
-          <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
+          <Button
+            variant="secondary"
+            className="d-inline-flex align-items-center"
+            onClick={onSubmit}
+          >
             <PlusIcon className="icon icon-xs me-2" />
             Create {type}
           </Button>
@@ -242,7 +331,12 @@ export const KanbanMoveModal = (props) => {
   const { type = "card", show = false, lists = [] } = props;
   const [listId, setListId] = useState(props.listId ?? "");
   const [index, setIndex] = useState(props.index ?? 0);
-  const cardList = lists.find(l => l.id === listId);
+  const cardList = lists.find((l) => l.id === listId);
+  const { myDiscordAPI, authId, profile, setProfile } = usePizzly();
+  const [fetchCalled, setFetchCalled] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const history = useHistory();
+
 
   const onHide = () => {
     props.onHide && props.onHide();
@@ -255,73 +349,83 @@ export const KanbanMoveModal = (props) => {
     props.onSubmit && props.onSubmit({ source, destination });
   };
 
+  const goToUsers = () => {
+    history.push(Routes.Users.path);
+  }
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      await myDiscordAPI
+        .auth(authId)
+        .get("/users/@me")
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setProfile(json);
+        });
+    };
+
+    fetchProfile();
+  }, []);
+
+
+
   return (
     <Modal as={Modal.Dialog} centered show={show} onHide={onHide}>
       <Form className="modal-content p-3">
         <Modal.Header className="pb-0 border-0">
-          <Modal.Title className="fw-normal">
-            Move {type}
-          </Modal.Title>
+          <Modal.Title className="fw-normal">/user/@me</Modal.Title>
           <Button variant="close" onClick={onHide} />
         </Modal.Header>
         <Modal.Body className="pb-0">
-          {type === "card" ? (
-            <>
-              <FloatingLabel id="listId" label="List" className="mb-3">
-                <Form.Select
-                  value={listId}
-                  onChange={e => setListId(e.target.value)}
-                >
-                  {lists.map(l => (
-                    <option value={l.id} key={`move-list-id-${l.id}`}>
-                      {l.id === props.listId ? `${l.title} (current)` : l.title}
-                    </option>
-                  ))}
-                </Form.Select>
-              </FloatingLabel>
-              {cardList && (
-                <FloatingLabel id="listIndex" label="Position" className="mb-3">
-                  <Form.Select
-                    value={index}
-                    onChange={e => setIndex(e.target.value)}
-                  >
-                    {cardList.cards.map((_, ind) => (
-                      <option value={ind} key={`move-list-index-${ind}`}>
-                        {ind + 1}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </FloatingLabel>
-              )}
-            </>
-          ) : (
-            <FloatingLabel id="listIndex" label="Position" className="mb-3">
-              <Form.Select
-                value={index}
-                onChange={e => setIndex(e.target.value)}
-              >
-                {lists.map((_, ind) => (
-                  <option value={ind} key={`move-list-index-${ind}`}>
-                    {ind === props.index ? `${ind + 1} (current)` : ind + 1}
-                  </option>
-                ))}
-              </Form.Select>
-            </FloatingLabel>
-          )}
+          {isLoading ? <div> </div> : 
+          <ul>
+            {JSON.stringify(profile, null, " ")}
+
+          </ul>}
         </Modal.Body>
         <Modal.Footer className="justify-content-start border-0 pt-0">
-          <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
-            Move {type}
+          <Button
+            variant="secondary"
+            className="d-inline-flex align-items-center"
+            onClick={() => {
+              setIsLoading(false);
+            }}
+          >
+            Fetch Data
           </Button>
+          {!isLoading &&
+            <Button
+              variant="secondary"
+              className="d-inline-flex align-items-right"
+              style={{
+                float: "right"
+                }}
+              onClick={goToUsers}
+            >
+              Share
+            </Button>
+}
         </Modal.Footer>
       </Form>
     </Modal>
   );
 };
 
+// This Modal is from after the Click
 export const KanbanEditModal = (props) => {
-  const { id: cardId, index, listId, show = false, author, members = [], labels = [], comments = [] } = props;
+  const {
+    id: cardId,
+    index,
+    listId,
+    show = false,
+    author,
+    members = [],
+    labels = [],
+    comments = [],
+  } = props;
   const [title, setTitle] = useState(props.title ?? "");
+  const [image, setImage] = useState(props.image ?? "");
   const [comment, setComment] = useState("");
   const [isTitleEditable, setIsTitleEditable] = useState(false);
 
@@ -359,8 +463,36 @@ export const KanbanEditModal = (props) => {
     props.onMove && props.onMove({ listId, index });
   };
 
+  const onWatch = () => {};
+
+  const onConnect = () => {
+    props.onConnect && props.onConnect();
+  };
+
+  const TableRow = (props) => {
+    const { pageName, views, returnValue, bounceRate } = props;
+    const BounceIcon = bounceRate < 0 ? ArrowNarrowDownIcon : ArrowNarrowUpIcon;
+    const bounceTxtColor = bounceRate < 0 ? "text-danger" : "text-success";
+
+    return (
+      <tr className="border-bottom">
+        <th className="text-gray-900" scope="row">
+          <Button variant="white" onClick={onMove}>{pageName}</Button>
+        </th>
+        <td className="fw-bolder text-gray-500">{views}</td>
+        <td className="fw-bolder text-gray-500">${returnValue}</td>
+        <td className="fw-bolder text-gray-500">
+          <div className="d-flex align-items-center">
+            <BounceIcon className={`icon icon-xs ${bounceTxtColor} me-2`} />
+            {Math.abs(bounceRate)}%
+          </div>
+        </td>
+      </tr>
+    );
+  };
+
   return (
-    <Modal as={Modal.Dialog} centered size="lg" show={show} onHide={onHide}>
+    <Modal as={Modal.Dialog} centered size="xl" show={show} onHide={onHide}>
       <Form className="modal-content p-lg-3">
         <Modal.Header className="align-items-start border-bottom">
           <div className="d-block">
@@ -371,28 +503,40 @@ export const KanbanEditModal = (props) => {
                   autoFocus
                   value={title}
                   className="text-gray-900 fs-5 fw-bold border-0 px-1 py-0 m-0"
-                  onChange={e => setTitle(e.target.value)}
+                  onChange={(e) => setTitle(e.target.value)}
                   onBlur={onChange}
                 />
               </Form.Group>
             ) : (
-              <h5 className="text-gray-900 fs-5 fw-bold py-1 ps-1 mb-3" onClick={toggleIsTitleEditable}>
-                {title}
-              </h5>
+              <div>
+                {/* <h5 className="text-gray-900 fs-5 fw-bold py-1 ps-1 mb-3" onClick={toggleIsTitleEditable}> */}
+                <Image
+                  rounded
+                  src={image}
+                  className="image-md justify-center"
+                />
+              </div>
             )}
 
             <div className="d-flex">
               <div className="d-block me-3 me-sm-4">
                 <h5 className="fs-6 fw-bold text-gray-500">Members</h5>
                 <div className="d-flex align-items-center">
-                  {members.map(m => <KanbanAvatar key={`kanban-avatar-${m.id}`}  {...m} />)}
+                  {members.map((m) => (
+                    <KanbanAvatar key={`kanban-avatar-${m.id}`} {...m} />
+                  ))}
 
-                  <Button variant="gray-200" size="sm" className="d-inline-flex align-items-center px-3 ms-1" onClick={onEditMembers}>
+                  <Button
+                    variant="gray-200"
+                    size="sm"
+                    className="d-inline-flex align-items-center px-3 ms-1"
+                    onClick={onEditMembers}
+                  >
                     <PlusIcon className="icon icon-xs" />
                   </Button>
                 </div>
               </div>
-              <div className="d-block me-3">
+              {/* <div className="d-block me-3">
                 <h5 className="fs-6 fw-bold text-gray-500">Labels</h5>
                 <div className="d-flex align-items-center">
                   {labels.map(l => (
@@ -405,7 +549,7 @@ export const KanbanEditModal = (props) => {
                     <PlusIcon className="icon icon-xs" />
                   </Button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <Button variant="close" onClick={onHide} />
@@ -431,28 +575,46 @@ export const KanbanEditModal = (props) => {
                       rows={3}
                       as="textarea"
                       value={comment}
-                      onChange={e => setComment(e.target.value)}
+                      onChange={(e) => setComment(e.target.value)}
                       placeholder="Leave a comment"
                     />
                   </Form.Group>
                 </Col>
               </Row>
               <Row className="mb-4 mb-lg-0">
-                {comments.map(c => (
+                <Table responsive className="align-items-center table-flush">
+                  <thead className="thead-light">
+                    <tr>
+                      <th className="border-bottom" scope="col">
+                        Api Name
+                      </th>
+                      <th className="border-bottom" scope="col">
+                        Page Views
+                      </th>
+                      <th className="border-bottom" scope="col">
+                        Page Value
+                      </th>
+                      <th className="border-bottom" scope="col">
+                        Bounce rate
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="border-0">
+                    {pageVisits.map((pv) => (
+                      <TableRow key={`page-visit-${pv.id}`} {...pv}/>
+                    ))}
+                  </tbody>
+                </Table>
+              </Row>
+              {/* <Row className="mb-4 mb-lg-0">
+                {comments.map((c) => (
                   <Col xs={12} key={`kanban-comment-${c.id}`} className="mb-4">
                     <div className="bg-gray-50 border border-gray-100 rounded p-3">
                       <div className="d-flex align-items-center mb-2">
-                        <h3 className="fs-6 mb-0 me-3">
-                          {c.sender}
-                        </h3>
-                        <small>
-                          {moment(c.timeSent).fromNow()}
-                        </small>
+                        <h3 className="fs-6 mb-0 me-3">{c.sender}</h3>
+                        <small>{moment(c.timeSent).fromNow()}</small>
                       </div>
-                      <p className="text-dark mb-1">
-                        {c.message}
-                      </p>
-
+                      <p className="text-dark mb-1">{c.message}</p>
                       <small className="hover:underline text-gray-700 me-1">
                         Edit
                       </small>
@@ -463,27 +625,49 @@ export const KanbanEditModal = (props) => {
                     </div>
                   </Col>
                 ))}
-              </Row>
+              </Row> */}
             </Col>
             <Col xs={12} lg={3}>
               <div className="d-grid gap-2">
-                <Button variant="gray-200" size="sm" className="d-inline-flex align-items-center rounded py-2 ps-3 text-start" onClick={onEditMembers}>
+                <Button
+                  variant="gray-200"
+                  size="sm"
+                  className="d-inline-flex align-items-center rounded py-2 ps-3 text-start"
+                  onClick={onEditMembers}
+                >
                   <UserGroupIcon className="icon icon-xs text-gray-500 me-2" />
                   Members
                 </Button>
-                <Button variant="gray-200" size="sm" className="d-inline-flex align-items-center rounded py-2 ps-3 text-start" onClick={onEditLabels}>
+                <Button
+                  variant="gray-200"
+                  size="sm"
+                  className="d-inline-flex align-items-center rounded py-2 ps-3 text-start"
+                  onClick={onEditLabels}
+                >
                   <TagIcon className="icon icon-xs text-gray-500 me-2" />
                   Labels
                 </Button>
-                <Button variant="gray-200" size="sm" className="d-inline-flex align-items-center rounded py-2 ps-3 text-start">
+                <Button
+                  variant="gray-200"
+                  size="sm"
+                  className="d-inline-flex align-items-center rounded py-2 ps-3 text-start"
+                >
                   <ClipboardCheckIcon className="icon icon-xs text-gray-500 me-2" />
                   Checklist
                 </Button>
-                <Button variant="gray-200" size="sm" className="d-inline-flex align-items-center rounded py-2 ps-3 text-start">
+                <Button
+                  variant="gray-200"
+                  size="sm"
+                  className="d-inline-flex align-items-center rounded py-2 ps-3 text-start"
+                >
                   <PaperClipIcon className="icon icon-xs text-gray-500 me-2" />
                   Attachment
                 </Button>
-                <Button variant="gray-200" size="sm" className="d-inline-flex align-items-center rounded py-2 ps-3 text-start">
+                <Button
+                  variant="gray-200"
+                  size="sm"
+                  className="d-inline-flex align-items-center rounded py-2 ps-3 text-start"
+                >
                   <ClockIcon className="icon icon-xs text-gray-500 me-2" />
                   Due Date
                 </Button>
@@ -493,21 +677,43 @@ export const KanbanEditModal = (props) => {
         </Modal.Body>
 
         <Modal.Footer className="justify-content-start border-top">
-          <Button variant="gray-800" className="me-2 text-start" onClick={onMove}>
+          <Button
+            variant="gray-800"
+            className="me-2 text-start"
+            onClick={onMove}
+          >
             <SelectorIcon className="icon icon-xs me-2" />
             Move
           </Button>
-          <Button variant="gray-800" className="me-2 text-start" onClick={onArchive}>
+          <Button
+            variant="gray-800"
+            className="me-2 text-start"
+            onClick={onArchive}
+          >
             <ArchiveIcon className="icon icon-xs me-2" />
             Archive
           </Button>
-          <Button variant="gray-800" className="me-2 text-start">
+          <Button
+            variant="gray-800"
+            className="me-2 text-start"
+            onClick={onWatch}
+          >
             <EyeIcon className="icon icon-xs me-2" />
             Watch
           </Button>
+
           <Button variant="gray-800" className="me-2 text-start">
             <ShareIcon className="icon icon-xs me-2" />
             Share
+          </Button>
+          {/* Pizzly Integration Discord connection */}
+          <Button
+            variant="gray-800"
+            className="me-2 text-start"
+            onClick={onConnect}
+          >
+            <ShareIcon className="icon icon-xs me-2" />
+            Connect
           </Button>
         </Modal.Footer>
       </Form>
@@ -518,18 +724,29 @@ export const KanbanEditModal = (props) => {
 export const KanbanEditMembersModal = (props) => {
   const { listId, id: cardId, show = false, members = [] } = props;
   const [searchValue, setSearchValue] = useState("");
-  const [boardMembers, setBoardMembers] = useState(BoardMembers.map(bm => ({ ...bm, show: true, isAssignedToCard: members.some(m => m.id === bm.id) })));
+  const [boardMembers, setBoardMembers] = useState(
+    BoardMembers.map((bm) => ({
+      ...bm,
+      show: true,
+      isAssignedToCard: members.some((m) => m.id === bm.id),
+    }))
+  );
 
   const onSearchValueChange = (e) => {
     const newSearchValue = e.target.value;
-    const searchResults = boardMembers.map(bm => ({ ...bm, show: bm.name.toLowerCase().includes(newSearchValue.toLowerCase()) }));
+    const searchResults = boardMembers.map((bm) => ({
+      ...bm,
+      show: bm.name.toLowerCase().includes(newSearchValue.toLowerCase()),
+    }));
 
     setSearchValue(newSearchValue);
     setBoardMembers(searchResults);
   };
 
   const onMemberClick = (id) => {
-    const boardMembersUpdated = boardMembers.map(m => m.id === id ? ({ ...m, isAssignedToCard: !m.isAssignedToCard }) : m);
+    const boardMembersUpdated = boardMembers.map((m) =>
+      m.id === id ? { ...m, isAssignedToCard: !m.isAssignedToCard } : m
+    );
     setBoardMembers(boardMembersUpdated);
   };
 
@@ -538,7 +755,7 @@ export const KanbanEditMembersModal = (props) => {
   };
 
   const onSubmit = () => {
-    const membersSelected = boardMembers.filter(m => m.isAssignedToCard);
+    const membersSelected = boardMembers.filter((m) => m.isAssignedToCard);
     const payload = { listId, cardId, members: membersSelected };
 
     return props.onSubmit && props.onSubmit(payload);
@@ -548,9 +765,7 @@ export const KanbanEditMembersModal = (props) => {
     <Modal as={Modal.Dialog} centered scrollable show={show} onHide={onHide}>
       <Form className="modal-content p-3">
         <Modal.Header className="border-0 px-3 pb-0">
-          <Modal.Title className="fw-normal">
-            Members
-          </Modal.Title>
+          <Modal.Title className="fw-normal">Members</Modal.Title>
           <Button variant="close" onClick={onHide} />
         </Modal.Header>
 
@@ -568,8 +783,8 @@ export const KanbanEditMembersModal = (props) => {
 
           <div className="px-3">
             {boardMembers
-              .filter(m => m.show)
-              .map(m => (
+              .filter((m) => m.show)
+              .map((m) => (
                 <Row
                   key={`board-member-${m.id}`}
                   className="kanban-card-member border-bottom py-2"
@@ -578,10 +793,11 @@ export const KanbanEditMembersModal = (props) => {
                   <Col xs={2}>
                     <Image src={m.image} className="avatar-md rounded-circle" />
                   </Col>
-                  <Col xs={8} className="d-flex align-items-center justify-content-start">
-                    <h4 className="fs-6 text-dark mb-0">
-                      {m.name}
-                    </h4>
+                  <Col
+                    xs={8}
+                    className="d-flex align-items-center justify-content-start"
+                  >
+                    <h4 className="fs-6 text-dark mb-0">{m.name}</h4>
                   </Col>
                   {m.isAssignedToCard && (
                     <Col xs={2} className="d-flex align-items-center">
@@ -593,7 +809,11 @@ export const KanbanEditMembersModal = (props) => {
           </div>
         </Modal.Body>
         <Modal.Footer className="justify-content-start border-0 pb-0">
-          <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
+          <Button
+            variant="secondary"
+            className="d-inline-flex align-items-center"
+            onClick={onSubmit}
+          >
             Confirm members
           </Button>
         </Modal.Footer>
@@ -605,21 +825,32 @@ export const KanbanEditMembersModal = (props) => {
 export const KanbanEditLabelsModal = (props) => {
   const { listId, id: cardId, show = false, labels = [] } = props;
   const [searchValue, setSearchValue] = useState("");
-  const [boardLabels, setBoardLabels] = useState(BoardLabels.map(bm => ({ ...bm, show: true, isAssignedToCard: labels.some(m => m.id === bm.id) })));
+  const [boardLabels, setBoardLabels] = useState(
+    BoardLabels.map((bm) => ({
+      ...bm,
+      show: true,
+      isAssignedToCard: labels.some((m) => m.id === bm.id),
+    }))
+  );
 
   const onSearchValueChange = (e) => {
     const newSearchValue = e.target.value;
-    const searchResults = boardLabels.map(bm => ({ ...bm, show: bm.name.toLowerCase().includes(newSearchValue.toLowerCase()) }));
+    const searchResults = boardLabels.map((bm) => ({
+      ...bm,
+      show: bm.name.toLowerCase().includes(newSearchValue.toLowerCase()),
+    }));
 
     setSearchValue(newSearchValue);
     setBoardLabels(searchResults);
   };
 
   const onLabelClick = (id) => {
-    const boardLabelsUpdated = boardLabels.map(m => m.id === id ? ({ ...m, isAssignedToCard: !m.isAssignedToCard }) : m);
+    const boardLabelsUpdated = boardLabels.map((m) =>
+      m.id === id ? { ...m, isAssignedToCard: !m.isAssignedToCard } : m
+    );
     setBoardLabels(boardLabelsUpdated);
 
-    const labelsSelected = boardLabelsUpdated.filter(l => l.isAssignedToCard);
+    const labelsSelected = boardLabelsUpdated.filter((l) => l.isAssignedToCard);
     const payload = { listId, cardId, labels: labelsSelected };
     props.onSubmit && props.onSubmit(payload);
   };
@@ -632,9 +863,7 @@ export const KanbanEditLabelsModal = (props) => {
     <Modal as={Modal.Dialog} centered scrollable show={show} onHide={onHide}>
       <Form className="modal-content p-3">
         <Modal.Header className="border-0 px-3 pb-0">
-          <Modal.Title className="fw-normal">
-            Labels
-          </Modal.Title>
+          <Modal.Title className="fw-normal">Labels</Modal.Title>
           <Button variant="close" onClick={onHide} />
         </Modal.Header>
 
@@ -652,8 +881,8 @@ export const KanbanEditLabelsModal = (props) => {
 
           <div className="px-3 py-2">
             {boardLabels
-              .filter(l => l.show)
-              .map(l => (
+              .filter((l) => l.show)
+              .map((l) => (
                 <Row key={`label-${l.id}`} className="my-1">
                   <Badge
                     bg={l.color}
@@ -661,9 +890,7 @@ export const KanbanEditLabelsModal = (props) => {
                     onClick={() => onLabelClick(l.id)}
                   >
                     <div className="d-flex align-items-center justify-content-between">
-                      <h4 className="fs-6 text-white mb-0">
-                        {l.name}
-                      </h4>
+                      <h4 className="fs-6 text-white mb-0">{l.name}</h4>
                       {l.isAssignedToCard && (
                         <CheckIcon className="icon icon-sm" />
                       )}

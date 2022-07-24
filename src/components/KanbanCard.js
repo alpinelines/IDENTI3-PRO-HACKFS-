@@ -4,7 +4,11 @@ import { Card, Button, Image, Dropdown } from "react-bootstrap";
 
 import KanbanAvatar from "components/KanbanAvatar";
 
+import { usePizzly } from 'services/contextPizzly';
+
+
 export default (props) => {
+  const {authId, myDiscordAPI, connect, fetchProfile, setAuthId} = usePizzly();
   const { cardRef, title, image, members, description, style = {}, extraProps = {} } = props;
   const membersCountDescription = !members.length ? "Unassigned" : members.length === 1 ? "1 Assignee" : `${members.length} Assignees`;
 
@@ -35,22 +39,42 @@ export default (props) => {
   const onCardClick = (e) => {
     if (e.defaultPrevented) return;
 
-    props.onClick && props.onClick();
+    myDiscordAPI
+      .connect()
+      .then(({authId}) => {
+          console.log('Sucessfully connected!', authId);
+          setAuthId(authId);
+          props.onClick && props.onClick();
+      })
+      .catch((err)=> {
+          console.error(err);
+          alert('Error connecting to Discord');
+      });
+
   };
 
   const onDropdownClick = (e) => {
     e.preventDefault();
   };
-
+  // Add Margin  
   return (
-    <Card border={1} className="p-4" ref={cardRef}{...extraProps} style={style} onClick={onCardClick}>
+    <Card border={10} className="p-4" ref={cardRef}{...extraProps} style={{ 
+      marginLeft: "10px",
+      marginRight: "10px",
+      marginBottom: "10px",
+      marginTop: "10px",
+      width: "22%",
+
+
+      }} 
+      onClick={onCardClick}
+      > 
       <Card.Header className="d-flex align-items-center justify-content-between border-0 p-0 mb-3">
-        <h5 className="mb-0">{title}</h5>
+        {/* <h5 className="mb-0">{title}</h5> */}
+        {image && <Image src={image} width="275px" />}
+
         <div>
           <Dropdown onClick={onDropdownClick}>
-            <Dropdown.Toggle as={Button} variant="link" size="sm" className="fs-6 px-1 py-0">
-              <PencilAltIcon className="icon icon-xs text-gray-500" />
-            </Dropdown.Toggle>
 
             <Dropdown.Menu className="dashboard-dropdown dropdown-menu-start mt-2 py-1">
               <Dropdown.Item className="d-flex align-items-center" onClick={onEdit}>
@@ -79,9 +103,9 @@ export default (props) => {
         </div>
       </Card.Header>
       <Card.Body className="p-0">
-        {image && <Image src={image} className="card-img-top mb-2 mb-lg-3" />}
+        {/* {image && <Image src={image} className="card-img-top mb-2 mb-lg-3" />} */}
 
-        <p>{description}</p>
+        {/* <p>{description}</p>
 
         <h5 className="fs-6 fw-normal mt-4">
           {membersCountDescription}
@@ -89,7 +113,7 @@ export default (props) => {
 
         <div className="avatar-group">
           {members.map(member => <KanbanAvatar key={`card-member-${member.id}`} {...member} />)}
-        </div>
+        </div> */}
       </Card.Body>
     </Card>
   );

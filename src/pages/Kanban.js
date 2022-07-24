@@ -11,6 +11,9 @@ import KanbanCard from "components/KanbanCard";
 import { KanbanCreateModal, KanbanEditModal, KanbanCopyModal, KanbanMoveModal, KanbanEditMembersModal, KanbanEditLabelsModal } from "components/Modals";
 import KANBAN_LISTS, { createCard, createList } from "data/kanban";
 import { ArchiveIcon, PlusIcon } from "@heroicons/react/solid";
+import { usePizzly } from 'services/contextPizzly';
+
+
 
 const ArchiveIconHtml = ReactDOMServer.renderToString(
   <ArchiveIcon className="h-50 w-auto" />
@@ -37,6 +40,9 @@ export default () => {
   const [cardToChangeLabels, setCardToChangeLabels] = useState(null);
   const [listToCopy, setListToCopy] = useState(null);
   const [listToMoveIndex, setListToMoveIndex] = useState(null);
+
+  const {authId, connect, fetchProfile} = usePizzly();
+
 
   const toggleCreateListModal = () => {
     setShowCreateListModal(!showCreateListModal);
@@ -289,6 +295,7 @@ export default () => {
           onHide={() => setCardToEdit(null)}
           onArchive={(card) => handleArchiveCards([card])}
           onMove={(card) => setCardToMove(card)}
+          onConnect={() => connect()}
           onEditMembers={(card) => setCardToChangeMembers(card)}
           onEditLabels={(card) => setCardToChangeLabels(card)}
           onChange={handleCardChange}
@@ -329,7 +336,7 @@ export default () => {
           {...cardToMove}
           lists={kanbanLists}
           onHide={() => setCardToMove(null)}
-          onSubmit={handleDragEnd}
+          onSubmit={setCardToMove}
         />
       )}
 
@@ -423,7 +430,9 @@ export default () => {
                         {placeholder}
                         <Button
                           variant="outline-gray-500"
+                          //onClick={() => toggleCreateCardModal({ listId, cardIndex: cards.length })}
                           onClick={() => toggleCreateCardModal({ listId, cardIndex: cards.length })}
+
                           className="d-inline-flex align-items-center justify-content-center dashed-outline new-card w-100"
                         >
                           <PlusIcon className="icon icon-xs me-2" /> Add another card
@@ -436,7 +445,7 @@ export default () => {
             })}
           </DragDropContext>
 
-          <Col xs={12} lg={6} xl={4} xxl={3}>
+          {/* <Col xs={12} lg={6} xl={4} xxl={3}>
             <div className="d-grid">
               <Button
                 variant="outline-gray-500"
@@ -446,7 +455,7 @@ export default () => {
                 <PlusIcon className="icon icon-xs me-2" /> Add another list
               </Button>
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     </>
