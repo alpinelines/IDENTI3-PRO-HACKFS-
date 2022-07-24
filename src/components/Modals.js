@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
 import { ArchiveIcon, CalendarIcon, CameraIcon, CheckIcon, ClipboardCheckIcon, ClockIcon, EyeIcon, PaperClipIcon, PlusIcon, SelectorIcon, ShareIcon, TagIcon, UserGroupIcon } from "@heroicons/react/solid";
-import { Col, Row, Form, Modal, Button, InputGroup, Image, Badge, FloatingLabel } from 'react-bootstrap';
+import { Col, Row, Form, Modal, Button, InputGroup, Image, Badge, FloatingLabel } from 'react-bootstr'; 
 
 import KanbanAvatar from "components/KanbanAvatar";
 import { Members as BoardMembers, Labels as BoardLabels } from "data/kanban";
+import { components } from "react-select";
 
 
 export const EventModal = (props) => {
@@ -121,6 +122,7 @@ export const KanbanCreateModal = (props) => {
   const { modalTitle = "Add a new card", type = "card", show = false } = props;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  
 
   const onTitleChange = (e) => setTitle(e.target.value);
   const onDescriptionChange = (e) => setDescription(e.target.value);
@@ -142,18 +144,19 @@ export const KanbanCreateModal = (props) => {
         </Modal.Header>
         <Modal.Body className="pb-0">
           <Form.Group id="title" className="mb-3">
-            <Form.Control
+            {/* <Form.Control
               required
               autoFocus
               type="text"
               value={title}
               onChange={onTitleChange}
               placeholder={`Enter a title for this ${type}…`}
-            />
+            /> */}
           </Form.Group>
+
           {type === "card" && (
             <Form.Group id="description" className="mb-3">
-              <Form.Control
+              {/* <Form.Control
                 required
                 autoFocus
                 multiple
@@ -161,7 +164,65 @@ export const KanbanCreateModal = (props) => {
                 value={description}
                 onChange={onDescriptionChange}
                 placeholder={`Enter a description for this ${type}…`}
-              />
+              /> */}
+
+               <Form.Group id="title" className="mb-3">
+
+              <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit} >
+            <PlusIcon className="icon icon-xs me-2" />
+            Discord
+          </Button>
+
+          <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
+            <PlusIcon className="icon icon-xs me-2" />
+            Twitter
+          </Button>
+
+          <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
+            <PlusIcon className="icon icon-xs me-2" />
+            Github
+          </Button>
+
+          
+          
+          <Form.Group id="title" className="mb-3"></Form.Group>
+
+          <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
+            <img src = ".assets/YoutubeLogo.png">
+            </img>
+            <PlusIcon className="icon icon-xs me-2" />
+            Youtube
+          </Button>
+
+          <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
+
+            <PlusIcon className="icon icon-xs me-2" />
+            LinkedIn
+          </Button>
+
+          <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
+            <PlusIcon className="icon icon-xs me-2" />
+            <img src =""></img>
+            Twitch
+          </Button>
+
+          </Form.Group>
+
+          <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
+            <PlusIcon className="icon icon-xs me-2" />
+            Dework
+          </Button>
+
+          <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
+            <PlusIcon className="icon icon-xs me-2" />
+            Dropbox
+          </Button>
+          
+          <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
+            <PlusIcon className="icon icon-xs me-2" />
+            Add {type}
+          </Button>
+
             </Form.Group>
           )}
         </Modal.Body>

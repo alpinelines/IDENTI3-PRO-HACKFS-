@@ -187,12 +187,12 @@ export default () => {
   const handleCardsDelete = async (cards = []) => {
     const cardsNr = cards.length;
     const textMessage = cardsNr === 1
-      ? "Are you sure do you want to delete this card?"
-      : `Are you sure do you want to delete these ${cardsNr} cards?`;
+      ? "Are you sure do you want to remove this application?"
+      : `Are you sure do you want to disconnect these ${cardsNr} applications?`;
 
     const result = await SwalWithBootstrapButtons.fire({
       icon: "error",
-      title: "Confirm deletion",
+      title: "Confirm Disconnection",
       text: textMessage,
       showCancelButton: true,
       confirmButtonText: "Yes",
@@ -203,7 +203,7 @@ export default () => {
       const listsUpdated = removeCardsFromList(cards);
       setKanbanLists(listsUpdated);
 
-      const confirmMessage = cardsNr === 1 ? "The card has been deleted." : "The cards have been deleted.";
+      const confirmMessage = cardsNr === 1 ? "The application has been disconnected." : "The applications have been disconnected.";
       await SwalWithBootstrapButtons.fire("Deleted", confirmMessage, "success");
     }
   };
@@ -426,7 +426,7 @@ export default () => {
                           onClick={() => toggleCreateCardModal({ listId, cardIndex: cards.length })}
                           className="d-inline-flex align-items-center justify-content-center dashed-outline new-card w-100"
                         >
-                          <PlusIcon className="icon icon-xs me-2" /> Add another card
+                          <PlusIcon className="icon icon-xs me-2" /> Test
                         </Button>
                       </KanbanList>
                     );
