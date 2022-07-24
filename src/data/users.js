@@ -46,7 +46,7 @@ export default [
     {
         "id": uuidv4(),
         "verified": false,
-        "status": "inactive",
+        "status": "sharing",
         "image": Profile3,
         "name": "Jane Rinehart",
         "email": "example@themesberg.com",

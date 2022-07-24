@@ -241,11 +241,15 @@ export const UsersTable = (props) => {
     props.deleteUsers && props.deleteUsers(ids)
   }
 
+
+  //active = Active
+  // inactive = Sharing
+//pending = data request
   const TableRow = (props) => {
     const { id, verified, status, image, name, email, dateCreated, isSelected } = props;
     const VerifiedIcon = verified ? CheckCircleIcon : InformationCircleIcon;
     const statusVariant = status === "active" ? "success"
-      : status === "inactive" ? "warning"
+      : status === "sharing" ? "warning"
         : status === "pending" ? "purple"
           : status === "suspended" ? "danger" : "primary";
 
@@ -453,7 +457,7 @@ export const TransactionsTable = (props) => {
               <th className="border-gray-200">Issue Date</th>
               <th className="border-gray-200">Due Date</th>
               <th className="border-gray-200">Total</th>
-              <th className="border-gray-200">Status</th>
+              <th className="border-gray-200">Data Access Control</th>
               <th className="border-gray-200">Action</th>
             </tr>
           </thead>
