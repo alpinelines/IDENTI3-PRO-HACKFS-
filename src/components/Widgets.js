@@ -818,9 +818,9 @@ export const ProgressTrackWidget = () => {
       </Card.Header>
       <Card.Body>
         <Progress title="Rocket - SaaS Template" color="purple" percentage={34} />
-        <Progress title="Themesberg - Design System" color="success" percentage={60} />
+        <Progress title="IDENTI3 - Design System" color="success" percentage={60} />
         <Progress title="Homepage Design in Figma" color="warning" percentage={45} />
-        <Progress last title="Backend for Themesberg v2" color="danger" percentage={34} />
+        <Progress last title="Backend for IDENTI3 v2" color="danger" percentage={34} />
       </Card.Body>
     </Card>
   );

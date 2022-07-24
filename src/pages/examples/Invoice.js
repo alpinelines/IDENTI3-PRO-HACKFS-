@@ -65,7 +65,7 @@ export default () => {
                 <div>
                   <ListGroup className="list-group simple-list">
                     <ListGroup.Item className="fw-normal">Henry M. Pike</ListGroup.Item>
-                    <ListGroup.Item className="fw-normal">Themesberg LLC</ListGroup.Item>
+                    <ListGroup.Item className="fw-normal">IDENTI3 LLC</ListGroup.Item>
                     <ListGroup.Item className="fw-normal">311 West Mechanic Lane Middletown, NY 10940</ListGroup.Item>
                     <ListGroup.Item className="fw-normal">
                       <Card.Link className="fw-bold text-primary">name@company.com</Card.Link>

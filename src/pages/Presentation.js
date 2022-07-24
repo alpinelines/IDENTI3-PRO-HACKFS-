@@ -130,8 +130,8 @@ export default () => {
               </div>
               <div className="text-center mb-6 mb-lg-5">
                 <a href="https://themesberg.com" target="_blank" rel="noopener noreferrer">
-                  <Image src={ThemesbergLogoIcon} height={25} width={25} className="mb-3" alt="Themesberg Logo" />
-                  <p className="text-muted font-small m-0">A Themesberg production</p>
+                  <Image src={ThemesbergLogoIcon} height={25} width={25} className="mb-3" alt="IDENTI3 Logo" />
+                  <p className="text-muted font-small m-0">A IDENTI3 production</p>
                 </a>
               </div>
             </Col>
@@ -788,10 +788,9 @@ export default () => {
                 <Image src={ReactHero} />
                 <span className="ms-2 brand-text">Volt React Pro</span>
               </Navbar.Brand>
-              <p>Volt Pro React is a premium admin dashboard template powered by React.js and Bootstrap 5</p>
             </Col>
             <Col xs={6} md={2} className="mb-5 mb-lg-0">
-              <span className="h5">Themesberg</span>
+              <span className="h5">IDENTI3</span>
               <ul className="links-vertical mt-2">
                 <li><Card.Link target="_blank" href="https://themesberg.com/blog">Blog</Card.Link></li>
                 <li><Card.Link target="_blank" href="https://themesberg.com/products">Products</Card.Link></li>
@@ -830,10 +829,10 @@ export default () => {
           <Row>
             <Col className="mb-md-2">
               <Card.Link href="https://themesberg.com" target="_blank" className="d-flex justify-content-center">
-                <Image src={ThemesbergLogo} height={35} className="d-block mx-auto mb-3" alt="Themesberg Logo" />
+                <Image src={ThemesbergLogo} height={35} className="d-block mx-auto mb-3" alt="IDENTI3 Logo" />
               </Card.Link>
               <div className="d-flex text-center justify-content-center align-items-center" role="contentinfo">
-                <p className="font-weight-normal font-small mb-0">Copyright © Themesberg 2019-<span className="current-year">{currentYear}</span>. All rights reserved.</p>
+                <p className="font-weight-normal font-small mb-0">Copyright © IDENTI3 2019-<span className="current-year">{currentYear}</span>. All rights reserved.</p>
               </div>
             </Col>
           </Row>
