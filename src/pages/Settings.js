@@ -107,10 +107,10 @@ export default () => {
           <Row>
             <Col xs={12} className="mb-4">
               <ProfileCardWidget
-                fullName="Neil Sims"
+                fullName="Oisin Lyons"
                 picture={Profile1}
-                jobTitle="Senior Software Engineer"
-                location="New York, USA"
+                jobTitle="Operatations & Strategy"
+                location="Dublin. Ireland"
               />
             </Col>
             <Col xs={12}>
