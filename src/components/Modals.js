@@ -30,6 +30,9 @@ import {
   Table,
 } from "react-bootstrap";
 
+import { Routes } from "routes";
+
+
 import { v4 as uuidv4 } from "uuid";
 
 import { usePizzly } from "services/contextPizzly";
@@ -38,6 +41,7 @@ import KanbanAvatar from "components/KanbanAvatar";
 import { Members as BoardMembers, Labels as BoardLabels } from "data/kanban";
 
 import { PageTrafficTable } from "components/Tables";
+import { useHistory } from "react-router-dom";
 
 const pageVisits = [
   {
@@ -331,6 +335,8 @@ export const KanbanMoveModal = (props) => {
   const { myDiscordAPI, authId, profile, setProfile } = usePizzly();
   const [fetchCalled, setFetchCalled] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const history = useHistory();
+
 
   const onHide = () => {
     props.onHide && props.onHide();
@@ -342,6 +348,10 @@ export const KanbanMoveModal = (props) => {
 
     props.onSubmit && props.onSubmit({ source, destination });
   };
+
+  const goToUsers = () => {
+    history.push(Routes.Users.path);
+  }
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -384,6 +394,18 @@ export const KanbanMoveModal = (props) => {
           >
             Fetch Data
           </Button>
+          {!isLoading &&
+            <Button
+              variant="secondary"
+              className="d-inline-flex align-items-right"
+              style={{
+                float: "right"
+                }}
+              onClick={goToUsers}
+            >
+              Share
+            </Button>
+}
         </Modal.Footer>
       </Form>
     </Modal>
