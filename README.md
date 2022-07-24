@@ -1,8 +1,6 @@
 
 # IDENTI3-PRO-HACKFS-
 
-
-
 ## Getting started
 
 Make sure you Node v14 LTS installed and then run the following commands:
