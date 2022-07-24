@@ -10,7 +10,7 @@ export const Routes = {
     Messages: { path: "/messages" },
     SingleMessage: { path: "/message" },
     Users: { path: "/users" },
-    Transactions: { path: "/transactions" },
+    Data: { path: "/data" },
     Tasks: { path: "/tasks" },
     Settings: { path: "/settings" },
     Calendar: { path: "/calendar" },

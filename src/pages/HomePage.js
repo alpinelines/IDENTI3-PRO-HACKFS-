@@ -12,7 +12,7 @@ import Applications from 'pages/Applications';
 import Messages from "pages/Messages";
 import SingleMessage from "pages/SingleMessage";
 import Users from "pages/Users";
-import Transactions from "pages/Transactions";
+import Data from "pages/Data";
 import Tasks from "pages/Tasks";
 import Settings from "pages/Settings";
 import Calendar from "pages/Calendar";
@@ -152,7 +152,7 @@ export default () => (
     <RouteWithSidebar exact path={Routes.Messages.path} component={Messages} />
     <RouteWithSidebar exact path={Routes.SingleMessage.path} component={SingleMessage} />
     <RouteWithSidebar exact path={Routes.Users.path} component={Users} />
-    <RouteWithSidebar exact path={Routes.Transactions.path} component={Transactions} />
+    <RouteWithSidebar exact path={Routes.Data.path} component={Data} />
     <RouteWithSidebar exact path={Routes.Tasks.path} component={Tasks} />
     <RouteWithSidebar exact path={Routes.Settings.path} component={Settings} />
     <RouteWithSidebar exact path={Routes.Calendar.path} component={Calendar} />

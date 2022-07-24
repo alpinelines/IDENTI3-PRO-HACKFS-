@@ -383,8 +383,8 @@ export const UsersTable = (props) => {
 };
 
 export const TransactionsTable = (props) => {
-  const { transactions } = props;
-  const totalTransactions = transactions.length;
+  const { data } = props;
+  const totalTransactions = data.length;
 
   const TableRow = (props) => {
     const { invoiceNumber, subscription, price, issueDate, dueDate, status } = props;
@@ -462,7 +462,7 @@ export const TransactionsTable = (props) => {
             </tr>
           </thead>
           <tbody className="border-0">
-            {transactions.map(t => <TableRow key={`transaction-${t.invoiceNumber}`} {...t} />)}
+            {data.map(t => <TableRow key={`transaction-${t.invoiceNumber}`} {...t} />)}
           </tbody>
         </Table>
         <Card.Footer className="px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
