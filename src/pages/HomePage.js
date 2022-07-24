@@ -8,11 +8,12 @@ import Presentation from "pages/Presentation";
 import DashboardOverview from "pages/dashboard/DashboardOverview";
 import DashboardTraffic from "pages/dashboard/DashboardTraffic";
 import DashboardProductAnalysis from "pages/dashboard/DashboardProductAnalysis";
-import Kanban from 'pages/Kanban';
+import Applications from 'pages/Applications';
 import Messages from "pages/Messages";
 import SingleMessage from "pages/SingleMessage";
 import Users from "pages/Users";
-import Transactions from "pages/Transactions";
+import AccessData from "pages/AccessData";
+import MyData from "pages/MyData";
 import Tasks from "pages/Tasks";
 import Settings from "pages/Settings";
 import Calendar from "pages/Calendar";
@@ -148,11 +149,12 @@ export default () => (
     <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
     <RouteWithSidebar exact path={Routes.DashboardTraffic.path} component={DashboardTraffic} />
     <RouteWithSidebar exact path={Routes.DashboardProductAnalysis.path} component={DashboardProductAnalysis} />
-    <RouteWithSidebar exact path={Routes.Kanban.path} component={Kanban} />
+    <RouteWithSidebar exact path={Routes.Applications.path} component={Applications} />
     <RouteWithSidebar exact path={Routes.Messages.path} component={Messages} />
     <RouteWithSidebar exact path={Routes.SingleMessage.path} component={SingleMessage} />
     <RouteWithSidebar exact path={Routes.Users.path} component={Users} />
-    <RouteWithSidebar exact path={Routes.Transactions.path} component={Transactions} />
+    <RouteWithSidebar exact path={Routes.AccessData.path} component={AccessData} />
+    <RouteWithSidebar exact path={Routes.MyData.path} component={MyData} />
     <RouteWithSidebar exact path={Routes.Tasks.path} component={Tasks} />
     <RouteWithSidebar exact path={Routes.Settings.path} component={Settings} />
     <RouteWithSidebar exact path={Routes.Calendar.path} component={Calendar} />

@@ -63,7 +63,7 @@ export default () => (
           headerTitle="Weekly Sales"
           headerSubtitle="28 Daily Avg."
           reportTitle="$456,678"
-          reportSubtitle="Total Themesberg Sales"
+          reportSubtitle="Total IDENTI3 Sales"
         />
       </Col>
 

@@ -3,16 +3,16 @@ import { CheckIcon, CogIcon, HomeIcon, PlusIcon, SearchIcon } from "@heroicons/r
 import { Col, Row, Form, Button, ButtonGroup, Breadcrumb, InputGroup, Dropdown } from 'react-bootstrap';
 
 import { TransactionsTable } from "components/Tables";
-import TRANSACTIONS_DATA from "data/transactions";
+import TRANSACTIONS_DATA from "data/data";
 
 export default () => {
-  const [transactions, setTransactions] = useState(TRANSACTIONS_DATA.map(t => ({ ...t, show: true })));
+  const [data, setTransactions] = useState(TRANSACTIONS_DATA.map(t => ({ ...t, show: true })));
   const [searchValue, setSearchValue] = useState("");
   const [statusValue, setStatusValue] = useState("all");
 
   const changeSearchValue = (e) => {
     const newSearchValue = e.target.value;
-    const newTransactions = transactions.map(t => {
+    const newTransactions = data.map(t => {
       const subscription = t.subscription.toLowerCase();
       const shouldShow = subscription.includes(newSearchValue)
         || `${t.price}`.includes(newSearchValue)
@@ -28,7 +28,7 @@ export default () => {
 
   const changeStatusValue = (e) => {
     const newStatusValue = e.target.value;
-    const newTransactions = transactions.map(u => ({ ...u, show: u.status === newStatusValue || newStatusValue === "all" }));
+    const newTransactions = data.map(u => ({ ...u, show: u.status === newStatusValue || newStatusValue === "all" }));
 
     setStatusValue(newStatusValue);
     setTransactions(newTransactions);
@@ -41,10 +41,10 @@ export default () => {
           <Breadcrumb className="d-none d-md-inline-block" listProps={{ className: "breadcrumb-dark breadcrumb-transparent" }}>
             <Breadcrumb.Item><HomeIcon className="icon icon-xs" /></Breadcrumb.Item>
             <Breadcrumb.Item>Volt</Breadcrumb.Item>
-            <Breadcrumb.Item active>Transactions</Breadcrumb.Item>
+            <Breadcrumb.Item active>Data</Breadcrumb.Item>
           </Breadcrumb>
-          <h4>All Orders</h4>
-          <p className="mb-0">Your web analytics dashboard template.</p>
+          <h4>Shared Data</h4>
+          <p className="mb-0">Data streams that you have shared with other DIDs</p>
         </div>
         <div className="btn-toolbar mb-2 mb-md-0">
           <Button variant="gray-800" size="sm" className="d-inline-flex align-items-center">
@@ -98,7 +98,7 @@ export default () => {
       </div>
 
       <TransactionsTable
-        transactions={transactions.filter(t => t.show)}
+        data={data.filter(t => t.show)}
       />
     </>
   );

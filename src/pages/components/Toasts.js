@@ -45,7 +45,7 @@ const toggleDefaultToast = () => setShowDefault(!showDefault);`}
           example={`<Toast show={showDefault} onClose={handleCloseDefault} className="my-3">
     <Toast.Header className="text-primary" closeButton={false}>
         <InboxInIcon className="icon icon-xs text-gray-400" />
-        <strong className="me-auto ms-2">Themesberg</strong>
+        <strong className="me-auto ms-2">IDENTI3</strong>
         <small>11 mins ago</small>
         <Button variant="close" size="xs" onClick={handleCloseDefault} />
     </Toast.Header>
@@ -74,7 +74,7 @@ const handleCloseTertiary = () => setShowTertiary(false);`}
   <Toast show={showPrimary} onClose={handleClosePrimary} className="bg-primary text-white my-3">
       <Toast.Header className="text-primary" closeButton={false}>
           <InboxInIcon className="icon icon-xs text-gray-500" />
-          <strong className="me-auto ms-2">Themesberg</strong>
+          <strong className="me-auto ms-2">IDENTI3</strong>
           <small>11 mins ago</small>
           <Button variant="close" size="xs" onClick={handleClosePrimary} />
       </Toast.Header>
@@ -86,7 +86,7 @@ const handleCloseTertiary = () => setShowTertiary(false);`}
   <Toast show={showTertiary} onClose={handleCloseTertiary} className="bg-secondary text-white my-3">
       <Toast.Header className="text-primary" closeButton={false}>
           <InboxInIcon className="icon icon-xs text-secondary" />
-          <strong className="me-auto ms-2">Themesberg</strong>
+          <strong className="me-auto ms-2">IDENTI3</strong>
           <small>11 mins ago</small>
           <Button variant="close" size="xs" onClick={handleCloseTertiary} />
       </Toast.Header>

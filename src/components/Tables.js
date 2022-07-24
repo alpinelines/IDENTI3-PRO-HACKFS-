@@ -219,7 +219,7 @@ export const UsersTable = (props) => {
   const { users = [], allSelected } = props;
   const [bulkOption, setBulkOption] = useState(0);
   const disabledBulkMenu = users.filter(u => u.isSelected).length === 0;
-
+  
   const selectUser = (id) => {
     props.selectUser && props.selectUser(id);
   };
@@ -241,11 +241,17 @@ export const UsersTable = (props) => {
     props.deleteUsers && props.deleteUsers(ids)
   }
 
+ 
+
+
+  //active = Active
+  // inactive = Sharing
+//pending = data request
   const TableRow = (props) => {
     const { id, verified, status, image, name, email, dateCreated, isSelected } = props;
     const VerifiedIcon = verified ? CheckCircleIcon : InformationCircleIcon;
     const statusVariant = status === "active" ? "success"
-      : status === "inactive" ? "warning"
+      : status === "sharing" ? "warning"
         : status === "pending" ? "purple"
           : status === "suspended" ? "danger" : "primary";
 
@@ -298,7 +304,7 @@ export const UsersTable = (props) => {
                 <ShieldExclamationIcon className="dropdown-icon text-gray-400 me-2" />
                 Reset Pass
               </Dropdown.Item>
-              <Dropdown.Item className="d-flex align-items-center">
+              <Dropdown.Item as={Link} to={Routes.AccessData.path}  className="d-flex align-items-center">
                 <EyeIcon className="dropdown-icon text-gray-400 me-2" />
                 View Details
               </Dropdown.Item>
@@ -379,8 +385,8 @@ export const UsersTable = (props) => {
 };
 
 export const TransactionsTable = (props) => {
-  const { transactions } = props;
-  const totalTransactions = transactions.length;
+  const { data } = props;
+  const totalTransactions = data.length;
 
   const TableRow = (props) => {
     const { invoiceNumber, subscription, price, issueDate, dueDate, status } = props;
@@ -449,16 +455,16 @@ export const TransactionsTable = (props) => {
           <thead>
             <tr>
               <th className="border-gray-200">#</th>
-              <th className="border-gray-200">Bill For</th>
-              <th className="border-gray-200">Issue Date</th>
-              <th className="border-gray-200">Due Date</th>
+              <th className="border-gray-200">Data Info</th>
+              <th className="border-gray-200">Date of Collection</th>
+              <th className="border-gray-200">Application</th>
               <th className="border-gray-200">Total</th>
-              <th className="border-gray-200">Status</th>
+              <th className="border-gray-200">Data Access Control</th>
               <th className="border-gray-200">Action</th>
             </tr>
           </thead>
           <tbody className="border-0">
-            {transactions.map(t => <TableRow key={`transaction-${t.invoiceNumber}`} {...t} />)}
+            {data.map(t => <TableRow key={`transaction-${t.invoiceNumber}`} {...t} />)}
           </tbody>
         </Table>
         <Card.Footer className="px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">

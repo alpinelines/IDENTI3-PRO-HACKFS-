@@ -14,7 +14,7 @@ export default [
         "verified": true,
         "status": "active",
         "name": "Roy Fendley",
-        "email": "example@themesberg.com",
+        "email": "did:pkh:eip155:137:0x6ab7cd21c2387db6c4989fe88a3d242ec243f620",
         "dateCreated": moment().format("DD MMM YYYY"),
     },
     {
@@ -23,7 +23,7 @@ export default [
         "verified": true,
         "status": "active",
         "name": "Bonnie Green",
-        "email": "example@themesberg.com",
+        "email": "did:pkh:eip155:137:0x6ab7cd21c2387db6c4989fe88a3d242ec243f620",
         "dateCreated": moment().subtract(2, "days").format("DD MMM YYYY"),
     },
     {
@@ -31,7 +31,7 @@ export default [
         "verified": true,
         "status": "active",
         "name": "Scott Anderson",
-        "email": "example@themesberg.com",
+        "email": "did:pkh:eip155:137:0x6ab7cd21c2387db6c4989fe88a3d242ec243f620",
         "dateCreated": moment().subtract(2, "days").format("DD MMM YYYY"),
     },
     {
@@ -40,16 +40,16 @@ export default [
         "status": "active",
         "image": Profile4,
         "name": "Ronnie Buchanan",
-        "email": "example@themesberg.com",
+        "email": "did:pkh:eip155:137:0x6ab7cd21c2387db6c4989fe88a3d242ec243f620",
         "dateCreated": moment().subtract(3, "days").format("DD MMM YYYY"),
     },
     {
         "id": uuidv4(),
         "verified": false,
-        "status": "inactive",
+        "status": "sharing",
         "image": Profile3,
         "name": "Jane Rinehart",
-        "email": "example@themesberg.com",
+        "email": "did:pkh:eip155:137:0x6ab7cd21c2387db6c4989fe88a3d242ec243f620",
         "dateCreated": moment().subtract(4, "days").format("DD MMM YYYY"),
     },
     {
@@ -57,7 +57,7 @@ export default [
         "verified": false,
         "status": "pending",
         "name": "William Ginther",
-        "email": "example@themesberg.com",
+        "email": "did:pkh:eip155:137:0x6ab7cd21c2387db6c4989fe88a3d242ec243f620",
         "dateCreated": moment().subtract(5, "days").format("DD MMM YYYY"),
     },
     {
@@ -66,7 +66,7 @@ export default [
         "verified": false,
         "status": "pending",
         "name": "George Driskell",
-        "email": "example@themesberg.com",
+        "email": "did:pkh:eip155:137:0x6ab7cd21c2387db6c4989fe88a3d242ec243f620",
         "dateCreated": moment().subtract(5, "days").format("DD MMM YYYY"),
     },
     {
@@ -75,7 +75,7 @@ export default [
         "verified": false,
         "status": "suspended",
         "name": "Ronnie Buchanan",
-        "email": "example@themesberg.com",
+        "email": "did:pkh:eip155:137:0x6ab7cd21c2387db6c4989fe88a3d242ec243f620",
         "dateCreated": moment().subtract(5, "days").format("DD MMM YYYY"),
     },
     {
@@ -83,7 +83,7 @@ export default [
         "verified": false,
         "status": "suspended",
         "name": "Jane Rinehart",
-        "email": "example@themesberg.com",
+        "email": "did:pkh:eip155:137:0x6ab7cd21c2387db6c4989fe88a3d242ec243f620",
         "dateCreated": moment().subtract(6, "days").format("DD MMM YYYY"),
     }
 ]

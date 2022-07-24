@@ -39,7 +39,7 @@ export default () => (
                 <li><code>components/</code> - custom state or stateless <Card.Link href="https://reactjs.org/docs/components-and-props.html#function-and-class-components/" target="_blank">function components</Card.Link> built on top of <a href="https://react-bootstrap.github.io/" target="_blank" rel="noopener noreferrer">react-bootstrap library</a> and used throughout the application</li>
                 <li><code>data/</code> - files to feed the components that require an array of data (e.g tables, lists or calendar events). This data will in the end be fetched from a backend service.</li>
                 <li><code>pages/</code> - carefully built pages to provide all the necessary widgets your project will require</li>
-                <li><code>scss/</code> - holds the variables, mixins and custom component styles developed by Themesberg for Volt Pro React Dashboard</li>
+                <li><code>scss/</code> - holds the variables, mixins and custom component styles developed by IDENTI3 for Volt Pro React Dashboard</li>
                 <li><code>index.js</code> - is the JavaScript entry point</li>
                 <li><code>routes.js</code> - exports an object with all the route paths found in Volt Pro React Dashboard</li>
               </ul>

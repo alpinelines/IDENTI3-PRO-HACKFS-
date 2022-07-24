@@ -49,7 +49,7 @@ export default () => {
 
   const selectUser = (id) => {
     const newUsers = users.map(u => u.id === id ? ({ ...u, isSelected: !u.isSelected }) : u);
-    setUsers(newUsers);
+    setUsers(newUsers); 
   };
 
   const deleteUsers = async (ids) => {
@@ -117,8 +117,8 @@ export default () => {
             <Form.Select value={statusFilter} className="fmxw-200 d-none d-md-inline" onChange={changeStatusFilter}>
               <option value="all">All</option>
               <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-              <option value="pending">Pending</option>
+              <option value="sharing">Sharing</option>
+              <option value="pending">Data Request Pending</option>
               <option value="suspended">Suspended</option>
             </Form.Select>
           </Col>

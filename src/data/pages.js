@@ -3,9 +3,9 @@ import { v4 as uuidv4 } from "uuid";
 import OverviewImg from "assets/img/pages/overview.jpg";
 import TrafficSourcesImg from "assets/img/pages/traffic-sources.jpg";
 import AppAnalysisImg from "assets/img/pages/app-analysis.jpg";
-import KanbanImg from "assets/img/pages/kanban.jpg";
+import ApplicationImg from "assets/img/pages/application.jpg";
 import UsersImg from "assets/img/pages/users-list.jpg";
-import TransactionsImg from "assets/img/pages/transactions.jpg";
+import TransactionsImg from "assets/img/pages/data.jpg";
 import TasksImg from "assets/img/pages/tasks.jpg";
 import SettingsImg from "assets/img/pages/settings.jpg";
 import MessagesImg from "assets/img/pages/messages.jpg";
@@ -46,9 +46,9 @@ export default [
     },
     {
         "id": uuidv4(),
-        "name": "Kanban",
-        "image": KanbanImg,
-        "link": Routes.Kanban.path
+        "name": "Applications",
+        "image": ApplicationImg,
+        "link": Routes.Applications.path
     },
     {
         "id": uuidv4(),
@@ -58,9 +58,9 @@ export default [
     },
     {
         "id": uuidv4(),
-        "name": "Transactions",
+        "name": "Data",
         "image": TransactionsImg,
-        "link": Routes.Transactions.path
+        "link": Routes.MyData.path
     },
     {
         "id": uuidv4(),

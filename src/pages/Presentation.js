@@ -14,7 +14,7 @@ import MockupPresentation from "assets/img/mockup-presentation.png";
 import ReactHero from "assets/img/technologies/react-hero-logo.svg";
 import MapboxImg from "assets/img/mockup-map-presentation.png";
 import CalendarImg from "assets/img/mockup-calendar-presentation.png";
-import KanbanImg from "assets/img/mockup-kanban-presentation.png";
+import ApplicationImg from "assets/img/mockup-application-presentation.png";
 import ReactMockupImg from "assets/img/react-mockup.png";
 import BS5IllustrationsImg from "assets/img/illustrations/bs5-illustrations.svg";
 import BS5Logo from "assets/img/technologies/bootstrap-5-logo.svg";
@@ -135,13 +135,18 @@ export default () => {
                 {/* <Button variant="outline-secondary" as={HashLink} to="#pricing" className="d-flex align-items-center">
                   Purchase now
                 </Button> */}
+
+
+                <Button variant="outline-secondary" onClick={()=> fetchProfile()} className="d-flex align-items-center">
+                  Fetch Data
+                </Button>
               </div>
               <div className="text-center mb-6 mb-lg-5">
-                {/* <a href="https://themesberg.com" target="_blank" rel="noopener noreferrer">
-                  <Image src={ThemesbergLogoIcon} height={25} width={25} className="mb-3" alt="Themesberg Logo" />
-                  <p className="text-muted font-small m-0">A Themesberg production</p>
-                </a> */}
-                
+                <a href="https://themesberg.com" target="_blank" rel="noopener noreferrer">
+                  <Image src={ThemesbergLogoIcon} height={25} width={25} className="mb-3" alt="IDENTI3 Logo" />
+                  <p className="text-muted font-small m-0">A IDENTI3 production</p>
+                </a>
+
               </div>
             </Col>
           </Row>
@@ -195,19 +200,23 @@ export default () => {
         <Container>
         <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5}>
+
               <h2>Data Management</h2>
+
               <p className="mb-3 lead fw-bold">
                 Manage and own your own data
               </p>
               <p className="mb-4">
+
                 Import your own data to build your IDENTI3. OAuth allows you to take your data from your favourite applications and websites
+
               </p>
-              <Button as={Link} to={Routes.Kanban.path} className="me-3" variant="secondary" target="_blank">
-                <MapIcon className="icon icon-xs me-2" /> Demo Kanban
+              <Button as={Link} to={Routes.Applications.path} className="me-3" variant="secondary" target="_blank">
+                <MapIcon className="icon icon-xs me-2" /> Demo Applications
               </Button>
             </Col>
             <Col lg={6}>
-              <Image src={KanbanImg} alt="Calendar Preview" />
+              <Image src={ApplicationImg} alt="Calendar Preview" />
             </Col>
           </Row>
           <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
@@ -786,10 +795,9 @@ export default () => {
                 <Image src={ReactHero} />
                 <span className="ms-2 brand-text">Volt React Pro</span>
               </Navbar.Brand>
-              <p>Volt Pro React is a premium admin dashboard template powered by React.js and Bootstrap 5</p>
             </Col>
             <Col xs={6} md={2} className="mb-5 mb-lg-0">
-              <span className="h5">Themesberg</span>
+              <span className="h5">IDENTI3</span>
               <ul className="links-vertical mt-2">
                 <li><Card.Link target="_blank" href="https://themesberg.com/blog">Blog</Card.Link></li>
                 <li><Card.Link target="_blank" href="https://themesberg.com/products">Products</Card.Link></li>
@@ -828,10 +836,10 @@ export default () => {
           <Row>
             <Col className="mb-md-2">
               <Card.Link href="https://themesberg.com" target="_blank" className="d-flex justify-content-center">
-                <Image src={ThemesbergLogo} height={35} className="d-block mx-auto mb-3" alt="Themesberg Logo" />
+                <Image src={ThemesbergLogo} height={35} className="d-block mx-auto mb-3" alt="IDENTI3 Logo" />
               </Card.Link>
               <div className="d-flex text-center justify-content-center align-items-center" role="contentinfo">
-                <p className="font-weight-normal font-small mb-0">Copyright © Themesberg 2019-<span className="current-year">{currentYear}</span>. All rights reserved.</p>
+                <p className="font-weight-normal font-small mb-0">Copyright © IDENTI3 2019-<span className="current-year">{currentYear}</span>. All rights reserved.</p>
               </div>
             </Col>
           </Row>

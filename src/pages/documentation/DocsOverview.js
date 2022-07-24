@@ -28,8 +28,8 @@ export default () => (
               <h2 id="community">Community</h2>
               <ul className="docs-list">
                 <li>Follow <Card.Link href="https://twitter.com/themesberg" target="_blank">@themesberg on Twitter</Card.Link>.</li>
-                <li>Follow <Card.Link href="https://facebook.com/themesberg" target="_blank">Themesberg on Facebook</Card.Link>.</li>
-                <li>Read and subscribe to <Card.Link href="https://themesberg.com/blog" target="_blank">The Official Themesberg Blog</Card.Link>.</li>
+                <li>Follow <Card.Link href="https://facebook.com/themesberg" target="_blank">IDENTI3 on Facebook</Card.Link>.</li>
+                <li>Read and subscribe to <Card.Link href="https://themesberg.com/blog" target="_blank">The Official IDENTI3 Blog</Card.Link>.</li>
                 <li>Follow latest open source projects on our <Card.Link href="https://github.com/themesberg" target="_blank">Github Page</Card.Link></li>
               </ul>
             </article>

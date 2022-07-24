@@ -66,7 +66,7 @@ export default (props) => {
             <p className="mb-0 text-center text-lg-start">
               © 2019-{`${currentYear} `}
               <Card.Link href="https://themesberg.com" target="_blank" className="text-primary fw-normal">
-                Themesberg
+                IDENTI3
               </Card.Link>
             </p>
           </Col>

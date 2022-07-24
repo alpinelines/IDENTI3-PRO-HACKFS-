@@ -2,7 +2,7 @@ import React from "react";
 import { ClipboardCopyIcon, CreditCardIcon, PencilAltIcon, SelectorIcon, TagIcon, TrashIcon, UserIcon } from "@heroicons/react/solid";
 import { Card, Button, Image, Dropdown } from "react-bootstrap";
 
-import KanbanAvatar from "components/KanbanAvatar";
+import ApplicationAvatar from "components/ApplicationAvatar";
 
 import { usePizzly } from 'services/contextPizzly';
 
@@ -112,7 +112,7 @@ export default (props) => {
         </h5>
 
         <div className="avatar-group">
-          {members.map(member => <KanbanAvatar key={`card-member-${member.id}`} {...member} />)}
+          {members.map(member => <ApplicationAvatar key={`card-member-${member.id}`} {...member} />)}
         </div> */}
       </Card.Body>
     </Card>
