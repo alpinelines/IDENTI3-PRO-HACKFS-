@@ -436,7 +436,7 @@ export default () => {
             })}
           </DragDropContext>
 
-          <Col xs={12} lg={6} xl={4} xxl={3}>
+          {/* <Col xs={12} lg={6} xl={4} xxl={3}>
             <div className="d-grid">
               <Button
                 variant="outline-gray-500"
@@ -446,7 +446,7 @@ export default () => {
                 <PlusIcon className="icon icon-xs me-2" /> Add another list
               </Button>
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     </>

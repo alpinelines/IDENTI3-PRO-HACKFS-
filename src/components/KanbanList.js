@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { ClipboardCopyIcon, DotsHorizontalIcon, EyeIcon, SelectorIcon, TrashIcon, ViewGridAddIcon } from "@heroicons/react/solid";
-import { Col, Form, Button, Dropdown, ListGroup } from "react-bootstrap";
+import { Col, Row, Form, Button, Dropdown, ListGroup } from "react-bootstrap";
 
 export default (props) => {
   const { id, listRef, extraProps = {} } = props;
-  const [title, setTitle] = useState(props.title ?? "");
+  const [title, setTitle] = useState(props.title ?? "");  
   const [isTitleEditable, setIsTitleEditable] = useState(false);
 
   const onTitleChange = () => {
@@ -33,8 +33,8 @@ export default (props) => {
   };
 
   return (
-    <Col xs={12} lg={6} xl={4} xxl={3} ref={listRef} {...extraProps}>
-      <div className="d-flex justify-content-between align-items-center kanban-title-container mb-2">
+    <Row xs={12} lg={6} xl={4} xxl={3} ref={listRef} {...extraProps}>
+      {/* <div className="d-flex justify-content-between align-items-center kanban-title-container mb-2">
         {isTitleEditable ? (
           <Form.Group id="title" className="w-100">
             <Form.Control
@@ -78,11 +78,11 @@ export default (props) => {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-      </div>
+      </div> */}
 
-      <ListGroup className="kanban-list">
+      {/* <ListGroup className="kanban-list "> */}
         {props.children}
-      </ListGroup>
-    </Col>
+      {/* </ListGroup> */}
+    </Row>
   );
 };

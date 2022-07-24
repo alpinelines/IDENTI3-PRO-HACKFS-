@@ -41,16 +41,13 @@ export default (props) => {
   const onDropdownClick = (e) => {
     e.preventDefault();
   };
-
+  // Add Margin 
   return (
-    <Card border={1} className="p-4" ref={cardRef}{...extraProps} style={style} onClick={onCardClick}>
+    <Card border={10} className="p-4" ref={cardRef}{...extraProps} style={style} onClick={onCardClick}>
       <Card.Header className="d-flex align-items-center justify-content-between border-0 p-0 mb-3">
         <h5 className="mb-0">{title}</h5>
         <div>
           <Dropdown onClick={onDropdownClick}>
-            <Dropdown.Toggle as={Button} variant="link" size="sm" className="fs-6 px-1 py-0">
-              <PencilAltIcon className="icon icon-xs text-gray-500" />
-            </Dropdown.Toggle>
 
             <Dropdown.Menu className="dashboard-dropdown dropdown-menu-start mt-2 py-1">
               <Dropdown.Item className="d-flex align-items-center" onClick={onEdit}>
