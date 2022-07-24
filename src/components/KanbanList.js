@@ -34,7 +34,7 @@ export default (props) => {
 
   return (
     <Row xs={12} lg={6} xl={4} xxl={3} ref={listRef} {...extraProps}>
-      {/* <div className="d-flex justify-content-between align-items-center kanban-title-container mb-2">
+      {/* <div className="d-flex justify-content-between align-items-center application-title-container mb-2">
         {isTitleEditable ? (
           <Form.Group id="title" className="w-100">
             <Form.Control
@@ -47,7 +47,7 @@ export default (props) => {
             />
           </Form.Group>
         ) : (
-          <h5 className="kanban-title d-flex align-items-center w-100 fs-6 fw-bold p-2 m-0" onClick={toggleIsTitleEditable}>
+          <h5 className="application-title d-flex align-items-center w-100 fs-6 fw-bold p-2 m-0" onClick={toggleIsTitleEditable}>
             {title}
           </h5>
         )}
@@ -80,7 +80,7 @@ export default (props) => {
         </Dropdown>
       </div> */}
 
-      {/* <ListGroup className="kanban-list "> */}
+      {/* <ListGroup className="application-list "> */}
         {props.children}
       {/* </ListGroup> */}
     </Row>

@@ -6,7 +6,7 @@ export const Routes = {
     DashboardOverview: { path: "/dashboard/overview" },
     DashboardTraffic: { path: "/dashboard/traffic-and-engagement" },
     DashboardProductAnalysis: { path: "/dashboard/product-analysis" },
-    Kanban: { path: "/kanban" },
+    Application: { path: "/application" },
     Messages: { path: "/messages" },
     SingleMessage: { path: "/message" },
     Users: { path: "/users" },

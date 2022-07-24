@@ -32,8 +32,8 @@ import {
 
 import { v4 as uuidv4 } from "uuid";
 
-import KanbanAvatar from "components/KanbanAvatar";
-import { Members as BoardMembers, Labels as BoardLabels } from "data/kanban";
+import ApplicationAvatar from "components/ApplicationAvatar";
+import { Members as BoardMembers, Labels as BoardLabels } from "data/application";
 
 import { PageTrafficTable } from "components/Tables";
 
@@ -166,7 +166,7 @@ export const EventModal = (props) => {
   );
 };
 
-export const KanbanCreateModal = (props) => {
+export const ApplicationCreateModal = (props) => {
   const { modalTitle = "Add a new card", type = "card", show = false } = props;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -232,7 +232,7 @@ export const KanbanCreateModal = (props) => {
   );
 };
 
-export const KanbanCopyModal = (props) => {
+export const ApplicationCopyModal = (props) => {
   const { type = "card", show = false, lists = [], ...otherProps } = props;
   const [title, setTitle] = useState(props.title ?? "");
   const [listId, setListId] = useState(props.listId ?? "");
@@ -293,7 +293,7 @@ export const KanbanCopyModal = (props) => {
   );
 };
 
-export const KanbanMoveModal = (props) => {
+export const ApplicationMoveModal = (props) => {
   const { type = "card", show = false, lists = [] } = props;
   const [listId, setListId] = useState(props.listId ?? "");
   const [index, setIndex] = useState(props.index ?? 0);
@@ -377,7 +377,7 @@ export const KanbanMoveModal = (props) => {
 };
 
 // This Modal is from after the Click
-export const KanbanEditModal = (props) => {
+export const ApplicationEditModal = (props) => {
   const {
     id: cardId,
     index,
@@ -490,7 +490,7 @@ export const KanbanEditModal = (props) => {
                 <h5 className="fs-6 fw-bold text-gray-500">Members</h5>
                 <div className="d-flex align-items-center">
                   {members.map((m) => (
-                    <KanbanAvatar key={`kanban-avatar-${m.id}`} {...m} />
+                    <ApplicationAvatar key={`application-avatar-${m.id}`} {...m} />
                   ))}
 
                   <Button
@@ -507,7 +507,7 @@ export const KanbanEditModal = (props) => {
                 <h5 className="fs-6 fw-bold text-gray-500">Labels</h5>
                 <div className="d-flex align-items-center">
                   {labels.map(l => (
-                    <Badge text="white" bg={l.color} key={`kanban-label-${l.id}`} className="rounded py-2 px-3">
+                    <Badge text="white" bg={l.color} key={`application-label-${l.id}`} className="rounded py-2 px-3">
                       {l.name}
                     </Badge>
                   ))}
@@ -575,7 +575,7 @@ export const KanbanEditModal = (props) => {
               </Row>
               {/* <Row className="mb-4 mb-lg-0">
                 {comments.map((c) => (
-                  <Col xs={12} key={`kanban-comment-${c.id}`} className="mb-4">
+                  <Col xs={12} key={`application-comment-${c.id}`} className="mb-4">
                     <div className="bg-gray-50 border border-gray-100 rounded p-3">
                       <div className="d-flex align-items-center mb-2">
                         <h3 className="fs-6 mb-0 me-3">{c.sender}</h3>
@@ -684,7 +684,7 @@ export const KanbanEditModal = (props) => {
   );
 };
 
-export const KanbanEditMembersModal = (props) => {
+export const ApplicationEditMembersModal = (props) => {
   const { listId, id: cardId, show = false, members = [] } = props;
   const [searchValue, setSearchValue] = useState("");
   const [boardMembers, setBoardMembers] = useState(
@@ -750,7 +750,7 @@ export const KanbanEditMembersModal = (props) => {
               .map((m) => (
                 <Row
                   key={`board-member-${m.id}`}
-                  className="kanban-card-member border-bottom py-2"
+                  className="application-card-member border-bottom py-2"
                   onClick={() => onMemberClick(m.id)}
                 >
                   <Col xs={2}>
@@ -785,7 +785,7 @@ export const KanbanEditMembersModal = (props) => {
   );
 };
 
-export const KanbanEditLabelsModal = (props) => {
+export const ApplicationEditLabelsModal = (props) => {
   const { listId, id: cardId, show = false, labels = [] } = props;
   const [searchValue, setSearchValue] = useState("");
   const [boardLabels, setBoardLabels] = useState(
@@ -849,7 +849,7 @@ export const KanbanEditLabelsModal = (props) => {
                 <Row key={`label-${l.id}`} className="my-1">
                   <Badge
                     bg={l.color}
-                    className="kanban-card-label py-2 px-3"
+                    className="application-card-label py-2 px-3"
                     onClick={() => onLabelClick(l.id)}
                   >
                     <div className="d-flex align-items-center justify-content-between">

@@ -5,11 +5,11 @@ import withReactContent from "sweetalert2-react-content";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Col, Row, Button, Container } from "react-bootstrap";
 
-import KanbanHeader from "components/KanbanHeader";
-import KanbanList from "components/KanbanList";
-import KanbanCard from "components/KanbanCard";
-import { KanbanCreateModal, KanbanEditModal, KanbanCopyModal, KanbanMoveModal, KanbanEditMembersModal, KanbanEditLabelsModal } from "components/Modals";
-import KANBAN_LISTS, { createCard, createList } from "data/kanban";
+import ApplicationHeader from "components/ApplicationHeader";
+import ApplicationList from "components/ApplicationList";
+import ApplicationCard from "components/ApplicationCard";
+import { ApplicationCreateModal, ApplicationEditModal, ApplicationCopyModal, ApplicationMoveModal, ApplicationEditMembersModal, ApplicationEditLabelsModal } from "components/Modals";
+import KANBAN_LISTS, { createCard, createList } from "data/application";
 import { ArchiveIcon, PlusIcon } from "@heroicons/react/solid";
 import { usePizzly } from 'services/contextPizzly';
 
@@ -28,8 +28,8 @@ const SwalWithBootstrapButtons = withReactContent(Swal.mixin({
 }));
 
 export default () => {
-  const [kanbanLists, setKanbanLists] = useState(KANBAN_LISTS);
-  const createCardDefaultProps = { listId: kanbanLists[0].id, cardIndex: 0 };
+  const [applicationLists, setApplicationLists] = useState(KANBAN_LISTS);
+  const createCardDefaultProps = { listId: applicationLists[0].id, cardIndex: 0 };
   const [showCreateCardModal, setShowCreateCardModal] = useState(false);
   const [showCreateListModal, setShowCreateListModal] = useState(false);
   const [createCardProps, setCreateCardProps] = useState(createCardDefaultProps);
@@ -70,7 +70,7 @@ export default () => {
     const listsUpdated = createCardInListAtIndex({ ...createCardProps, ...props });
 
     toggleCreateCardModal();
-    setKanbanLists(listsUpdated);
+    setApplicationLists(listsUpdated);
   };
 
   const handleCopyCard = (card = {}) => {
@@ -78,24 +78,24 @@ export default () => {
     const listsUpdated = createCardInListAtIndex({ listId, title, description });
 
     setCardToCopy(null);
-    setKanbanLists(listsUpdated);
+    setApplicationLists(listsUpdated);
   };
 
   const handleMoveList = ({ source, destination }) => {
-    const lists = [...kanbanLists];
+    const lists = [...applicationLists];
     const [listRemoved] = lists.splice(source.index, 1);
     lists.splice(destination.index, 0, listRemoved);
 
-    setKanbanLists(lists);
+    setApplicationLists(lists);
     setListToMoveIndex(null);
   };
 
   const handleCreateList = (props) => {
     const newList = createList(props);
-    const listsUpdated = [...kanbanLists, newList];
+    const listsUpdated = [...applicationLists, newList];
 
     setShowCreateListModal(false);
-    setKanbanLists(listsUpdated);
+    setApplicationLists(listsUpdated);
     setListToCopy(null);
   };
 
@@ -130,20 +130,20 @@ export default () => {
     const { droppableId: sListId, index: sCardIndex } = source;
     const { droppableId: dListId, index: dCardIndex } = destination;
 
-    const sList = kanbanLists.find(l => l.id === sListId);
-    const dList = kanbanLists.find(l => l.id === dListId);
+    const sList = applicationLists.find(l => l.id === sListId);
+    const dList = applicationLists.find(l => l.id === dListId);
 
     if (sListId === dListId) {
       // reorder cards in the list only if card's index changes
       if (sCardIndex !== dCardIndex) {
         const sCardsUpdated = reorderCards(sList.cards, sCardIndex, dCardIndex);
-        const listsUpdated = kanbanLists.map(l => l.id === sListId ? { ...l, cards: sCardsUpdated } : l);
-        setKanbanLists(listsUpdated);
+        const listsUpdated = applicationLists.map(l => l.id === sListId ? { ...l, cards: sCardsUpdated } : l);
+        setApplicationLists(listsUpdated);
       }
     } else {
       const [sListUpdated, dListUpdated] = moveCardFromList(sList, dList, sCardIndex, dCardIndex);
-      const listsUpdated = kanbanLists.map(l => l.id === sListId ? sListUpdated : l.id === dListId ? dListUpdated : l);
-      setKanbanLists(listsUpdated);
+      const listsUpdated = applicationLists.map(l => l.id === sListId ? sListUpdated : l.id === dListId ? dListUpdated : l);
+      setApplicationLists(listsUpdated);
     }
 
     if (cardToMove) {
@@ -161,7 +161,7 @@ export default () => {
       return acc
     }, {});
 
-    const listsUpdated = kanbanLists.map(l => {
+    const listsUpdated = applicationLists.map(l => {
       const cardsToDelete = cardsGroupedByListId[l.id];
       if (!cardsToDelete) return l;
 
@@ -183,8 +183,8 @@ export default () => {
     });
 
     if (result.isConfirmed) {
-      const listsUpdated = kanbanLists.filter(l => l.id !== listId);
-      setKanbanLists(listsUpdated);
+      const listsUpdated = applicationLists.filter(l => l.id !== listId);
+      setApplicationLists(listsUpdated);
 
       await SwalWithBootstrapButtons.fire("Deleted", "The list has been deleted.", "success");
     }
@@ -207,7 +207,7 @@ export default () => {
 
     if (result.isConfirmed) {
       const listsUpdated = removeCardsFromList(cards);
-      setKanbanLists(listsUpdated);
+      setApplicationLists(listsUpdated);
 
       const confirmMessage = cardsNr === 1 ? "The card has been deleted." : "The cards have been deleted.";
       await SwalWithBootstrapButtons.fire("Deleted", confirmMessage, "success");
@@ -233,7 +233,7 @@ export default () => {
     if (result.isConfirmed) {
       setCardToEdit(null);
       const listsUpdated = removeCardsFromList(cards);
-      setKanbanLists(listsUpdated);
+      setApplicationLists(listsUpdated);
 
       const confirmMessage = cardsNr === 1 ? "The card has been archived." : "The cards have been archived.";
       await SwalWithBootstrapButtons.fire('Archived', confirmMessage, 'success');
@@ -241,14 +241,14 @@ export default () => {
   };
 
   const handleListTitleChange = ({ id, title }) => {
-    const listsUpdated = kanbanLists.map(l => l.id === id ? ({ ...l, title }) : l);
-    setKanbanLists(listsUpdated);
+    const listsUpdated = applicationLists.map(l => l.id === id ? ({ ...l, title }) : l);
+    setApplicationLists(listsUpdated);
   };
 
   const handleCardChange = (props) => {
     const { listId, cardId, ...otherProps } = props;
 
-    const listsUpdated = kanbanLists.map(l => {
+    const listsUpdated = applicationLists.map(l => {
       if (l.id !== listId) return l;
 
       const cards = l.cards.map(c => c.id === cardId ? ({ ...c, ...otherProps }) : c);
@@ -259,14 +259,14 @@ export default () => {
       setCardToEdit({ ...cardToEdit, ...otherProps });
     }
 
-    setKanbanLists(listsUpdated);
+    setApplicationLists(listsUpdated);
     setCardToChangeMembers(null);
   };
 
   const createCardInListAtIndex = (props) => {
     const { listId, cardIndex, ...otherProps } = props;
 
-    const listsUpdated = kanbanLists.map(l => {
+    const listsUpdated = applicationLists.map(l => {
       if (listId !== l.id) return l;
 
       const newCard = createCard(otherProps);
@@ -281,7 +281,7 @@ export default () => {
   return (
     <>
       {showCreateCardModal && (
-        <KanbanCreateModal
+        <ApplicationCreateModal
           show={showCreateCardModal}
           onHide={toggleCreateCardModal}
           onSubmit={handleCreateCard}
@@ -289,7 +289,7 @@ export default () => {
       )}
 
       {cardToEdit && (
-        <KanbanEditModal
+        <ApplicationEditModal
           show={true}
           {...cardToEdit}
           onHide={() => setCardToEdit(null)}
@@ -303,7 +303,7 @@ export default () => {
       )}
 
       {cardToChangeMembers && (
-        <KanbanEditMembersModal
+        <ApplicationEditMembersModal
           show={true}
           {...cardToChangeMembers}
           onHide={() => setCardToChangeMembers(null)}
@@ -312,7 +312,7 @@ export default () => {
       )}
 
       {cardToChangeLabels && (
-        <KanbanEditLabelsModal
+        <ApplicationEditLabelsModal
           show={true}
           {...cardToChangeLabels}
           onHide={() => setCardToChangeLabels(null)}
@@ -321,27 +321,27 @@ export default () => {
       )}
 
       {cardToCopy && (
-        <KanbanCopyModal
+        <ApplicationCopyModal
           show={true}
           {...cardToCopy}
-          lists={kanbanLists}
+          lists={applicationLists}
           onHide={() => setCardToCopy(null)}
           onSubmit={handleCopyCard}
         />
       )}
 
       {cardToMove && (
-        <KanbanMoveModal
+        <ApplicationMoveModal
           show={true}
           {...cardToMove}
-          lists={kanbanLists}
+          lists={applicationLists}
           onHide={() => setCardToMove(null)}
           onSubmit={handleDragEnd}
         />
       )}
 
       {showCreateListModal && (
-        <KanbanCreateModal
+        <ApplicationCreateModal
           type="list"
           modalTitle="Add a new list"
           show={showCreateListModal}
@@ -351,7 +351,7 @@ export default () => {
       )}
 
       {listToCopy && (
-        <KanbanCopyModal
+        <ApplicationCopyModal
           show={true}
           type="list"
           {...listToCopy}
@@ -361,35 +361,35 @@ export default () => {
       )}
 
       {listToMoveIndex !== null && (
-        <KanbanMoveModal
+        <ApplicationMoveModal
           show={true}
           type="list"
-          lists={kanbanLists}
+          lists={applicationLists}
           listIndex={listToMoveIndex}
           onHide={() => setListToMoveIndex(null)}
           onSubmit={handleMoveList}
         />
       )}
 
-      <KanbanHeader
+      <ApplicationHeader
         onNewCard={toggleCreateCardModal}
         onArchive={handleArchiveCards}
         onDelete={handleCardsDelete}
       />
 
-      <Container fluid className="kanban-container py-4 px-0">
+      <Container fluid className="application-container py-4 px-0">
         <Row className="d-flex flex-nowrap">
           <DragDropContext onDragEnd={handleDragEnd}>
-            {kanbanLists.map((list, ind) => {
+            {applicationLists.map((list, ind) => {
               const { id: listId, cards } = list;
 
               return (
-                <Droppable index={ind} droppableId={`${listId}`} key={`kanban-list-${listId}`}>
+                <Droppable index={ind} droppableId={`${listId}`} key={`application-list-${listId}`}>
                   {provided => {
                     const { innerRef: listRef, placeholder, droppableProps } = provided;
 
                     return (
-                      <KanbanList
+                      <ApplicationList
                         {...list}
                         listRef={listRef}
                         extraProps={droppableProps}
@@ -403,12 +403,12 @@ export default () => {
                           const { id: cardId } = card;
 
                           return (
-                            <Draggable index={index} draggableId={`${cardId}`} key={`kanban-card-${cardId}`}>
+                            <Draggable index={index} draggableId={`${cardId}`} key={`application-card-${cardId}`}>
                               {(provided, snapshot) => {
                                 const { innerRef: cardRef, draggableProps, dragHandleProps } = provided;
 
                                 return (
-                                  <KanbanCard
+                                  <ApplicationCard
                                     {...card}
                                     cardRef={cardRef}
                                     style={getCardStyle(draggableProps.style, snapshot)}
@@ -437,7 +437,7 @@ export default () => {
                         >
                           <PlusIcon className="icon icon-xs me-2" /> Add another card
                         </Button>
-                      </KanbanList>
+                      </ApplicationList>
                     );
                   }}
                 </Droppable>

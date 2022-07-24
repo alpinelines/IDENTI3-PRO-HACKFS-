@@ -14,7 +14,7 @@ import MockupPresentation from "assets/img/mockup-presentation.png";
 import ReactHero from "assets/img/technologies/react-hero-logo.svg";
 import MapboxImg from "assets/img/mockup-map-presentation.png";
 import CalendarImg from "assets/img/mockup-calendar-presentation.png";
-import KanbanImg from "assets/img/mockup-kanban-presentation.png";
+import ApplicationImg from "assets/img/mockup-application-presentation.png";
 import ReactMockupImg from "assets/img/react-mockup.png";
 import BS5IllustrationsImg from "assets/img/illustrations/bs5-illustrations.svg";
 import BS5Logo from "assets/img/technologies/bootstrap-5-logo.svg";
@@ -186,19 +186,19 @@ export default () => {
         <Container>
         <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5}>
-              <h2>Kanban Board</h2>
+              <h2>Application Board</h2>
               <p className="mb-3 lead fw-bold">
                 Interactive drag and drop interface
               </p>
               <p className="mb-4">
-                You'll get a fully interactive Drag and Drop Kanban board interface.
+                You'll get a fully interactive Drag and Drop Application board interface.
               </p>
-              <Button as={Link} to={Routes.Kanban.path} className="me-3" variant="secondary" target="_blank">
-                <MapIcon className="icon icon-xs me-2" /> Demo Kanban
+              <Button as={Link} to={Routes.Application.path} className="me-3" variant="secondary" target="_blank">
+                <MapIcon className="icon icon-xs me-2" /> Demo Application
               </Button>
             </Col>
             <Col lg={6}>
-              <Image src={KanbanImg} alt="Calendar Preview" />
+              <Image src={ApplicationImg} alt="Calendar Preview" />
             </Col>
           </Row>
           <Row className="justify-content-between align-items-center mb-5 mb-lg-7">

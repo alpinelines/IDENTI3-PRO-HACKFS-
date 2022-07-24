@@ -151,7 +151,7 @@ export default (props = {}) => {
                 <NavItem title="Product Analysis" link={Routes.DashboardProductAnalysis.path} />
               </CollapsableNavItem>
 
-              <NavItem title="Kanban" icon={ViewGridIcon} link={Routes.Kanban.path} />
+              <NavItem title="Application" icon={ViewGridIcon} link={Routes.Application.path} />
               <NavItem title="Messages" icon={InboxIcon} badgeText={numMessages} badgeBg="danger" link={Routes.Messages.path} />
               <NavItem title="Users List" icon={UsersIcon} link={Routes.Users.path} />
               <NavItem title="Transactions" icon={CreditCardIcon} link={Routes.Transactions.path} />

@@ -157,16 +157,16 @@
     }
 }
 
-.kanban-container {
+.application-container {
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
 }
 
-.kanban-title-container {
+.application-title-container {
     max-height: 2.25rem;
 }
 
-.kanban-title {
+.application-title {
     &:hover {
         cursor: pointer;
         background: $gray-200;
@@ -174,14 +174,14 @@
     }
 }
 
-.kanban-card-member {
+.application-card-member {
     &:hover {
         cursor: pointer;
         background: $gray-100;
     }
 }
 
-.kanban-card-label {
+.application-card-label {
     &:hover {
         cursor: pointer;
     }
