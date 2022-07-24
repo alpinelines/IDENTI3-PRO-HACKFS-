@@ -24,11 +24,14 @@ import pages from "data/pages";
 import features from "data/features";
 import { BootstrapIcon, FileCodeIcon, GithubIcon, JsIcon, ReactIcon } from "components/BrandIcons";
 
-import { useOrbis } from 'services/context';
+// import { useOrbis } from 'services/context';
+import { usePizzly } from 'services/contextPizzly';
 
 export default () => {
   const currentYear = moment().get("year");
-  const { user, connect } = useOrbis();
+  // const { user, connect } = useOrbis();
+  const {authId, connect, fetchProfile} = usePizzly();
+
 
   const PagePreview = (props) => {
     const { name, image, link } = props;
@@ -110,8 +113,8 @@ export default () => {
               </h1>
               <p className="text-muted fw-light mb-5 h5">Premium admin dashboard powered by React.js and Bootstrap 5</p>
               <div className="d-flex justify-content-center mb-5">
-                {user ?
-                  <p>Connected with: {user}</p>
+                {authId ?
+                  <p>Connected with: {authId}</p>
                  :
                   <Button 
                     variant="secondary" 
@@ -121,8 +124,8 @@ export default () => {
                     Connect <ExternalLinkIcon className="icon icon-xs d-none d-sm-inline ms-1" />
                   </Button>
                 } 
-                <Button variant="outline-secondary" as={HashLink} to="#pricing" className="d-flex align-items-center">
-                  Purchase now
+                <Button variant="outline-secondary" onClick={()=> fetchProfile()} className="d-flex align-items-center">
+                  Fetch Data
                 </Button>
               </div>
               <div className="text-center mb-6 mb-lg-5">

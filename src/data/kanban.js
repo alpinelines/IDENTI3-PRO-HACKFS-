@@ -7,6 +7,11 @@ import Profile2 from "assets/img/team/profile-picture-2.jpg";
 import Profile3 from "assets/img/team/profile-picture-3.jpg";
 import Profile4 from "assets/img/team/profile-picture-4.jpg";
 import ThemesbergMockup from "assets/img/themesberg-mockup.jpg";
+import DiscordLogo from "assets/img/discord.png";
+import GithubLogo from "assets/img/github.jpg";
+
+import TwitterLogo from "assets/img/twitter.png";
+
 
 export const Members = [
     { "id": uuidv4(), "name": "Ryan Tompson", "image": Profile1 },
@@ -55,6 +60,7 @@ export default [
             {
                 "id": uuidv4(),
                 "title": "variables.scss problems",
+                "image": DiscordLogo,
                 "description": "On line 672 you define $table_variants. Each instance of \"color-level\" needs to be changed to \"shift-color\".",
                 "author": Members[0],
                 "members": [
@@ -82,7 +88,7 @@ export default [
             {
                 "id": uuidv4(),
                 "title": "Redesign homepage",
-                "image": ThemesbergMockup,
+                "image": TwitterLogo,
                 "description": "On line 672 you define $table_variants. Each instance of \"color-level\" needs to be changed to \"shift-color\".",
                 "author": Members[0],
                 "members": [
@@ -109,6 +115,7 @@ export default [
             {
                 "id": uuidv4(),
                 "title": "Upgrade bootstrap version to latest",
+                "image": GithubLogo,
                 "description": "On line 672 you define $table_variants. Each instance of \"color-level\" needs to be changed to \"shift-color\".",
                 "author": Members[0],
                 "members": [
