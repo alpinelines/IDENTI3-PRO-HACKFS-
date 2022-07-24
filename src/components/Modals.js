@@ -359,6 +359,11 @@ export const KanbanEditModal = (props) => {
     props.onMove && props.onMove({ listId, index });
   };
 
+  const onConnect = () => {
+    props.onConnect && props.onConnect();
+  };
+
+
   return (
     <Modal as={Modal.Dialog} centered size="lg" show={show} onHide={onHide}>
       <Form className="modal-content p-lg-3">
@@ -505,9 +510,15 @@ export const KanbanEditModal = (props) => {
             <EyeIcon className="icon icon-xs me-2" />
             Watch
           </Button>
+          
           <Button variant="gray-800" className="me-2 text-start">
             <ShareIcon className="icon icon-xs me-2" />
             Share
+          </Button>
+          {/* Pizzly Integration Discord connection */}
+          <Button variant="gray-800" className="me-2 text-start" onClick={onConnect}>
+            <ShareIcon className="icon icon-xs me-2" />
+            Connect
           </Button>
         </Modal.Footer>
       </Form>

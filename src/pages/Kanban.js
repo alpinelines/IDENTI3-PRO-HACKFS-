@@ -11,6 +11,9 @@ import KanbanCard from "components/KanbanCard";
 import { KanbanCreateModal, KanbanEditModal, KanbanCopyModal, KanbanMoveModal, KanbanEditMembersModal, KanbanEditLabelsModal } from "components/Modals";
 import KANBAN_LISTS, { createCard, createList } from "data/kanban";
 import { ArchiveIcon, PlusIcon } from "@heroicons/react/solid";
+import { usePizzly } from 'services/contextPizzly';
+
+
 
 const ArchiveIconHtml = ReactDOMServer.renderToString(
   <ArchiveIcon className="h-50 w-auto" />
@@ -37,6 +40,9 @@ export default () => {
   const [cardToChangeLabels, setCardToChangeLabels] = useState(null);
   const [listToCopy, setListToCopy] = useState(null);
   const [listToMoveIndex, setListToMoveIndex] = useState(null);
+
+  const {authId, connect, fetchProfile} = usePizzly();
+
 
   const toggleCreateListModal = () => {
     setShowCreateListModal(!showCreateListModal);
@@ -289,6 +295,7 @@ export default () => {
           onHide={() => setCardToEdit(null)}
           onArchive={(card) => handleArchiveCards([card])}
           onMove={(card) => setCardToMove(card)}
+          onConnect={() => connect()}
           onEditMembers={(card) => setCardToChangeMembers(card)}
           onEditLabels={(card) => setCardToChangeLabels(card)}
           onChange={handleCardChange}
