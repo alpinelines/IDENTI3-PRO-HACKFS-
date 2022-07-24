@@ -136,10 +136,6 @@ export default () => {
                   Purchase now
                 </Button> */}
 
-
-                <Button variant="outline-secondary" onClick={()=> fetchProfile()} className="d-flex align-items-center">
-                  Fetch Data
-                </Button>
               </div>
               <div className="text-center mb-6 mb-lg-5">
                 <a href="https://themesberg.com" target="_blank" rel="noopener noreferrer">

@@ -37,7 +37,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { usePizzly } from "services/contextPizzly";
 
-]import ApplicationAvatar from "components/ApplicationAvatar";
+import ApplicationAvatar from "components/ApplicationAvatar";
 import { Members as BoardMembers, Labels as BoardLabels } from "data/application";
 
 import { PageTrafficTable } from "components/Tables";

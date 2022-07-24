@@ -11,7 +11,6 @@ import { useOrbis } from "services/context";
 // import messages from "data/messages";
 
 export default () => {
-<<<<<<< HEAD
   const messageRef = useRef([]);
   const { 
     messageService: { 
@@ -26,9 +25,7 @@ export default () => {
       send
     } 
   } = useOrbis();
-=======
-  const { messageService: { conversation, setConversation } } = useOrbis();
->>>>>>> remotes/aplinelines/pizzly-data-strurcture-setup---lyons
+
   const [message, setMessage] = useState("");
   const currentDate = moment().format("Do of MMMM, YYYY");
 

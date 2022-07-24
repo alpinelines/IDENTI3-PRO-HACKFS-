@@ -40,8 +40,8 @@ export default () => {
       // })
     // }
   }, []);
-  const { messageService: { messages, setMessages } } = useOrbis();
-  const selectedMessageIds = messages.filter(m => m.isSelected).map(m => m.id);
+  // const { messageService: { messages, setMessages } } = useOrbis();
+  // const selectedMessageIds = messages.filter(m => m.isSelected).map(m => m.id);
 
   const disableMenu = selectedMessageIds.length === 0;
 
