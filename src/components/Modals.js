@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
 import { ArchiveIcon, CalendarIcon, CameraIcon, CheckIcon, ClipboardCheckIcon, ClockIcon, EyeIcon, PaperClipIcon, PlusIcon, SelectorIcon, ShareIcon, TagIcon, UserGroupIcon } from "@heroicons/react/solid";
-import { Col, Row, Form, Modal, Button, InputGroup, Image, Badge, FloatingLabel } from 'react-bootstrap'; 
-
+import { Col, Row, Form, Modal, Button, InputGroup, Image, Badge, FloatingLabel  } from 'react-bootstrap'; 
 import KanbanAvatar from "components/KanbanAvatar";
 import { Members as BoardMembers, Labels as BoardLabels } from "data/kanban";
 import { components } from "react-select";
+import YoutubeLogo from "assets/img/YoutubeLogo.png";
 
 
 export const EventModal = (props) => {
@@ -168,8 +168,20 @@ export const KanbanCreateModal = (props) => {
 
                <Form.Group id="title" className="mb-3">
 
-              <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit} >
-            <PlusIcon className="icon icon-xs me-2" />
+              <Button className="d-inline-flex align-items-center" onClick={(() => setTitle("Discord"), onSubmit)} >
+              {/* <Form.Control
+              
+              required
+              autoFocus
+              type="text"
+              value="Discord"
+              onChange={onTitleChange}
+              placeholder={`Enter a title for this ${type}…`}
+            /> */}
+            {/* <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
+          <Image source={require("assets/img/YoutubeLogo.png")}/>
+        </TouchableOpacity> */}
+        <img src="assets/img/YoutubeLogo.png"/>
             Discord
           </Button>
 
@@ -182,15 +194,13 @@ export const KanbanCreateModal = (props) => {
             <PlusIcon className="icon icon-xs me-2" />
             Github
           </Button>
-
           
+          {/* <button><img src="./img/google.png" alt="my image" onClick={this.myfunction} /></button> */}
           
           <Form.Group id="title" className="mb-3"></Form.Group>
 
           <Button variant="secondary" className="d-inline-flex align-items-center" onClick={onSubmit}>
-            <img src = ".assets/YoutubeLogo.png">
-            </img>
-            <PlusIcon className="icon icon-xs me-2" />
+            <img src="assets/img/YoutubeLogo.png"/>
             Youtube
           </Button>
 
