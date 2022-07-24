@@ -10,7 +10,7 @@ export default (props) => {
         <Col xs={6} className="d-flex justify-content-between ps-0">
           <div className="me-lg-3">
             <Button as={Button} variant="secondary" className="d-inline-flex align-items-center me-2" onClick={props.onNewCard}>
-              <PlusIcon className="icon icon-xs me-2" /> New Card
+              <PlusIcon className="icon icon-xs me-2" /> Add Application
             </Button>
           </div>
         </Col>

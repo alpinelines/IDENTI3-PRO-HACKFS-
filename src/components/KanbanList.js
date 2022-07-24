@@ -59,7 +59,7 @@ export default (props) => {
 
           <Dropdown.Menu className="dashboard-dropdown dropdown-menu-start mt-2 py-1">
             <Dropdown.Item className="d-flex align-items-center" onClick={onCardAdd}>
-              <ViewGridAddIcon className="icon icon-xs text-gray-400 me-2" /> Add Card
+              <ViewGridAddIcon className="icon icon-xs text-gray-400 me-2" /> Add Application
             </Dropdown.Item>
             <Dropdown.Item className="d-flex align-items-center" onClick={onListCopy}>
               <ClipboardCopyIcon className="icon icon-xs text-gray-400 me-2" /> Copy List
