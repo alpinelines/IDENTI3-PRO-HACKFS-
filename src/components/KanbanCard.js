@@ -4,7 +4,11 @@ import { Card, Button, Image, Dropdown } from "react-bootstrap";
 
 import KanbanAvatar from "components/KanbanAvatar";
 
+import { usePizzly } from 'services/contextPizzly';
+
+
 export default (props) => {
+  const {authId, myDiscordAPI, connect, fetchProfile, setAuthId} = usePizzly();
   const { cardRef, title, image, members, description, style = {}, extraProps = {} } = props;
   const membersCountDescription = !members.length ? "Unassigned" : members.length === 1 ? "1 Assignee" : `${members.length} Assignees`;
 
@@ -35,13 +39,24 @@ export default (props) => {
   const onCardClick = (e) => {
     if (e.defaultPrevented) return;
 
-    props.onClick && props.onClick();
+    myDiscordAPI
+      .connect()
+      .then(({authId}) => {
+          console.log('Sucessfully connected!', authId);
+          setAuthId(authId);
+          props.onClick && props.onClick();
+      })
+      .catch((err)=> {
+          console.error(err);
+          alert('Error connecting to Discord');
+      });
+
   };
 
   const onDropdownClick = (e) => {
     e.preventDefault();
   };
-  // Add Margin 
+  // Add Margin  
   return (
     <Card border={10} className="p-4" ref={cardRef}{...extraProps} style={{ 
       marginLeft: "10px",
@@ -51,7 +66,9 @@ export default (props) => {
       width: "22%",
 
 
-      }} onClick={onCardClick}>
+      }} 
+      onClick={onCardClick}
+      > 
       <Card.Header className="d-flex align-items-center justify-content-between border-0 p-0 mb-3">
         {/* <h5 className="mb-0">{title}</h5> */}
         {image && <Image src={image} width="275px" />}

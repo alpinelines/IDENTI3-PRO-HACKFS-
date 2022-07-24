@@ -59,16 +59,16 @@ export default [
         "cards": [
             {
                 "id": uuidv4(),
-                "title": "variables.scss problems",
+                "title": "Discord ",
                 "image": DiscordLogo,
                 "description": "On line 672 you define $table_variants. Each instance of \"color-level\" needs to be changed to \"shift-color\".",
                 "author": Members[0],
                 "members": [
-                    Members[0],
-                    Members[1],
-                    Members[2],
+                    // Members[0],
+                    // Members[1],
+                    // Members[2],
                 ],
-                "labels": [Labels[0]],
+                // "labels": [Labels[0]],
                 "comments": [
                     {
                         "id": uuidv4(),

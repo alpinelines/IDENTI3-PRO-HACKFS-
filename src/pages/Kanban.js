@@ -430,7 +430,9 @@ export default () => {
                         {placeholder}
                         <Button
                           variant="outline-gray-500"
+                          //onClick={() => toggleCreateCardModal({ listId, cardIndex: cards.length })}
                           onClick={() => toggleCreateCardModal({ listId, cardIndex: cards.length })}
+
                           className="d-inline-flex align-items-center justify-content-center dashed-outline new-card w-100"
                         >
                           <PlusIcon className="icon icon-xs me-2" /> Add another card

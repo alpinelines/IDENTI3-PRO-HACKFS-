@@ -53,7 +53,9 @@ const PizzlyProvider = ({ children }) => {
         <PizzlyContext.Provider
             value={{
                 pizzly,
+                myDiscordAPI,
                 authId,
+                setAuthId,
                 connect,
                 fetchProfile
             }}
