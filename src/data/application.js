@@ -8,9 +8,9 @@ import Profile3 from "assets/img/team/profile-picture-3.jpg";
 import Profile4 from "assets/img/team/profile-picture-4.jpg";
 import ThemesbergMockup from "assets/img/themesberg-mockup.jpg";
 import DiscordLogo from "assets/img/discord.png";
-import GithubLogo from "assets/img/github.jpg";
+import GithubLogo from "assets/img/githubLogo.png";
 
-import TwitterLogo from "assets/img/twitter.png";
+import TwitterLogo from "assets/img/twitterLogo.png";
 
 
 export const Members = [
@@ -61,7 +61,7 @@ export default [
                 "id": uuidv4(),
                 "title": "Discord ",
                 "image": DiscordLogo,
-                "description": "On line 672 you define $table_variants. Each instance of \"color-level\" needs to be changed to \"shift-color\".",
+                "description": "",
                 "author": Members[0],
                 "members": [
                     // Members[0],
