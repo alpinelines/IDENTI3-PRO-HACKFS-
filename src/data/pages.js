@@ -46,9 +46,9 @@ export default [
     },
     {
         "id": uuidv4(),
-        "name": "Application",
+        "name": "Applications",
         "image": ApplicationImg,
-        "link": Routes.Application.path
+        "link": Routes.Applications.path
     },
     {
         "id": uuidv4(),

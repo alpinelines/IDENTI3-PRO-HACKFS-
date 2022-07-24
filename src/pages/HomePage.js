@@ -8,7 +8,7 @@ import Presentation from "pages/Presentation";
 import DashboardOverview from "pages/dashboard/DashboardOverview";
 import DashboardTraffic from "pages/dashboard/DashboardTraffic";
 import DashboardProductAnalysis from "pages/dashboard/DashboardProductAnalysis";
-import Application from 'pages/Application';
+import Applications from 'pages/Applications';
 import Messages from "pages/Messages";
 import SingleMessage from "pages/SingleMessage";
 import Users from "pages/Users";
@@ -148,7 +148,7 @@ export default () => (
     <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
     <RouteWithSidebar exact path={Routes.DashboardTraffic.path} component={DashboardTraffic} />
     <RouteWithSidebar exact path={Routes.DashboardProductAnalysis.path} component={DashboardProductAnalysis} />
-    <RouteWithSidebar exact path={Routes.Application.path} component={Application} />
+    <RouteWithSidebar exact path={Routes.Applications.path} component={Applications} />
     <RouteWithSidebar exact path={Routes.Messages.path} component={Messages} />
     <RouteWithSidebar exact path={Routes.SingleMessage.path} component={SingleMessage} />
     <RouteWithSidebar exact path={Routes.Users.path} component={Users} />

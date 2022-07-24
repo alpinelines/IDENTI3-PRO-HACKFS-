@@ -186,15 +186,15 @@ export default () => {
         <Container>
         <Row className="justify-content-between align-items-center mb-5 mb-lg-7">
             <Col lg={5}>
-              <h2>Application Board</h2>
+              <h2>Applications Board</h2>
               <p className="mb-3 lead fw-bold">
                 Interactive drag and drop interface
               </p>
               <p className="mb-4">
-                You'll get a fully interactive Drag and Drop Application board interface.
+                You'll get a fully interactive Drag and Drop Applications board interface.
               </p>
-              <Button as={Link} to={Routes.Application.path} className="me-3" variant="secondary" target="_blank">
-                <MapIcon className="icon icon-xs me-2" /> Demo Application
+              <Button as={Link} to={Routes.Applications.path} className="me-3" variant="secondary" target="_blank">
+                <MapIcon className="icon icon-xs me-2" /> Demo Applications
               </Button>
             </Col>
             <Col lg={6}>
