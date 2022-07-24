@@ -43,8 +43,8 @@ export default () => {
             <Breadcrumb.Item>Volt</Breadcrumb.Item>
             <Breadcrumb.Item active>Data</Breadcrumb.Item>
           </Breadcrumb>
-          <h4>All Orders</h4>
-          <p className="mb-0">Your web analytics dashboard template.</p>
+          <h4>Shared Data</h4>
+          <p className="mb-0">Data streams that you have shared with other DIDs</p>
         </div>
         <div className="btn-toolbar mb-2 mb-md-0">
           <Button variant="gray-800" size="sm" className="d-inline-flex align-items-center">

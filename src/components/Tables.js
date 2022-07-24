@@ -219,7 +219,7 @@ export const UsersTable = (props) => {
   const { users = [], allSelected } = props;
   const [bulkOption, setBulkOption] = useState(0);
   const disabledBulkMenu = users.filter(u => u.isSelected).length === 0;
-
+  
   const selectUser = (id) => {
     props.selectUser && props.selectUser(id);
   };
@@ -240,6 +240,8 @@ export const UsersTable = (props) => {
   const deleteUsers = (ids) => {
     props.deleteUsers && props.deleteUsers(ids)
   }
+
+ 
 
 
   //active = Active
@@ -302,7 +304,7 @@ export const UsersTable = (props) => {
                 <ShieldExclamationIcon className="dropdown-icon text-gray-400 me-2" />
                 Reset Pass
               </Dropdown.Item>
-              <Dropdown.Item className="d-flex align-items-center">
+              <Dropdown.Item as={Link} to={Routes.AccessData.path}  className="d-flex align-items-center">
                 <EyeIcon className="dropdown-icon text-gray-400 me-2" />
                 View Details
               </Dropdown.Item>
@@ -453,9 +455,9 @@ export const TransactionsTable = (props) => {
           <thead>
             <tr>
               <th className="border-gray-200">#</th>
-              <th className="border-gray-200">Bill For</th>
-              <th className="border-gray-200">Issue Date</th>
-              <th className="border-gray-200">Due Date</th>
+              <th className="border-gray-200">Data Info</th>
+              <th className="border-gray-200">Date of Collection</th>
+              <th className="border-gray-200">Application</th>
               <th className="border-gray-200">Total</th>
               <th className="border-gray-200">Data Access Control</th>
               <th className="border-gray-200">Action</th>

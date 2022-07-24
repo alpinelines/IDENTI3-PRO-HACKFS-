@@ -49,7 +49,7 @@ export default () => {
 
   const selectUser = (id) => {
     const newUsers = users.map(u => u.id === id ? ({ ...u, isSelected: !u.isSelected }) : u);
-    setUsers(newUsers);
+    setUsers(newUsers); 
   };
 
   const deleteUsers = async (ids) => {

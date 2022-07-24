@@ -154,12 +154,60 @@ export default (props = {}) => {
               <NavItem title="Applications" icon={ViewGridIcon} link={Routes.Applications.path} />
               <NavItem title="Messages" icon={InboxIcon} badgeText={numMessages} badgeBg="danger" link={Routes.Messages.path} />
               <NavItem title="Users List" icon={UsersIcon} link={Routes.Users.path} />
-              <NavItem title="Data" icon={CreditCardIcon} link={Routes.Data.path} />
-              <NavItem title="Task List" icon={ClipboardListIcon} link={Routes.Tasks.path} />
+              <NavItem title="My Data" icon={CreditCardIcon} link={Routes.MyData.path} />
+              
               <NavItem title="Settings" icon={CogIcon} link={Routes.Settings.path} />
-              <NavItem title="Calendar" icon={CalendarIcon} link={Routes.Calendar.path} />
-              <NavItem title="Map" icon={LocationMarkerIcon} link={Routes.Map.path} />
-              <NavItem title="Widgets" icon={TemplateIcon} link={Routes.Widgets.path} />
+             
+
+             
+
+              <Dropdown.Divider className="my-3 border-indigo" />
+
+              
+
+              <CollapsableNavItem eventKey="hiddenrelevant/" title="HiddenRelevent" icon={ArchiveIcon}>
+              <NavItem title="Access Data" icon={CreditCardIcon} link={Routes.AccessData.path} />
+              </CollapsableNavItem>
+
+
+              <CollapsableNavItem eventKey="plugins/" title="Hidden" icon={ChartPieIcon}>
+                <NavItem title="Charts" link={Routes.PluginCharts.path} />
+                <NavItem title="Calendar" link={Routes.PluginCalendar.path} />
+                <NavItem title="DataTable" link={Routes.PluginDatatable.path} />
+                <NavItem title="Map" link={Routes.PluginMap.path} />
+                <NavItem title="DropZone" link={Routes.PluginDropzone.path} />
+                <NavItem title="SweetAlert" link={Routes.PluginSweetAlert.path} />
+                
+                <CollapsableNavItem eventKey="components/" title="Components" icon={ArchiveIcon}>
+                <NavItem title="Accordion" link={Routes.Accordions.path} />
+                <NavItem title="Alerts" link={Routes.Alerts.path} />
+                <NavItem title="Badges" link={Routes.Badges.path} />
+                <NavItem title="Breadcrumbs" link={Routes.Breadcrumbs.path} />
+                <NavItem title="Buttons" link={Routes.Buttons.path} />
+                <NavItem title="Forms" link={Routes.Forms.path} />
+                <NavItem title="Modals" link={Routes.Modals.path} />
+                <NavItem title="Navbars" link={Routes.Navbars.path} />
+                <NavItem title="Navs" link={Routes.Navs.path} />
+                <NavItem title="Pagination" link={Routes.Pagination.path} />
+                <NavItem title="Popovers" link={Routes.Popovers.path} />
+                <NavItem title="Progress" link={Routes.Progress.path} />
+                <NavItem title="Tables" link={Routes.Tables.path} />
+                <NavItem title="Tabs" link={Routes.Tabs.path} />
+                <NavItem title="Toasts" link={Routes.Toasts.path} />
+                <NavItem title="Tooltips" link={Routes.Tooltips.path} />
+                <NavItem title="Widgets" link={Routes.WidgetsComponent.path} />
+                </CollapsableNavItem>
+
+
+                <CollapsableNavItem eventKey="documentation/" title="Getting Started" icon={InformationCircleIcon}>
+                <NavItem title="Overview" link={Routes.DocsOverview.path} />
+                <NavItem title="Download" link={Routes.DocsDownload.path} />
+                <NavItem title="Quick Start" link={Routes.DocsQuickStart.path} />
+                <NavItem title="License" link={Routes.DocsLicense.path} />
+                <NavItem title="Folder Structure" link={Routes.DocsFolderStructure.path} />
+                <NavItem title="Build Tools" link={Routes.DocsBuild.path} />
+                <NavItem title="Changelog" link={Routes.DocsChangelog.path} />
+              </CollapsableNavItem>
 
               <CollapsableNavItem eventKey="tables/" title="Tables" icon={TableIcon}>
                 <NavItem title="DataTables" link={Routes.Datatables.path} />
@@ -179,45 +227,11 @@ export default (props = {}) => {
                 <NavItem title="500 Server Error" link={Routes.ServerError.path} />
               </CollapsableNavItem>
 
-              <Dropdown.Divider className="my-3 border-indigo" />
+              <NavItem title="Task List" icon={ClipboardListIcon} link={Routes.Tasks.path} />
+              <NavItem title="Calendar" icon={CalendarIcon} link={Routes.Calendar.path} />
+              <NavItem title="Map" icon={LocationMarkerIcon} link={Routes.Map.path} />
+              <NavItem title="Widgets" icon={TemplateIcon} link={Routes.Widgets.path} />
 
-              <CollapsableNavItem eventKey="documentation/" title="Getting Started" icon={InformationCircleIcon}>
-                <NavItem title="Overview" link={Routes.DocsOverview.path} />
-                <NavItem title="Download" link={Routes.DocsDownload.path} />
-                <NavItem title="Quick Start" link={Routes.DocsQuickStart.path} />
-                <NavItem title="License" link={Routes.DocsLicense.path} />
-                <NavItem title="Folder Structure" link={Routes.DocsFolderStructure.path} />
-                <NavItem title="Build Tools" link={Routes.DocsBuild.path} />
-                <NavItem title="Changelog" link={Routes.DocsChangelog.path} />
-              </CollapsableNavItem>
-
-              <CollapsableNavItem eventKey="components/" title="Components" icon={ArchiveIcon}>
-                <NavItem title="Accordion" link={Routes.Accordions.path} />
-                <NavItem title="Alerts" link={Routes.Alerts.path} />
-                <NavItem title="Badges" link={Routes.Badges.path} />
-                <NavItem title="Breadcrumbs" link={Routes.Breadcrumbs.path} />
-                <NavItem title="Buttons" link={Routes.Buttons.path} />
-                <NavItem title="Forms" link={Routes.Forms.path} />
-                <NavItem title="Modals" link={Routes.Modals.path} />
-                <NavItem title="Navbars" link={Routes.Navbars.path} />
-                <NavItem title="Navs" link={Routes.Navs.path} />
-                <NavItem title="Pagination" link={Routes.Pagination.path} />
-                <NavItem title="Popovers" link={Routes.Popovers.path} />
-                <NavItem title="Progress" link={Routes.Progress.path} />
-                <NavItem title="Tables" link={Routes.Tables.path} />
-                <NavItem title="Tabs" link={Routes.Tabs.path} />
-                <NavItem title="Toasts" link={Routes.Toasts.path} />
-                <NavItem title="Tooltips" link={Routes.Tooltips.path} />
-                <NavItem title="Widgets" link={Routes.WidgetsComponent.path} />
-              </CollapsableNavItem>
-
-              <CollapsableNavItem eventKey="plugins/" title="Plugins" icon={ChartPieIcon}>
-                <NavItem title="Charts" link={Routes.PluginCharts.path} />
-                <NavItem title="Calendar" link={Routes.PluginCalendar.path} />
-                <NavItem title="DataTable" link={Routes.PluginDatatable.path} />
-                <NavItem title="Map" link={Routes.PluginMap.path} />
-                <NavItem title="DropZone" link={Routes.PluginDropzone.path} />
-                <NavItem title="SweetAlert" link={Routes.PluginSweetAlert.path} />
               </CollapsableNavItem>
 
             </Nav>

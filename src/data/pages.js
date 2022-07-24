@@ -60,7 +60,7 @@ export default [
         "id": uuidv4(),
         "name": "Data",
         "image": TransactionsImg,
-        "link": Routes.Data.path
+        "link": Routes.MyData.path
     },
     {
         "id": uuidv4(),
