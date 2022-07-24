@@ -31,14 +31,11 @@ import pages from "data/pages";
 import features from "data/features";
 import { BootstrapIcon, FileCodeIcon, GithubIcon, JsIcon, ReactIcon } from "components/BrandIcons";
 
-// import { useOrbis } from 'services/context';
-import { usePizzly } from 'services/contextPizzly';
+import { useOrbis } from 'services/context';
 
 export default () => {
   const currentYear = moment().get("year");
-  // const { user, connect } = useOrbis();
-  const {authId, connect, fetchProfile} = usePizzly();
-
+  const { user, connect } = useOrbis();
 
   const PagePreview = (props) => {
     const { name, image, link } = props;
@@ -123,8 +120,8 @@ export default () => {
               </h1>
               <p className="text-muted fw-light mb-5 h5">Take Control of your Data</p>
               <div className="d-flex justify-content-center mb-5">
-                {authId ?
-                  <p>Connected with: {authId}</p>
+                {user ?
+                  <p>Connected with: {user}</p>
                  :
                   <Button 
                     className="text-dark me-3"
