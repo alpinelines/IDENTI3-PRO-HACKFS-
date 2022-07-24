@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
 import { ArchiveIcon, CalendarIcon, CameraIcon, CheckIcon, ClipboardCheckIcon, ClockIcon, EyeIcon, PaperClipIcon, PlusIcon, SelectorIcon, ShareIcon, TagIcon, UserGroupIcon } from "@heroicons/react/solid";
-import { Col, Row, Form, Modal, Button, InputGroup, Image, Badge, FloatingLabel } from 'react-bootstr'; 
+import { Col, Row, Form, Modal, Button, InputGroup, Image, Badge, FloatingLabel } from 'react-bootstrap'; 
 
 import KanbanAvatar from "components/KanbanAvatar";
 import { Members as BoardMembers, Labels as BoardLabels } from "data/kanban";
