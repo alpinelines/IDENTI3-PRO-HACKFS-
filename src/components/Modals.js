@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
 import { ArrowNarrowDownIcon, ArrowNarrowUpIcon } from "@heroicons/react/solid";
@@ -32,20 +32,50 @@ import {
 
 import { v4 as uuidv4 } from "uuid";
 
+import { usePizzly } from "services/contextPizzly";
+
 import KanbanAvatar from "components/KanbanAvatar";
 import { Members as BoardMembers, Labels as BoardLabels } from "data/kanban";
 
 import { PageTrafficTable } from "components/Tables";
 
 const pageVisits = [
-  { id: uuidv4(), views: 4.525, returnValue: 255, bounceRate: 42.55, pageName: "/demo/admin/index.html" },
-  { id: uuidv4(), views: 2.987, returnValue: 139, bounceRate: -43.52, pageName: "/demo/admin/forms.html" },
-  { id: uuidv4(), views: 2.844, returnValue: 124, bounceRate: -32.35, pageName: "/demo/admin/util.html" },
-  { id: uuidv4(), views: 1.220, returnValue: 55, bounceRate: 15.78, pageName: "/demo/admin/validation.html" },
-  { id: uuidv4(), views: 505, returnValue: 3, bounceRate: -75.12, pageName: "/demo/admin/modals.html" }
+  {
+    id: uuidv4(),
+    views: 4.525,
+    returnValue: 255,
+    bounceRate: 42.55,
+    pageName: "/user/@me",
+  },
+  {
+    id: uuidv4(),
+    views: 2.987,
+    returnValue: 139,
+    bounceRate: -43.52,
+    pageName: "/user/group",
+  },
+  {
+    id: uuidv4(),
+    views: 2.844,
+    returnValue: 124,
+    bounceRate: -32.35,
+    pageName: "/channel/id",
+  },
+  {
+    id: uuidv4(),
+    views: 1.22,
+    returnValue: 55,
+    bounceRate: 15.78,
+    pageName: "/guild/everyone",
+  },
+  {
+    id: uuidv4(),
+    views: 505,
+    returnValue: 3,
+    bounceRate: -75.12,
+    pageName: "/user/id",
+  },
 ];
-
-
 
 export const EventModal = (props) => {
   const [title, setTitle] = useState(props.title);
@@ -298,6 +328,9 @@ export const KanbanMoveModal = (props) => {
   const [listId, setListId] = useState(props.listId ?? "");
   const [index, setIndex] = useState(props.index ?? 0);
   const cardList = lists.find((l) => l.id === listId);
+  const { myDiscordAPI, authId, profile, setProfile } = usePizzly();
+  const [fetchCalled, setFetchCalled] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const onHide = () => {
     props.onHide && props.onHide();
@@ -310,65 +343,46 @@ export const KanbanMoveModal = (props) => {
     props.onSubmit && props.onSubmit({ source, destination });
   };
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      await myDiscordAPI
+        .auth(authId)
+        .get("/users/@me")
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setProfile(json);
+        });
+    };
+
+    fetchProfile();
+  }, []);
+
+
+
   return (
     <Modal as={Modal.Dialog} centered show={show} onHide={onHide}>
       <Form className="modal-content p-3">
         <Modal.Header className="pb-0 border-0">
-          <Modal.Title className="fw-normal">Move {type}</Modal.Title>
+          <Modal.Title className="fw-normal">/user/@me</Modal.Title>
           <Button variant="close" onClick={onHide} />
         </Modal.Header>
         <Modal.Body className="pb-0">
-          {type === "card" ? (
-            <>
-              <FloatingLabel id="listId" label="List" className="mb-3">
-                <Form.Select
-                  value={listId}
-                  onChange={(e) => setListId(e.target.value)}
-                >
-                  {lists.map((l) => (
-                    <option value={l.id} key={`move-list-id-${l.id}`}>
-                      {l.id === props.listId ? `${l.title} (current)` : l.title}
-                    </option>
-                  ))}
-                </Form.Select>
-              </FloatingLabel>
-              {cardList && (
-                <FloatingLabel id="listIndex" label="Position" className="mb-3">
-                  <Form.Select
-                    value={index}
-                    onChange={(e) => setIndex(e.target.value)}
-                  >
-                    {cardList.cards.map((_, ind) => (
-                      <option value={ind} key={`move-list-index-${ind}`}>
-                        {ind + 1}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </FloatingLabel>
-              )}
-            </>
-          ) : (
-            <FloatingLabel id="listIndex" label="Position" className="mb-3">
-              <Form.Select
-                value={index}
-                onChange={(e) => setIndex(e.target.value)}
-              >
-                {lists.map((_, ind) => (
-                  <option value={ind} key={`move-list-index-${ind}`}>
-                    {ind === props.index ? `${ind + 1} (current)` : ind + 1}
-                  </option>
-                ))}
-              </Form.Select>
-            </FloatingLabel>
-          )}
+          {isLoading ? <div> </div> : 
+          <ul>
+            {JSON.stringify(profile, null, " ")}
+
+          </ul>}
         </Modal.Body>
         <Modal.Footer className="justify-content-start border-0 pt-0">
           <Button
             variant="secondary"
             className="d-inline-flex align-items-center"
-            onClick={onSubmit}
+            onClick={() => {
+              setIsLoading(false);
+            }}
           >
-            Move {type}
+            Fetch Data
           </Button>
         </Modal.Footer>
       </Form>
@@ -427,6 +441,8 @@ export const KanbanEditModal = (props) => {
     props.onMove && props.onMove({ listId, index });
   };
 
+  const onWatch = () => {};
+
   const onConnect = () => {
     props.onConnect && props.onConnect();
   };
@@ -439,14 +455,10 @@ export const KanbanEditModal = (props) => {
     return (
       <tr className="border-bottom">
         <th className="text-gray-900" scope="row">
-          {pageName}
+          <Button variant="white" onClick={onMove}>{pageName}</Button>
         </th>
-        <td className="fw-bolder text-gray-500">
-          {views}
-        </td>
-        <td className="fw-bolder text-gray-500">
-          ${returnValue}
-        </td>
+        <td className="fw-bolder text-gray-500">{views}</td>
+        <td className="fw-bolder text-gray-500">${returnValue}</td>
         <td className="fw-bolder text-gray-500">
           <div className="d-flex align-items-center">
             <BounceIcon className={`icon icon-xs ${bounceTxtColor} me-2`} />
@@ -456,7 +468,6 @@ export const KanbanEditModal = (props) => {
       </tr>
     );
   };
-
 
   return (
     <Modal as={Modal.Dialog} centered size="xl" show={show} onHide={onHide}>
@@ -475,7 +486,7 @@ export const KanbanEditModal = (props) => {
                 />
               </Form.Group>
             ) : (
-              <div class="justify-right">
+              <div>
                 {/* <h5 className="text-gray-900 fs-5 fw-bold py-1 ps-1 mb-3" onClick={toggleIsTitleEditable}> */}
                 <Image
                   rounded
@@ -553,7 +564,7 @@ export const KanbanEditModal = (props) => {
                   <thead className="thead-light">
                     <tr>
                       <th className="border-bottom" scope="col">
-                        Page name
+                        Api Name
                       </th>
                       <th className="border-bottom" scope="col">
                         Page Views
@@ -568,7 +579,7 @@ export const KanbanEditModal = (props) => {
                   </thead>
                   <tbody className="border-0">
                     {pageVisits.map((pv) => (
-                      <TableRow key={`page-visit-${pv.id}`} {...pv} />
+                      <TableRow key={`page-visit-${pv.id}`} {...pv}/>
                     ))}
                   </tbody>
                 </Table>
@@ -660,7 +671,11 @@ export const KanbanEditModal = (props) => {
             <ArchiveIcon className="icon icon-xs me-2" />
             Archive
           </Button>
-          <Button variant="gray-800" className="me-2 text-start">
+          <Button
+            variant="gray-800"
+            className="me-2 text-start"
+            onClick={onWatch}
+          >
             <EyeIcon className="icon icon-xs me-2" />
             Watch
           </Button>

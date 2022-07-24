@@ -336,7 +336,7 @@ export default () => {
           {...cardToMove}
           lists={kanbanLists}
           onHide={() => setCardToMove(null)}
-          onSubmit={handleDragEnd}
+          onSubmit={setCardToMove}
         />
       )}
 

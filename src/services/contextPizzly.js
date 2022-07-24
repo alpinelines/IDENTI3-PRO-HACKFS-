@@ -15,6 +15,7 @@ const PizzlyProvider = ({ children }) => {
     
     const [loading, setLoading] = useState(false);
     const [authId, setAuthId] = useState('');
+    const [profile, setProfile] = useState({});
     
     
     // const [messageText, setMessageText] = useState("");
@@ -44,7 +45,9 @@ const PizzlyProvider = ({ children }) => {
                 .auth(authId)
                 .get('/users/@me')
                 .then((response) => response.json())
-                .then((json) => console.log(json));
+                .then((json) => {
+                    console.log(json); 
+                    setProfile(json)});
 
     };
 
@@ -55,6 +58,8 @@ const PizzlyProvider = ({ children }) => {
                 pizzly,
                 myDiscordAPI,
                 authId,
+                profile,
+                setProfile,
                 setAuthId,
                 connect,
                 fetchProfile
