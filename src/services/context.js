@@ -14,15 +14,18 @@ import { Routes } from "routes";
   
 const OrbisContext = createContext(undefined);
 
+let orbis = new Orbis();
+
 const OrbisProvider = ({ children }) => {
-    let orbis = new Orbis();
     let history = useHistory();
 
     const [loading, setLoading] = useState(false);
 
+    // const [orbis, setOrbis] = useState( new Orbis() );
     const [user, setUser] = useState(undefined);
-    const [messages, setMessages] = useState(MESSAGES_DATA);
-    const [conversation, setConversation] = useState(CONVERSATION_MESSAGES);
+    const [conversations, setConversations] = useState([]);
+    const [conversation, setConversation] = useState(undefined);
+    const [messages, setMessages] = useState([]);
     const [body, setBody] = useState("");
     // const [messageText, setMessageText] = useState("");
 
@@ -30,7 +33,7 @@ const OrbisProvider = ({ children }) => {
 	const connect = async () => {
         let res = await orbis.connect();
         if(res.status == 200) {
-            setUser(res.did);
+            setUser(res.details.did);
             // TODO: add isLoading state variable.
             history.push(Routes.DashboardOverview.path);
         } else {
@@ -40,12 +43,11 @@ const OrbisProvider = ({ children }) => {
     };
 
     const messageService = {
-        messages,
-        setMessages,
+        conversations,
+        setConversations,
         conversation,
         setConversation,
-        body,
-        setBody,
+        messages,
         /** We are calling the Orbis SDK to share a new post from this user */
         createConversation: async (recipients) => {
             setLoading(true);
@@ -55,8 +57,8 @@ const OrbisProvider = ({ children }) => {
              * which is an array containing all of the 'dids' that will be part of the conversation. The sender's
              * 'did' will be added automatically.
             */
-            let res = await orbis.createConversation({recipients: [recipients]});
 
+            let { res, error } = await orbis.createConversation({recipients: [recipients]}) //, name: "IDENTI3", description: "Testing..."});
             /** Check if conversation was created with success or not */
             if(res.status == 200) {
                 console.log("Save this conversation_id to use in the following examples: ", res.doc);
@@ -70,14 +72,16 @@ const OrbisProvider = ({ children }) => {
             setLoading(false);
         },
         /** We are calling the Orbis SDK to share a new post from this user */
-        send: async (message) => {
+        send: async (message, isJSON=false) => {
             setLoading(true);
 
             /**
              * The sendMessage() function accept a JSON object that must contain the 'conversation_id'
              * and 'body' key.
              */
-            let res = await orbis.sendMessage({conversation_id: conversation, body: message});
+            let res = isJSON 
+                ? await orbis.sendMessage({conversation_id: conversation, body: JSON.stringify(message)})
+                : await orbis.sendMessage({conversation_id: conversation, body: message});
 
             /** Check if conversation was created with success or not */
             if(res.status == 200) {
@@ -92,6 +96,19 @@ const OrbisProvider = ({ children }) => {
             
             setLoading(false);
         },
+        /** Query our API to load the conversations */
+        loadConversations: async () => {
+            setLoading(true);
+
+            let { data, error, status } = await orbis.getConversations({did: user});
+
+            if(data) {
+                setConversations(data);
+                setLoading(false);
+            } else if (error) {
+                console.error(`Error #${status}`);
+            }  
+        },
         /** Query our API to load the messages */
         loadMessages: async () => {
             setLoading(true);
@@ -101,19 +118,19 @@ const OrbisProvider = ({ children }) => {
             if(data) {
                 setMessages(data);
                 setLoading(false);
+                // return data;
             } else if (error) {
-                console.error(`Error #${status}`);
-            }
-            
-            setLoading(false);
+                console.log(`Error #${status}`);
+            }  
         },
         /**
          * Because the messages sent using Orbis are encrypted we need to decrypt it
          * before displaying the content on the screen.
          */
-        decryptMessage: async (message) => {
-            let res = await orbis.decryptMessage(message.content);
-            setBody(res.result);
+        decryptMessage: async (content) => {
+            let res = await orbis.decryptMessage(content);
+            // setBody(res.result);
+            return res.result;
         }
     };
 
@@ -125,12 +142,6 @@ const OrbisProvider = ({ children }) => {
                 user,
                 setUser,
                 loading,
-                setLoading,
-                messages,
-                setMessages,
-                conversation,
-                setConversation,
-                body,
                 messageService
             }}
         >

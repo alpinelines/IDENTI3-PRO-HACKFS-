@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -24,44 +24,57 @@ const SwalWithBootstrapButtons = withReactContent(Swal.mixin({
 }));
 
 export default () => {
-  const { messageService } = useOrbis();
-  const { messages, setMessages } = messageService;
-  const selectedMessageIds = messages.filter(m => m.isSelected).map(m => m.id);
-  
+  const messageRef = useRef([]);
+  const { messageService: { loadConversations, conversations, setConversations, setConversation } } = useOrbis();
+  const selectedMessageIds = conversations.filter(m => m.isSelected).map(m => m.id);
+
+  useEffect(() => {
+    loadConversations();
+    // data ? setConversations(data) : setConversations([]);
+    // console.log(data)
+      // if (conversations !== undefined) {
+      // messageRef.current = conversations;
+      // console.log({
+      //   conversations,
+      //   messageRef
+      // })
+    // }
+  }, []);
+
   const disableMenu = selectedMessageIds.length === 0;
 
   const selectMessage = (id) => {
-    const newMessages = messages.map(m => {
+    const newMessages = conversations.map(m => {
       const isSelected = m.id === id ? !m.isSelected : m.isSelected;
       return { ...m, isSelected };
     });
 
-    setMessages(newMessages);
+    setConversation(newMessages);
   };
 
   const toggleFavorite = (id) => {
-    setMessages(messages.map(m => m.id === id ? { ...m, favorite: !m.favorite } : m));
+    setConversations(conversations.map(m => m.id === id ? { ...m, favorite: !m.favorite } : m));
   };
 
   const toggleReadStatus = (id) => {
-    setMessages(messages.map(m => m.id === id ? { ...m, read: !m.read } : m));
+    setConversations(conversations.map(m => m.id === id ? { ...m, read: !m.read } : m));
   };
 
   const markSelectedMessagesAsUnread = () => {
-    const newMessages = messages.map(m => selectedMessageIds.includes(m.id) ? { ...m, read: false } : m);
-    setMessages(newMessages);
+    const newMessages = conversations.map(m => selectedMessageIds.includes(m.id) ? { ...m, read: false } : m);
+    setConversations(newMessages);
   };
 
   const markSelectedMessagesAsRead = () => {
-    const newMessages = messages.map(m => selectedMessageIds.includes(m.id) ? { ...m, read: true } : m);
-    setMessages(newMessages);
+    const newMessages = conversations.map(m => selectedMessageIds.includes(m.id) ? { ...m, read: true } : m);
+    setConversations(newMessages);
   };
 
   const deleteMessages = async (ids) => {
-    const messagesNr = ids.length;
-    const textMessage = messagesNr === 1
+    const conversationsNr = ids.length;
+    const textMessage = conversationsNr === 1
       ? "Are you sure do you want to delete this message?"
-      : `Are you sure do you want to delete these ${messagesNr} messages?`;
+      : `Are you sure do you want to delete these ${conversationsNr} conversations?`;
 
     const result = await SwalWithBootstrapButtons.fire({
       icon: "error",
@@ -73,19 +86,19 @@ export default () => {
     });
 
     if (result.isConfirmed) {
-      const newMessages = messages.filter(f => !ids.includes(f.id));
-      const confirmMessage = messagesNr === 1 ? "The message has been deleted." : "The messages have been deleted.";
+      const newMessages = conversations.filter(f => !ids.includes(f.id));
+      const confirmMessage = conversationsNr === 1 ? "The message has been deleted." : "The conversations have been deleted.";
 
-      setMessages(newMessages);
+      setConversations(newMessages);
       await SwalWithBootstrapButtons.fire('Deleted', confirmMessage, 'success');
     }
   };
 
   const archiveMessages = async (ids) => {
-    const messagesNr = ids.length;
-    const textMessage = messagesNr === 1
+    const conversationsNr = ids.length;
+    const textMessage = conversationsNr === 1
       ? "Are you sure do you want to archive this message?"
-      : `Are you sure do you want to archive these ${messagesNr} messages?`;
+      : `Are you sure do you want to archive these ${conversationsNr} conversations?`;
 
     const result = await SwalWithBootstrapButtons.fire({
       icon: "question",
@@ -98,10 +111,10 @@ export default () => {
     });
 
     if (result.isConfirmed) {
-      const newMessages = messages.filter(f => !ids.includes(f.id));
-      const confirmMessage = messagesNr === 1 ? "The message has been archived." : "The messages were archived.";
+      const newMessages = conversations.filter(f => !ids.includes(f.id));
+      const confirmMessage = conversationsNr === 1 ? "The message has been archived." : "The conversations were archived.";
 
-      setMessages(newMessages);
+      setConversations(newMessages);
       await SwalWithBootstrapButtons.fire('Archived', confirmMessage, 'success');
     }
   };
@@ -166,21 +179,21 @@ export default () => {
       </div>
 
       <div className="message-wrapper border-0 bg-white shadow rounded mb-4">
-        {messages.map(m => (
-          <MessageCardWidget
+        {conversations.map(m => {
+          return <MessageCardWidget
             {...m}
-            key={`message-${m.id}`}
-            selectMessage={selectMessage}
+            key={`message-${m.stream_id}`}
+            selectMessage={(stream_id) => setConversation(stream_id)}
             toggleFavorite={toggleFavorite}
             toggleReadStatus={toggleReadStatus}
-            archiveMessage={id => archiveMessages([id])}
-            deleteMessage={id => deleteMessages([id])}
+            archiveMessage={stream_id => archiveMessages([stream_id])}
+            deleteMessage={stream_id => deleteMessages([stream_id])}
           />
-        ))}
+        })}
 
         <Row className="p-4">
           <Col xs={7} className="mt-1">
-            Showing 1 - {messages.length} of 289
+            Showing 1 - {conversations.length} of 289
           </Col>
           <Col xs={5}>
             <ButtonGroup className="float-end">

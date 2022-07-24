@@ -16,6 +16,7 @@ import countries from "data/countries";
 import authorEarnings from "data/authorEarnings";
 import { productNotifications } from "data/notifications";
 import { GoogleIcon, TwitterIcon, YoutubeIcon } from "components/BrandIcons";
+import { useOrbis } from "services/context";
 
 const PeriodOverviewWidget = (props) => {
   const { category, title, period, percentage, ChartComponent = CustomersChart } = props;
@@ -234,32 +235,33 @@ export const ChoosePhotoWidget = (props) => {
 };
 
 export const MessageCardWidget = (props) => {
-  const { id, image, read, favorite, sender, timeSent, message, isSelected } = props;
-  const nameFirstLetters = sender.match(/\b\w/g).join('');
+  const { stream_id, image, read, favorite, details, timeSent, message, isSelected } = props;
+  const nameFirstLetters = '';//sender.match(/\b\w/g).join('');
   const timeColor = read ? "text-muted" : "text-danger";
   const textColor = read ? "fw-normal" : "fw-bold";
   const readText = read ? "Mark as Unread" : "Mark as Read";
   const favoriteClass = favorite ? "selected" : "";
   const MessageIcon = read ? MailIcon : MailOpenIcon;
+  const { messageService: { setConversation } } = useOrbis();
 
   const toggleReadStatus = () => {
-    props.toggleReadStatus && props.toggleReadStatus(id);
+    props.toggleReadStatus && props.toggleReadStatus(stream_id);
   };
 
   const toggleFavorite = () => {
-    props.toggleFavorite && props.toggleFavorite(id);
+    props.toggleFavorite && props.toggleFavorite(stream_id);
   };
 
   const deleteMessage = () => {
-    props.deleteMessage && props.deleteMessage(id);
+    props.deleteMessage && props.deleteMessage(stream_id);
   };
 
   const archiveMessage = () => {
-    props.archiveMessage && props.archiveMessage(id);
+    props.archiveMessage && props.archiveMessage(stream_id);
   };
 
   const selectMessage = () => {
-    props.selectMessage && props.selectMessage(id);
+    setConversation(stream_id);
   };
 
   return (
@@ -268,7 +270,7 @@ export const MessageCardWidget = (props) => {
         <Col xs={1} className="align-items-center px-0 d-none d-lg-flex">
           <Form.Check type="checkbox" className="form-check inbox-check me-2 mb-0">
             <Form.Check.Input
-              id={`message-${id}`}
+              id={`message-${stream_id}`}
               value={isSelected}
               onChange={selectMessage}
             />
@@ -279,8 +281,8 @@ export const MessageCardWidget = (props) => {
           />
         </Col>
         <Col xs={10} lg={2} className="ps-0 ps-lg-3 pe-lg-3">
-          <Card.Link as={Link} to={Routes.SingleMessage.path} className="d-flex align-items-center">
-            {image
+          <Card.Link as={Link} to={Routes.SingleMessage.path} onClick={selectMessage} className="d-flex align-items-center">
+            {/* {image
               ? (
                 <Image
                   src={image}
@@ -293,9 +295,9 @@ export const MessageCardWidget = (props) => {
                   </small>
                 </div>
               )
-            }
+            } */}
             <h6 className={`${textColor} mb-0`}>
-              {sender}
+              {details.creator}
             </h6>
           </Card.Link>
         </Col>

@@ -14,6 +14,7 @@ import MESSAGES_DATA from "data/messages";
 import { Routes } from "routes";
 import ReactHero from "assets/img/technologies/react-hero-logo.svg";
 import ProfilePicture from "assets/img/team/profile-picture-3.jpg";
+import { useOrbis } from "services/context";
 
 export default (props = {}) => {
   const location = useLocation();
@@ -24,15 +25,23 @@ export default (props = {}) => {
   const contracted = props.contracted ? "contracted" : "";
   const showClass = show ? "show" : "";
 
+  const { messageService: { loadConversations, conversations } } = useOrbis();
+
   const onCollapse = () => setShow(!show);
   const onMouseEnter = () => props.onMouseEnter && props.onMouseEnter();
   const onMouseLeave = () => props.onMouseLeave && props.onMouseLeave();
 
   const messageReducer = (messages) => messages.reduce((acc, curr) => curr.read === false ? acc += 1 : acc += 0, 0);
 
+  const handleConversations = async () => {
+    await loadConversations();
+    setNumMessages(messageReducer(conversations));
+  };
+
   useEffect(() => {
-    setNumMessages(messageReducer(MESSAGES_DATA));
+    handleConversations();
   }, []);
+
 
   const onNavItemCollapse = (itemKey) => {
     const isCollapsed = collapsedItems.some(item => item.includes(itemKey));
