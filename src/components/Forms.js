@@ -1,10 +1,12 @@
-
 import React, { useState } from "react";
+import ReactDOM from 'react-dom';
 import moment from "moment-timezone";
 import Datetime from "react-datetime";
 import { useDropzone } from "react-dropzone";
 import { CalendarIcon, CreditCardIcon } from "@heroicons/react/solid";
 import { Col, Row, Card, Form, Image, Button, InputGroup } from 'react-bootstrap';
+import Forms from "pages/components/Forms";
+import { ProfileCardWidget } from "./Widgets";
 
 export const DropFilesForm = () => {
   const [files, setFiles] = useState([]);
@@ -44,8 +46,21 @@ export const DropFilesForm = () => {
   );
 };
 
-export const GeneralInfoForm = () => {
+export const GeneralInfoForm = (props) => {
   const [birthday, setBirthday] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [wallet, setWallet] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+
+  const onSubmit = () => {
+    const payload = { ...wallet, lastName, firstName };
+    console.log(props.onSubmit && props.onSubmit(payload));
+    return props.onSubmit && props.onSubmit(payload);
+  };
+
+  
 
   return (
     <Card border="0" className="shadow mb-4">
@@ -59,20 +74,45 @@ export const GeneralInfoForm = () => {
                 <Form.Control required type="text" placeholder="Enter your first name" />
               </Form.Group>
             </Col>
+
+
             <Col md={6} className="mb-3">
               <Form.Group id="lastName">
                 <Form.Label>Last Name</Form.Label>
-                <Form.Control required type="text" placeholder="Also your last name" />
+                <Form.Group>
+                    <Form.Control 
+                      required 
+                      type="text" 
+                      placeholder="Enter your last name" 
+                      value={lastName} 
+                      onFocus = {setLastName}
+                      onChange={e => setLastName(e.target.value)}            
+                            // onFocus = {(e) =>e.target.select()}
+                      // onBlur = {onProfileUpdate} /> 
+                      />
+
+                </Form.Group>
+                
+
+
+
+                {/* value={title}
+              className="shadow-none fs-6 fw-bold p-2 m-0 lh-1 border-0"
+              onChange={(e) => setTitle(e.target.value)}
+              onFocus={(e) => e.target.select()}
+              onBlur={onTitleChange} */}
+            
               </Form.Group>
+              openCalendar
             </Col>
           </Row>
           <Row className="align-items-center">
             <Col md={6} className="mb-3">
-              <Form.Group id="birthday">
+              {/* <Form.Group id="birthday">
                 <Form.Label>Birthday</Form.Label>
                 <Datetime
                   timeFormat={false}
-                  onChange={setBirthday}
+                  nChange={setBirthday}
                   renderInput={(props, openCalendar) => (
                     <InputGroup>
                       <InputGroup.Text>
@@ -87,8 +127,20 @@ export const GeneralInfoForm = () => {
                         onChange={() => { }} />
                     </InputGroup>
                   )} />
+              </Form.Group> */}
+                  <Form.Group id="wallet">
+                <Form.Label>Public Wallet</Form.Label>
+                <Form.Control required type="text" placeholder="0x.....4743" />
               </Form.Group>
             </Col>
+
+            <Col md={6} className="mb-3">
+              <Form.Group id="email">
+                <Form.Label>Public Email</Form.Label>
+                <Form.Control required type="email" placeholder="name@company.com" />
+              </Form.Group>
+            </Col>
+
             <Col md={6} className="mb-3">
               <Form.Group id="gender">
                 <Form.Label>Gender</Form.Label>
@@ -96,50 +148,32 @@ export const GeneralInfoForm = () => {
                   <option value="0">Gender</option>
                   <option value="1">Female</option>
                   <option value="2">Male</option>
+                
+
                 </Form.Select>
               </Form.Group>
             </Col>
           </Row>
           <Row>
+            
             <Col md={6} className="mb-3">
-              <Form.Group id="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control required type="email" placeholder="name@company.com" />
-              </Form.Group>
-            </Col>
-            <Col md={6} className="mb-3">
-              <Form.Group id="phone">
-                <Form.Label>Phone</Form.Label>
-                <Form.Control required type="number" placeholder="+12-345 678 910" />
-              </Form.Group>
+            
             </Col>
           </Row>
 
           <h5 className="my-4">Location</h5>
           <Row>
-            <Col sm={9} className="mb-3">
-              <Form.Group id="address">
-                <Form.Label>Address</Form.Label>
-                <Form.Control required type="text" placeholder="Enter your home address" />
-              </Form.Group>
-            </Col>
-            <Col sm={3} className="mb-3">
-              <Form.Group id="addressNumber">
-                <Form.Label>Number</Form.Label>
-                <Form.Control required type="number" placeholder="No." />
-              </Form.Group>
-            </Col>
           </Row>
           <Row>
             <Col sm={4} className="mb-3">
               <Form.Group id="city">
                 <Form.Label>City</Form.Label>
-                <Form.Control required type="text" placeholder="City" />
+                <Form.Control required type="text" placeholder="Country" />
               </Form.Group>
             </Col>
             <Col sm={4} className="mb-3">
               <Form.Group className="mb-2">
-                <Form.Label>Select state</Form.Label>
+                <Form.Label>Select Country</Form.Label>
                 <Form.Select id="state" defaultValue="0">
                   <option value="0">State</option>
                   <option value="AL">Alabama</option>
@@ -197,14 +231,12 @@ export const GeneralInfoForm = () => {
               </Form.Group>
             </Col>
             <Col sm={4}>
-              <Form.Group id="zip">
-                <Form.Label>ZIP</Form.Label>
-                <Form.Control required type="tel" placeholder="ZIP" />
-              </Form.Group>
+             
             </Col>
           </Row>
           <div className="mt-3">
-            <Button variant="gray-800" type="submit" className="mt-2 animate-up-2">
+            <Button variant="gray-800" type="submit" className="mt-2 animate-up-2" onClick={onSubmit}>
+
               Save All
             </Button>
           </div>
@@ -214,7 +246,11 @@ export const GeneralInfoForm = () => {
   );
 };
 
+
+
+
 export const CardDetailsForm = () => {
+
   const RequiredLabel = ({ label }) => (
     <Form.Label>
       {label}

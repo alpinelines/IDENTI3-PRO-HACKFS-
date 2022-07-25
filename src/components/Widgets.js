@@ -17,6 +17,9 @@ import authorEarnings from "data/authorEarnings";
 import { productNotifications } from "data/notifications";
 import { GoogleIcon, TwitterIcon, YoutubeIcon } from "components/BrandIcons";
 import { useOrbis } from "services/context";
+import { GeneralInfoForm } from "./Forms";
+import {lastName} from "./Froms";
+
 
 const PeriodOverviewWidget = (props) => {
   const { category, title, period, percentage, ChartComponent = CustomersChart } = props;
@@ -86,7 +89,7 @@ export const ProfileCardWidget = (props) => {
       <div style={{ backgroundImage: `url(${ProfileCover})` }} className="profile-cover rounded-top" />
       <Card.Body className="pb-5">
         <Card.Img src={picture} className="avatar-xl rounded-circle mx-auto mt-n7 mb-4" />
-        <Card.Title>{fullName}</Card.Title>
+        <Card.Title>{lastName}</Card.Title>
         <Card.Subtitle className="fw-normal">
           {jobTitle}
         </Card.Subtitle>

@@ -29,6 +29,9 @@ const OrbisProvider = ({ children }) => {
     const [body, setBody] = useState("");
     // const [messageText, setMessageText] = useState("");
 
+    const [profile, setProfile] = useState([]);
+
+
     /** Calls the Orbis SDK and handle the results */
 	const connect = async () => {
         let res = await orbis.connect();
@@ -131,8 +134,21 @@ const OrbisProvider = ({ children }) => {
             let res = await orbis.decryptMessage(content);
             // setBody(res.result);
             return res.result;
+        },
+
+        updateProfile: async (user) => {
+                setLoading(true);
+
+                let {res, error} = await orbis.updateProfile({
+                    pfp: "https://...",
+                    username: "baptiste"
+                  });
+
         }
     };
+
+ 
+
 
     return (
         <OrbisContext.Provider

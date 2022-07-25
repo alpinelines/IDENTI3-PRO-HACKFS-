@@ -3,13 +3,14 @@ import { useDropzone } from "react-dropzone";
 import { ArchiveIcon, CalendarIcon, ChatIcon, ChevronDownIcon, ClipboardListIcon, CloudUploadIcon, DocumentTextIcon, FireIcon, PlusIcon, PresentationChartBarIcon, ShoppingBagIcon, UsersIcon } from "@heroicons/react/solid";
 import { Col, Row, Card, Form, Image, Button, Dropdown } from 'react-bootstrap';
 import { ChoosePhotoWidget, ProfileCardWidget, NotificationsWidget } from "components/Widgets";
-import { GeneralInfoForm } from "components/Forms";
+import {GeneralInfoForm, lastName, props} from "components/Forms";
 import { Link } from 'react-router-dom';
 
 import { Routes } from "routes";
 import Profile1 from "assets/img/team/profile-picture-1.jpg";
 import Profile3 from "assets/img/team/profile-picture-3.jpg";
 import ProfileCover from "assets/img/profile-cover.jpg";
+
 
 
 export default () => {
@@ -107,7 +108,7 @@ export default () => {
           <Row>
             <Col xs={12} className="mb-4">
               <ProfileCardWidget
-                fullName="Oisin Lyons"
+                fullName= {lastName}
                 picture={Profile1}
                 jobTitle="Operatations & Strategy"
                 location="Dublin. Ireland"
