@@ -71,7 +71,7 @@ export default () => {
                   {
                     id: 1,
                     eventKey: "panel-1",
-                    title: "Does my subscription automatically renew?",
+                    title: "Does my dataInfo automatically renew?",
                     description: "At IDENTI3, our mission has always been focused on bringing openness and transparency to the design process. We've always believed that by providing a space where designers can share ongoing work not only empowers them to make better products, it also helps them grow. We're proud to be a part of creating a more open culture and to continue building a product that supports this vision."
                   },
                   {
@@ -83,7 +83,7 @@ export default () => {
                   {
                     id: 3,
                     eventKey: "panel-3",
-                    title: "Can I cancel my subscription?",
+                    title: "Can I cancel my dataInfo?",
                     description: "At IDENTI3, our mission has always been focused on bringing openness and transparency to the design process. We've always believed that by providing a space where designers can share ongoing work not only empowers them to make better products, it also helps them grow. We're proud to be a part of creating a more open culture and to continue building a product that supports this vision."
                   },
                   {

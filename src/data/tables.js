@@ -37,10 +37,10 @@ const pageRanking = [
 ];
 
 const invoiceItems = [
-    { id: uuidv4(), item: "Origin License", description: "Extended License", price: "999,00", quantity: 1 },
-    { id: uuidv4(), item: "Custom Services", description: "Instalation and Customization (cost per hour)", price: "150,00", quantity: 20 },
-    { id: uuidv4(), item: "Hosting", description: "1 year subcription", price: "499,00", quantity: 1 },
-    { id: uuidv4(), item: "Platinum Support", description: "1 year subcription 24/7", price: "3999,00", quantity: 1 },
+    { id: uuidv4(), item: "Origin License", description: "Extended License", endpoint: "999,00", quantity: 1 },
+    { id: uuidv4(), item: "Custom Services", description: "Instalation and Customization (cost per hour)", endpoint: "150,00", quantity: 20 },
+    { id: uuidv4(), item: "Hosting", description: "1 year subcription", endpoint: "499,00", quantity: 1 },
+    { id: uuidv4(), item: "Platinum Support", description: "1 year subcription 24/7", endpoint: "3999,00", quantity: 1 },
 ];
 
 export {

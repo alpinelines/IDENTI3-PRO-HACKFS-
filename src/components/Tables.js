@@ -389,7 +389,7 @@ export const TransactionsTable = (props) => {
   const totalTransactions = data.length;
 
   const TableRow = (props) => {
-    const { invoiceNumber, subscription, price, issueDate, dueDate, status } = props;
+    const { dataHash, dataInfo, endpoint, issueDate, dueDate, status } = props;
     const statusVariant = status === "paid" ? "success"
       : status === "due" ? "warning"
         : status === "cancelled" ? "danger" : "primary";
@@ -398,12 +398,12 @@ export const TransactionsTable = (props) => {
       <tr className="border-bottom">
         <td>
           <Card.Link as={Link} to={Routes.Invoice.path} className="fw-bold">
-            {invoiceNumber}
+            {dataHash}
           </Card.Link>
         </td>
         <td>
           <span className="fw-normal">
-            {subscription}
+            {dataInfo}
           </span>
         </td>
         <td>
@@ -418,7 +418,7 @@ export const TransactionsTable = (props) => {
         </td>
         <td>
           <span className="fw-bold">
-            ${parseFloat(price).toFixed(2)}
+            ${parseFloat(endpoint).toFixed(2)}
           </span>
         </td>
         <td>
@@ -456,15 +456,15 @@ export const TransactionsTable = (props) => {
             <tr>
               <th className="border-gray-200">#</th>
               <th className="border-gray-200">Data Info</th>
-              <th className="border-gray-200">Date of Collection</th>
               <th className="border-gray-200">Application</th>
-              <th className="border-gray-200">Total</th>
+              <th className="border-gray-200">Endpoint</th>
+              <th className="border-gray-200">Date of Collection</th>
               <th className="border-gray-200">Data Access Control</th>
               <th className="border-gray-200">Action</th>
             </tr>
           </thead>
           <tbody className="border-0">
-            {data.map(t => <TableRow key={`transaction-${t.invoiceNumber}`} {...t} />)}
+            {data.map(t => <TableRow key={`transaction-${t.dataHash}`} {...t} />)}
           </tbody>
         </Table>
         <Card.Footer className="px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">

@@ -13,11 +13,11 @@ export default () => {
   const changeSearchValue = (e) => {
     const newSearchValue = e.target.value;
     const newTransactions = data.map(t => {
-      const subscription = t.subscription.toLowerCase();
-      const shouldShow = subscription.includes(newSearchValue)
-        || `${t.price}`.includes(newSearchValue)
+      const dataInfo = t.dataInfo.toLowerCase();
+      const shouldShow = dataInfo.includes(newSearchValue)
+        || `${t.endpoint}`.includes(newSearchValue)
         || t.status.includes(newSearchValue)
-        || `${t.invoiceNumber}`.includes(newSearchValue);
+        || `${t.dataHash}`.includes(newSearchValue);
 
       return ({ ...t, show: shouldShow });
     });

@@ -17,8 +17,8 @@ import authorEarnings from "data/authorEarnings";
 import { productNotifications } from "data/notifications";
 import { GoogleIcon, TwitterIcon, YoutubeIcon } from "components/BrandIcons";
 import { useOrbis } from "services/context";
-import { GeneralInfoForm } from "./Forms";
-import {lastName} from "./Froms";
+// import { GeneralInfoForm } from "./Forms";
+// import {lastName} from "./Forms";
 
 
 const PeriodOverviewWidget = (props) => {
@@ -89,7 +89,7 @@ export const ProfileCardWidget = (props) => {
       <div style={{ backgroundImage: `url(${ProfileCover})` }} className="profile-cover rounded-top" />
       <Card.Body className="pb-5">
         <Card.Img src={picture} className="avatar-xl rounded-circle mx-auto mt-n7 mb-4" />
-        <Card.Title>{lastName}</Card.Title>
+        <Card.Title>Full Name</Card.Title>
         <Card.Subtitle className="fw-normal">
           {jobTitle}
         </Card.Subtitle>
@@ -147,7 +147,7 @@ export const PriceCardWidget = (props) => {
 
 export const OrderHistoryWidget = () => {
   const InvoiceItem = (props) => {
-    const { invoiceNumber, invoiceDate, invoiceStatus, last } = props
+    const { dataHash, invoiceDate, invoiceStatus, last } = props
       , invoiceDateFormatted = invoiceDate.format("MMMM DD, YYYY")
       , isInvoicePaid = invoiceStatus === "paid"
       , listItemClassNames = last ? "py-3" : "border-bottom py-3";
@@ -157,7 +157,7 @@ export const OrderHistoryWidget = () => {
         <Row className="align-items-center">
           <Col>
             <h6 className="mb-1">
-              <a href="#!">Invoice #{invoiceNumber}</a>
+              <a href="#!">Invoice #{dataHash}</a>
             </h6>
             <small className="text-gray-700">
               Billed {invoiceDateFormatted}
@@ -192,13 +192,13 @@ export const OrderHistoryWidget = () => {
       <Card.Body className="px-0 py-0">
         <ListGroup>
           <InvoiceItem
-            invoiceNumber="120345"
+            dataHash="120345"
             invoiceStatus="issued"
             invoiceDate={moment().subtract("1", "day")}
           />
           <InvoiceItem
             last={true}
-            invoiceNumber="120344"
+            dataHash="120344"
             invoiceStatus="paid"
             invoiceDate={moment().subtract("2", "days")}
           />
@@ -1281,13 +1281,13 @@ export const ChangePlanWidget = () => {
     <Card border="0" className="shadow text-center py-4 mb-4 mb-lg-0">
       <Card.Body>
         <h2 className="display-3 mb-3">
-          Volt <span className="pro-badge subscription-badge bg-secondary fw-bolder">PRO</span>
+          Volt <span className="pro-badge dataInfo-badge bg-secondary fw-bolder">PRO</span>
         </h2>
-        <p>Switch your subscription to a different type, such as a monthly plan, annual plan, or student plan. And see a list of subscription plans that Volt offers</p>
+        <p>Switch your dataInfo to a different type, such as a monthly plan, annual plan, or student plan. And see a list of dataInfo plans that Volt offers</p>
         <p className="text-dark my-4">Next payment of <span className="fw-bold">$36 (yearly)</span>{` occurs on ${currentDay}.`}</p>
 
         <Card.Link as={Button} variant="outline-gray-800" size="sm" className="me-2">
-          Cancel subscription
+          Cancel dataInfo
         </Card.Link>
         <Button as={Link} variant="secondary" size="sm" to={Routes.Pricing.path}>
           Change plan
